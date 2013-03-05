@@ -1,8 +1,10 @@
 #!/bin/bash
 
-echo -e "Applying plugins\n"
-
+echo -e "Applying vim configuration\n"
 cp -f dotvimrc ~/.vimrc
+
+echo -e "Applying ~/.vim folder\n"
+rm -Rf ~/.vim
 mkdir -p ~/.vim
 cp -r dotvim/* ~/.vim
 
