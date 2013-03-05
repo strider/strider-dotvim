@@ -17,7 +17,7 @@
 	path = dotvim/bundle/command-t
 	url = git://git.wincent.com/command-t.git
 [submodule "dotvim/bundle/snippetsEmu"]
-    path = dotvim/bundle/snippetsEmu
+	path = dotvim/bundle/snippetsEmu
 	url = https://github.com/vim-scripts/snippetsEmu.git
 [submodule "dotvim/bundle/syntastic"]
     path = dotvim/bundle/syntastic
@@ -26,20 +26,17 @@
     path = dotvim/bundle/delimitMate
 	url = https://github.com/Raimondi/delimitMate.git
 [submodule "dotvim/bundle/snipmate.vim"]
-    path = dotvim/bundle/snipmate.vim
+	path = dotvim/bundle/snipmate.vim
 	url = https://github.com/msanders/snipmate.vim.git
 [submodule "dotvim/bundle/unimpaired.vim"]
-    path = dotvim/bundle/unimpaired.vim
+	path = dotvim/bundle/unimpaired.vim
 	url = https://github.com/vim-scripts/unimpaired.vim.git
 [submodule "dotvim/bundle/bash-support.vim"]
-    path = dotvim/bundle/bash-support.vim
+	path = dotvim/bundle/bash-support.vim
 	url = https://github.com/vim-scripts/bash-support.vim.git
 [submodule "dotvim/bundle/vim-session"]
-    path = dotvim/bundle/vim-session
+	path = dotvim/bundle/vim-session
 	url = https://github.com/xolox/vim-session.git
-[submodule "dotvim/bundle/DeleteTrailingWhitespace"]
-    path = dotvim/bundle/DeleteTrailingWhitespace
-	url = https://github.com/vim-scripts/DeleteTrailingWhitespace.git
 [submodule "dotvim/bundle/vim-surround"]
     path = dotvim/bundle/vim-surround
 	url = https://github.com/tpope/vim-surround.git
@@ -56,6 +53,7 @@
 	url = https://github.com/tpope/vim-endwise.git
 [submodule "dotvim/bundle/TextFormat"]
 	url = https://github.com/vim-scripts/TextFormat.git
+	path = dotvim/bundle/TextFormat
 [submodule "dotvim/bundle/vim-flake8"]
 	url = https://github.com/nvie/vim-flake8.git
 [submodule "dotvim/bundle/vim-ruby"]
@@ -85,5 +83,11 @@
 [submodule "dotvim/bundle/jedi-vim"]
 	url = https://github.com/davidhalter/jedi-vim.git
 [submodule "dotvim/bundle/DrawIt"]
-    path = dotvim/bundle/DrawIt
+	path = dotvim/bundle/DrawIt
 	url = https://github.com/vim-scripts/DrawIt.git
+[submodule "dotvim/bundle/DeleteTrailingWhitespace"]
+	path = dotvim/bundle/DeleteTrailingWhitespace
+	url = https://github.com/vim-scripts/DeleteTrailingWhitespace.git
+[submodule "vimwiki"]
+	path = vimwiki
+	url = https://github.com/vim-scripts/vimwiki.git
