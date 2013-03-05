@@ -18,7 +18,7 @@ let mapleader = ","
 " Bind nohl
 " Removes highlight of your last search
 " ``<C>`` stands for ``CTRL`` and therefore ``<C-n>`` stands for ``CTRL+n``
-nmap <silent> <leader>n :silent :nohlsearch<CR>
+nmap <silent> <leader>l :silent :nohlsearch<CR>
 
 "" Quicksave command
 noremap <C-Z> :update<CR>
@@ -199,6 +199,12 @@ autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 
 autocmd BufWritePost *.py call Flake8()
 
+function! s:DisplayStatus(msg)
+  echohl Todo
+  echo a:msg
+  echohl None
+endfunction
+
 " Cleaning of code
 " - replace tabs with spaces;
 " - delete char CTRL-M at end of line.
@@ -221,6 +227,7 @@ endfunction
 " Use with :
 " :CleanCode
 command! -bar -range=% CleanCode call CleanCode()
+
 " Show tabs and trailing characters.
 "set listchars=tab:»·,trail:·,eol:¬
 set listchars=tab:»·,trail:·
