@@ -103,3 +103,6 @@
 [submodule "dotvim/bundle/asciidoc.vim"]
 	path = dotvim/bundle/asciidoc.vim
 	url = https://github.com/vim-scripts/asciidoc.vim.git
+[submodule "dotvim/bundle/vim-powerline"]
+	path = dotvim/bundle/vim-powerline
+	url = https://github.com/Lokaltog/vim-powerline.git
