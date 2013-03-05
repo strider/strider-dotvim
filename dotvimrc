@@ -198,3 +198,27 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 
 autocmd BufWritePost *.py call Flake8()
+
+" Cleaning of code 
+" - replace tabs with spaces;
+" - delete char CTRL-M at end of line.
+" - delete trailing whitespaces at the end of lines 
+" Generate CTRL-M in insert mode with <ctrl-v>+<return>
+function! CleanCode()
+  set expandtab
+  %retab
+  try
+    %s///g
+  catch /E486:/
+  endtry
+  try
+    %s/\s\+$//
+  catch /E486:/
+  endtry
+  call s:DisplayStatus('Code cleaned')
+endfunction
+
+" Use with :
+" :CleanCode
+command! -bar -range=% CleanCode call CleanCode()
+
