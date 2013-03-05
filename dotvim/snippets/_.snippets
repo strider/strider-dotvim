@@ -1,0 +1,94 @@
+# Global snippets
+# (c) holds no legal value ;)
+snippet c) copyright #1
+	`&enc[:2] == "utf" ? "©" : "(c)"` Copyright `strftime("%Y")` ${1:`g:snips_author`}. All Rights Reserved.${2}
+snippet date date #1
+	`strftime("%Y-%m-%d")`
+snippet gpl
+	# Copyright (C) `strftime("%Y")` `system("git config user.name")` (<`system("git config user.email")`>) 
+	#
+	# This program is free software: you can redistribute it and/or modify
+	# it under the terms of the GNU General Public License as published by
+	# the Free Software Foundation, version 3 of the License.
+	#
+	# This program is distributed in the hope that it will be useful,
+	# but WITHOUT ANY WARRANTY; without even the implied warranty of
+	# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	# GNU General Public License for more details.
+	#
+	# You should have received a copy of the GNU General Public License
+	# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	
+	${1}
+snippet #head head #1
+	# Author:: `system("git config user.name")` (<`system("git config user.email")`>)
+	# Date:: `system("ruby -e 'puts Time.now'")`
+	#
+	${1}
+snippet mcagent mcagent #1
+	module MCollective
+	    module Agent
+	        class ${1:Agentname}<RPC::Agent
+	            action "${2:action name}" do
+	                ${3}
+	            end
+	        end
+	    end
+	end
+	${4}
+snippet -- line -- #1
+	-----------------------------------------------------------------------------
+	${1}
+snippet __ underscore __ #1
+	_____________________________________________________________________________
+	${1}
+snippet asr
+	[source, ruby]
+	-----------------------------------------------------------------------------
+	${1:source code}
+	-----------------------------------------------------------------------------
+snippet asp
+	[source, python]
+	-----------------------------------------------------------------------------
+	${1:source code}
+	-----------------------------------------------------------------------------
+snippet ass
+	[source, sh]
+	-----------------------------------------------------------------------------
+	${1:source code}
+	-----------------------------------------------------------------------------
+# custom puppet
+snippet ppackage
+	package { '${1:package name}':
+	  ensure => ${2:present},
+	}
+
+	${3}
+snippet pservice
+	service { '${1:service name}':
+	  ensure => ${2:running},
+	  enable => ${3:true},
+	}
+
+	${4}
+snippet sfile
+	file { '${1:filename}' :
+	  ensure => '${2:file}',
+	  source => 'puppet:///modules/${3:modulename}/${4:source}',
+	  owner  => '${5:root}',
+	  group  => '${6:root}',
+	  mode   => '${7:0640}',
+	}
+
+	${8}
+snippet tfile 
+	file { '${1:filename}' :
+	  ensure  => '${2:file}',
+	  content => template('${3:modulename}/${4:tplfile}'),
+	  owner   => '${5:root}',
+	  group   => '${6:root}',
+	  mode    => '${7:0640}',
+	}
+
+	${8}
+

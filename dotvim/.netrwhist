@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/home/gchamoul/Documents/DEV/PUPPET/puppetlabs/modules/puppetlabs-f5/lib/puppet/util/network_device'
+let g:netrw_dirhist_2='/home/gchamoul/Documents/DEV/PUPPET/puppetlabs/products/rspec-puppet'
+let g:netrw_dirhist_3='/home/gchamoul/Documents/DEV/PUPPET/puppetlabs/products/RSPEC/rspec/lib/rspec'
+let g:netrw_dirhist_4='/home/gchamoul/Documents/DEV/PUPPET/puppetlabs/products/RSPEC/rspec-core/lib/rspec/core'
+let g:netrw_dirhist_5='/home/gchamoul/Documents/DEV/PUPPET/puppetlabs/modules/puppetlabs-registry/lib/puppet_x/puppetlabs/registry'
+let g:netrw_dirhist_6='/home/gchamoul/Documents/DEV/PUPPET/puppetlabs/modules/puppetlabs-razor/lib/puppet_x/puppet_labs'
+let g:netrw_dirhist_7='/home/gchamoul/Documents/DEV/CLOUDFORMS/foreman/foreman/lib/fog_extensions'
+let g:netrw_dirhist_8='/home/gchamoul/Documents/DEV/AQUEDUCT/aqueduct/1.1/etc/puppet/doc/nodes/82f9ebf37d93845cdffd27d27f4e8e52'
+let g:netrw_dirhist_9='/home/gchamoul/Documents/DEV/AQUEDUCT/aqueduct/1.1/etc/puppet/manifests/nodes'

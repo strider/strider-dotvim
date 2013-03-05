@@ -1,0 +1,89 @@
+[submodule "dotvim/bundle/vimwiki"]
+	path = dotvim/bundle/vimwiki
+	url = https://github.com/vim-scripts/vimwiki.git
+[submodule "dotvim/bundle/zencoding-vim"]
+	path = dotvim/bundle/zencoding-vim
+	url = https://github.com/mattn/zencoding-vim.git
+[submodule "dotvim/bundle/taglist.vim"]
+	path = dotvim/bundle/taglist.vim
+	url = https://github.com/vim-scripts/taglist.vim.git
+[submodule "dotvim/bundle/nerdtree"]
+	path = dotvim/bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+[submodule "dotvim/bundle/vim-fugitive"]
+	path = dotvim/bundle/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "dotvim/bundle/command-t"]
+	path = dotvim/bundle/command-t
+	url = git://git.wincent.com/command-t.git
+[submodule "dotvim/bundle/snippetsEmu"]
+    path = dotvim/bundle/snippetsEmu
+	url = https://github.com/vim-scripts/snippetsEmu.git
+[submodule "dotvim/bundle/syntastic"]
+    path = dotvim/bundle/syntastic
+	url = https://github.com/scrooloose/syntastic.git
+[submodule "dotvim/bundle/delimitMate"]
+    path = dotvim/bundle/delimitMate
+	url = https://github.com/Raimondi/delimitMate.git
+[submodule "dotvim/bundle/snipmate.vim"]
+    path = dotvim/bundle/snipmate.vim
+	url = https://github.com/msanders/snipmate.vim.git
+[submodule "dotvim/bundle/unimpaired.vim"]
+    path = dotvim/bundle/unimpaired.vim
+	url = https://github.com/vim-scripts/unimpaired.vim.git
+[submodule "dotvim/bundle/bash-support.vim"]
+    path = dotvim/bundle/bash-support.vim
+	url = https://github.com/vim-scripts/bash-support.vim.git
+[submodule "dotvim/bundle/vim-session"]
+    path = dotvim/bundle/vim-session
+	url = https://github.com/xolox/vim-session.git
+[submodule "dotvim/bundle/DeleteTrailingWhitespace"]
+    path = dotvim/bundle/DeleteTrailingWhitespace
+	url = https://github.com/vim-scripts/DeleteTrailingWhitespace.git
+[submodule "dotvim/bundle/vim-surround"]
+    path = dotvim/bundle/vim-surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule "dotvim/bundle/autocorrect"]
+    path = dotvim/bundle/autocorrect.vim
+	url = https://github.com/vim-scripts/autocorrect.vim.git
+[submodule "dotvim/bundle/vim-powerline"]
+	url = https://github.com/Lokaltog/vim-powerline.git
+[submodule "dotvim/bundle/ctrlp.vim"]
+	url = https://github.com/kien/ctrlp.vim.git
+[submodule "dotvim/bundle/csapprox"]
+	url = https://github.com/godlygeek/csapprox.git
+[submodule "dotvim/bundle/vim-endwise"]
+	url = https://github.com/tpope/vim-endwise.git
+[submodule "dotvim/bundle/TextFormat"]
+	url = https://github.com/vim-scripts/TextFormat.git
+[submodule "dotvim/bundle/vim-flake8"]
+	url = https://github.com/nvie/vim-flake8.git
+[submodule "dotvim/bundle/vim-ruby"]
+	url = https://github.com/vim-ruby/vim-ruby.git
+[submodule "dotvim/bundle/vim-rooter"]
+	url = https://github.com/airblade/vim-rooter.git
+[submodule "dotvim/bundle/vim-kickstart"]
+	url = https://github.com/vim-scripts/vim-kickstart.git
+[submodule "dotvim/bundle/nerdcommenter"]
+	url = https://github.com/scrooloose/nerdcommenter.git
+[submodule "dotvim/bundle/TaskList.vim"]
+    path = dotvim/bundle/TaskList.vim
+	url = https://github.com/vim-scripts/TaskList.vim.git
+[submodule "dotvim/bundle/vim-markdown"]
+	url = https://github.com/tpope/vim-markdown.git
+[submodule "dotvim/bundle/tabular"]
+	url = https://github.com/godlygeek/tabular.git
+[submodule "dotvim/bundle/ScrollColors"]
+    path = dotvim/bundle/ScrollColors
+	url = https://github.com/vim-scripts/ScrollColors.git
+[submodule "dotvim/bundle/supertab"]
+	url = https://github.com/ervandew/supertab.git
+[submodule "dotvim/bundle/vim-puppet"]
+	url = https://github.com/rodjek/vim-puppet.git
+[submodule "dotvim/bundle/vim-pathogen"]
+	url = https://github.com/tpope/vim-pathogen.git
+[submodule "dotvim/bundle/jedi-vim"]
+	url = https://github.com/davidhalter/jedi-vim.git
+[submodule "dotvim/bundle/DrawIt"]
+    path = dotvim/bundle/DrawIt
+	url = https://github.com/vim-scripts/DrawIt.git
