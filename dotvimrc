@@ -199,16 +199,16 @@ autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 
 autocmd BufWritePost *.py call Flake8()
 
-" Cleaning of code 
+" Cleaning of code
 " - replace tabs with spaces;
 " - delete char CTRL-M at end of line.
-" - delete trailing whitespaces at the end of lines 
+" - delete trailing whitespaces at the end of lines
 " Generate CTRL-M in insert mode with <ctrl-v>+<return>
 function! CleanCode()
   set expandtab
   %retab
   try
-    %s///g
+    %s///g
   catch /E486:/
   endtry
   try
@@ -221,4 +221,20 @@ endfunction
 " Use with :
 " :CleanCode
 command! -bar -range=% CleanCode call CleanCode()
+" Show tabs and trailing characters.
+"set listchars=tab:»·,trail:·,eol:¬
+set listchars=tab:»·,trail:·
+set list
 
+" ASCIIDOC Specific
+" Reformat paragraphs and list.
+nnoremap <Leader>r gq}
+
+" Delete trailing white space and Dos-returns and to expand tabs to spaces.
+nnoremap <Leader>tr :set et<CR>:retab!<CR>:%s/[\r \t]\+$//<CR>
+
+autocmd BufRead,BufNewFile *.txt,*.asciidoc,README,TODO,CHANGELOG,NOTES,ABOUT
+        \ setlocal autoindent expandtab tabstop=8 softtabstop=2 shiftwidth=2 filetype=asciidoc
+        \ textwidth=70 wrap formatoptions=tcqn
+        \ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\\|^\\s*<\\d\\+>\\s\\+\\\\|^\\s*[a-zA-Z.]\\.\\s\\+\\\\|^\\s*[ivxIVX]\\+\\.\\s\\+
+        \ comments=s1:/*,ex:*/,://,b:#,:%,:XCOMM,fb:-,fb:*,fb:+,fb:.,fb:>
