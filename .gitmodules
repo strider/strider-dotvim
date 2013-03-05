@@ -44,43 +44,58 @@
     path = dotvim/bundle/autocorrect.vim
 	url = https://github.com/vim-scripts/autocorrect.vim.git
 [submodule "dotvim/bundle/vim-powerline"]
+    path = dotvim/bundle/vim-powerline
 	url = https://github.com/Lokaltog/vim-powerline.git
 [submodule "dotvim/bundle/ctrlp.vim"]
+    path = dotvim/bundle/vim-powerline
 	url = https://github.com/kien/ctrlp.vim.git
 [submodule "dotvim/bundle/csapprox"]
+    path = dotvim/bundle/csapprox
 	url = https://github.com/godlygeek/csapprox.git
 [submodule "dotvim/bundle/vim-endwise"]
+    path = dotvim/bundle/vim-endwise
 	url = https://github.com/tpope/vim-endwise.git
 [submodule "dotvim/bundle/TextFormat"]
-	url = https://github.com/vim-scripts/TextFormat.git
 	path = dotvim/bundle/TextFormat
+	url = https://github.com/vim-scripts/TextFormat.git
 [submodule "dotvim/bundle/vim-flake8"]
+    path = dotvim/bundle/vim-flake8
 	url = https://github.com/nvie/vim-flake8.git
 [submodule "dotvim/bundle/vim-ruby"]
+    path = dotvim/bundle/vim-ruby
 	url = https://github.com/vim-ruby/vim-ruby.git
 [submodule "dotvim/bundle/vim-rooter"]
+    path = dotvim/bundle/vim-rooter
 	url = https://github.com/airblade/vim-rooter.git
 [submodule "dotvim/bundle/vim-kickstart"]
+    path = dotvim/bundle/vim-kickstart
 	url = https://github.com/vim-scripts/vim-kickstart.git
 [submodule "dotvim/bundle/nerdcommenter"]
+    path = dotvim/bundle/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
 [submodule "dotvim/bundle/TaskList.vim"]
     path = dotvim/bundle/TaskList.vim
 	url = https://github.com/vim-scripts/TaskList.vim.git
 [submodule "dotvim/bundle/vim-markdown"]
+    path = dotvim/bundle/vim-markdown
 	url = https://github.com/tpope/vim-markdown.git
 [submodule "dotvim/bundle/tabular"]
+    path = dotvim/bundle/tabular
 	url = https://github.com/godlygeek/tabular.git
 [submodule "dotvim/bundle/ScrollColors"]
     path = dotvim/bundle/ScrollColors
 	url = https://github.com/vim-scripts/ScrollColors.git
 [submodule "dotvim/bundle/supertab"]
+    path = dotvim/bundle/supertab
 	url = https://github.com/ervandew/supertab.git
 [submodule "dotvim/bundle/vim-puppet"]
+    path = dotvim/bundle/vim-puppet
 	url = https://github.com/rodjek/vim-puppet.git
 [submodule "dotvim/bundle/vim-pathogen"]
+    path = dotvim/bundle/vim-pathogen
 	url = https://github.com/tpope/vim-pathogen.git
 [submodule "dotvim/bundle/jedi-vim"]
+    path = dotvim/bundle/jedi-vim
 	url = https://github.com/davidhalter/jedi-vim.git
 [submodule "dotvim/bundle/DrawIt"]
 	path = dotvim/bundle/DrawIt
@@ -88,6 +103,6 @@
 [submodule "dotvim/bundle/DeleteTrailingWhitespace"]
 	path = dotvim/bundle/DeleteTrailingWhitespace
 	url = https://github.com/vim-scripts/DeleteTrailingWhitespace.git
-[submodule "vimwiki"]
-	path = vimwiki
-	url = https://github.com/vim-scripts/vimwiki.git
+[submodule "dotvim/bundle/asciidoc.vim"]
+	path = dotvim/bundle/asciidoc.vim
+	url = https://github.com/vim-scripts/asciidoc.vim.git
