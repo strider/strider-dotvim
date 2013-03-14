@@ -9,12 +9,12 @@
 
 set background=dark
 if version > 580
-    " no guarantees for version 5.8 and below, but this makes it stop
-    " complaining
-    hi clear
-    if exists("syntax_on")
-        syntax reset
-    endif
+	" no guarantees for version 5.8 and below, but this makes it stop
+	" complaining
+	hi clear
+	if exists("syntax_on")
+		syntax reset
+	endif
 endif
 
 let g:colors_name="two2tango"
@@ -22,15 +22,15 @@ let g:colors_name="two2tango"
 "Tango palette
 "http://tango.freedesktop.org/Tango_Icon_Theme_Guidelines
 " {{{
-let s:Butter        = ['#fce94f', '#edd400', '#c4a000']
-let s:Chameleon     = ['#8ae234', '#73d216', '#4e9a06']
-let s:Orange        = ['#fcaf3e', '#f57900', '#ce5c00']
-let s:SkyBlue       = ['#729fcf', '#3465a4', '#204a87']
-let s:Plum          = ['#ad7fa8', '#75507b', '#5c3566']
-let s:Chocolate     = ['#e9b96e', '#c17d11', '#8f5902']
-let s:ScarletRed    = ['#ef2929', '#cc0000', '#a40000']
-let s:Aluminium     = ['#eeeeec', '#d3d7cf', '#babdb6',
-                    \'#888a85', '#555753', '#2e3436']
+let s:Butter		= ['#fce94f', '#edd400', '#c4a000']
+let s:Chameleon		= ['#8ae234', '#73d216', '#4e9a06']
+let s:Orange		= ['#fcaf3e', '#f57900', '#ce5c00']
+let s:SkyBlue		= ['#729fcf', '#3465a4', '#204a87']
+let s:Plum			= ['#ad7fa8', '#75507b', '#5c3566']
+let s:Chocolate		= ['#e9b96e', '#c17d11', '#8f5902']
+let s:ScarletRed	= ['#ef2929', '#cc0000', '#a40000']
+let s:Aluminium		= ['#eeeeec', '#d3d7cf', '#babdb6',
+					\'#888a85', '#555753', '#2e3436']
 "This color isn't part of the Tango Palette; I use it because there
 "isn't a Tango color that provides enough contrast
 let s:Background    = '#212628'
@@ -54,7 +54,7 @@ execute "hi Statement    guifg=" . s:Aluminium[3]
 execute "hi String       guifg=" . s:SkyBlue[0]
 execute "hi Title        guifg=" . s:Aluminium[0]
 execute "hi Todo         gui=bold guisp=NONE guibg=" . s:Orange[2] 
-            \. " guifg=" . s:Aluminium[0] 
+			\. " guifg=" . s:Aluminium[0] 
 execute "hi Type         guifg=" . s:Orange[2]
 execute "hi Underlined   gui=underline guifg=" . s:SkyBlue[0]
 " }}}
