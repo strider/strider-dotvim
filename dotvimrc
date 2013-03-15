@@ -292,8 +292,6 @@ nnoremap <Leader>r gq}
 " Delete trailing white space and Dos-returns and to expand tabs to spaces.
 nnoremap <Leader>tr :set et<CR>:retab!<CR>:%s/[\r \t]\+$//<CR>
 
-let g:DeleteTrailingWhitespace = 1
-
 autocmd BufRead,BufNewFile *.txt,*.asciidoc,README,TODO,CHANGELOG,NOTES,ABOUT
         \ setlocal autoindent expandtab tabstop=8 softtabstop=2 shiftwidth=2 filetype=asciidoc
         \ textwidth=70 wrap formatoptions=tcqn
