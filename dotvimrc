@@ -70,6 +70,7 @@ colorscheme neverland2-darker
 filetype off
 filetype plugin indent on
 syntax on
+set fenc=utf-8
 
 
 " Showing line numbers and length
@@ -113,6 +114,7 @@ set noswapfile
 " cd ~/.vim/bundle
 " git clone git://github.com/Lokaltog/vim-powerline.git
 set laststatus=2
+set rtp+=/home/gchamoul/Documents/DEV/VIM-STUFFS/powerline/powerline/bindings/vim/
 
 
 " Settings for ctrlp
@@ -242,6 +244,10 @@ let Tlist_Show_One_File = 1
 
 " detect kickstart filetype
 autocmd BufNewFile,BufRead *.ks setl ft=kickstart
+
+" Docbook Format
+autocmd BufNewFile,BufRead *.xml set ts=2
+autocmd BufNewFile,BufRead *.xml set sw=2
 
 " Ruby
 autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
