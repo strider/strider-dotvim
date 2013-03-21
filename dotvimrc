@@ -24,6 +24,7 @@ nmap <silent> <leader>l :silent :nohlsearch<CR>
 nmap T :tabnew<CR>
 
 nmap <leader>q :split ~/.buffer<cr>
+nmap <leader>v :tabnew $HOME/.vimrc<CR>
 
 "" Quicksave command
 noremap <C-Z> :update<CR>
@@ -53,6 +54,11 @@ vnoremap <Leader>s :sort<CR>
 " then press ``>`` several times.
 vnoremap < <gv  " better indentation
 vnoremap > >gv  " better indentation
+
+" underline the current line with : <F4><u>
+" useful for asciidoc sections
+"nn <F4>u yypVr-
+nn <F4>u yyp<C-V>$r-
 
 " Show whitespace
 " MUST be inserted BEFORE the colorscheme command
@@ -308,3 +314,12 @@ autocmd BufRead,BufNewFile *.txt,*.asciidoc,README,TODO,CHANGELOG,NOTES,ABOUT
 map <leader>cdi :cd %:p:h<cr>
 " Display Current time !!!
 map <leader>da :echo 'Current Time is ' . strftime( '%c' )<CR>
+
+map <silent> <F7> <Esc> :w! <cr> :!python % <cr>
+cmap w!! %!sudo tee > /dev/null %
+"delete all lines in the current buffer
+nmap <C-S-F2> ggdG
+nmap <C-S-F3> ggVG
+vmap <C-c> "*y<CR>
+vmap <C-v> "*gP<CR>
+
