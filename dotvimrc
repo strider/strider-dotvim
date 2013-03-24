@@ -160,6 +160,7 @@ set nofoldenable
 " =========================================
 "        Abreviation
 " =========================================
+iab gc -- Gaël
 iab gcha Gaël Chamoulaud <gchamoul@redhat.com>
 iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")
 iab WR WeeklyReport
