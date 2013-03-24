@@ -12,6 +12,12 @@ Copyright © 2013 Gaël Chamoulaud <gchamoul@redhat.com>. All Rights Reserved.
 If you want to force an update on each submodule, even if not tracked
 on the main repo:
 
+    git submodule init
+    git submodule update
+    git submodule foreach git pull origin master
+
+And after, you can simply use:
+
     ./update_submodules
 
 ## How to use
