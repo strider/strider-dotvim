@@ -306,7 +306,7 @@ nnoremap <Leader>r gq}
 " Delete trailing white space and Dos-returns and to expand tabs to spaces.
 nnoremap <Leader>tr :set et<CR>:retab!<CR>:%s/[\r \t]\+$//<CR>
 
-autocmd BufRead,BufNewFile *.txt,*.asciidoc,README,TODO,CHANGELOG,NOTES,ABOUT
+autocmd BufRead,BufNewFile *.txt,*.adoc,*.asciidoc,README,TODO,CHANGELOG,NOTES,ABOUT
         \ setlocal autoindent expandtab tabstop=8 softtabstop=2 shiftwidth=2 filetype=asciidoc
         \ textwidth=70 wrap formatoptions=tcqn
         \ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\\|^\\s*<\\d\\+>\\s\\+\\\\|^\\s*[a-zA-Z.]\\.\\s\\+\\\\|^\\s*[ivxIVX]\\+\\.\\s\\+
@@ -325,3 +325,4 @@ nmap <C-S-F3> ggVG
 vmap <C-c> "*y<CR>
 vmap <C-v> "*gP<CR>
 
+let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
