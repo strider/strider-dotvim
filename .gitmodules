@@ -112,3 +112,18 @@
 [submodule "dotvim/bundle/vim-notes"]
 	path = dotvim/bundle/vim-notes
 	url = https://github.com/xolox/vim-notes.git
+[submodule "dotvim/bundle/vim-kolor"]
+	path = dotvim/bundle/vim-kolor
+	url = https://github.com/zeis/vim-kolor.git
+[submodule "dotvim/bundle/gruvbox"]
+	path = dotvim/bundle/gruvbox
+	url = https://github.com/morhetz/gruvbox.git
+[submodule "dotvim/bundle/vim-colors-solarized"]
+	path = dotvim/bundle/vim-colors-solarized
+	url = https://github.com/altercation/vim-colors-solarized.git
+[submodule "dotvim/bundle/CoVim"]
+	path = dotvim/bundle/CoVim
+	url = https://github.com/FredKSchott/CoVim.git
+[submodule "dotvim/bundle/vim-misc"]
+	path = dotvim/bundle/vim-misc
+	url = https://github.com/xolox/vim-misc.git
