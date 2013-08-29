@@ -97,7 +97,7 @@ set nowrap  " don't automatically wrap on load
 set fo-=t   " don't automatically wrap text when typing
 "hi cursorline guibg=darkblue
 "set cursorline cursorcolumn
-set colorcolumn=80
+set colorcolumn=81
 highlight ColorColumn ctermbg=233
 
 " easier formatting of paragraphs
