@@ -1,9 +1,6 @@
 [submodule "dotvim/bundle/vimwiki"]
 	path = dotvim/bundle/vimwiki
 	url = https://github.com/vim-scripts/vimwiki.git
-[submodule "dotvim/bundle/zencoding-vim"]
-	path = dotvim/bundle/zencoding-vim
-	url = https://github.com/mattn/zencoding-vim.git
 [submodule "dotvim/bundle/taglist.vim"]
 	path = dotvim/bundle/taglist.vim
 	url = https://github.com/vim-scripts/taglist.vim.git
@@ -127,3 +124,9 @@
 [submodule "dotvim/bundle/vim-misc"]
 	path = dotvim/bundle/vim-misc
 	url = https://github.com/xolox/vim-misc.git
+[submodule "dotvim/bundle/zencoding-vim"]
+	path = dotvim/bundle/zencoding-vim
+	url = https://github.com/mattn/zencoding-vim.git
+[submodule "dotvim/bundle/vim-gitgutter"]
+	path = dotvim/bundle/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
