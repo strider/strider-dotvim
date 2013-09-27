@@ -143,7 +143,6 @@ set wildignore+=*.pyc,*.o,*.obj
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
 
-let g:jedi#related_names_command = "<leader>z"
 map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
 " Better navigating through omnicomplete option list
