@@ -2,8 +2,6 @@
 # (c) holds no legal value ;)
 snippet c) copyright #1
 	`&enc[:2] == "utf" ? "©" : "(c)"` Copyright `strftime("%Y")` ${1:`g:snips_author`}. All Rights Reserved.${2}
-snippet date date #1
-	`strftime("%Y-%m-%d")`
 snippet gpl
 	# Copyright (C) `strftime("%Y")` `system("git config user.name")` (<`system("git config user.email")`>) 
 	#
@@ -177,5 +175,3 @@ snippet :
 	"${1:title}":${2}
 snippet >
 	${1:attribute} => ${2:value},${3}
-snippet =
-    => 

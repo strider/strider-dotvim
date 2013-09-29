@@ -10,18 +10,12 @@
 [submodule "dotvim/bundle/vim-fugitive"]
 	path = dotvim/bundle/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
-[submodule "dotvim/bundle/snippetsEmu"]
-	path = dotvim/bundle/snippetsEmu
-	url = https://github.com/vim-scripts/snippetsEmu.git
 [submodule "dotvim/bundle/syntastic"]
     path = dotvim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
 [submodule "dotvim/bundle/delimitMate"]
     path = dotvim/bundle/delimitMate
 	url = https://github.com/Raimondi/delimitMate.git
-[submodule "dotvim/bundle/snipmate.vim"]
-	path = dotvim/bundle/snipmate.vim
-	url = https://github.com/msanders/snipmate.vim.git
 [submodule "dotvim/bundle/unimpaired.vim"]
 	path = dotvim/bundle/unimpaired.vim
 	url = https://github.com/vim-scripts/unimpaired.vim.git
@@ -130,3 +124,15 @@
 [submodule "dotvim/bundle/emmet-vim"]
 	path = dotvim/bundle/emmet-vim
 	url = https://github.com/mattn/emmet-vim.git
+[submodule "dotvim/bundle/vim-snippets"]
+	path = dotvim/bundle/vim-snippets
+	url = https://github.com/honza/vim-snippets.git
+[submodule "dotvim/bundle/tlib_vim"]
+	path = dotvim/bundle/tlib_vim
+	url = https://github.com/tomtom/tlib_vim.git
+[submodule "dotvim/bundle/vim-addon-mw-utils"]
+	path = dotvim/bundle/vim-addon-mw-utils
+	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
+[submodule "dotvim/bundle/vim-snipmate"]
+	path = dotvim/bundle/vim-snipmate
+	url = https://github.com/garbas/vim-snipmate.git
