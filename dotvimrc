@@ -80,7 +80,7 @@ au InsertLeave * match ExtraWhitespace /\s\+$/
 " mkdir -p ~/.vim/colors && cd ~/.vim/colors
 " wget -O wombat256mod.vim http://www.vim.org/scripts/download_script.php?src_id=13400
 set t_Co=256
-colorscheme wombat256i
+colorscheme wombat256mod
 
 " Enable syntax highlighting
 " You need to reload this file for the change to apply
@@ -97,8 +97,8 @@ set nowrap  " don't automatically wrap on load
 set fo-=t   " don't automatically wrap text when typing
 "hi cursorline guibg=darkblue
 "set cursorline cursorcolumn
-set colorcolumn=81
-highlight ColorColumn ctermbg=233
+"set colorcolumn=81
+"highlight ColorColumn ctermbg=233
 
 " easier formatting of paragraphs
 vmap Q gq
