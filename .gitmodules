@@ -61,9 +61,6 @@
 [submodule "dotvim/bundle/TaskList.vim"]
     path = dotvim/bundle/TaskList.vim
 	url = https://github.com/vim-scripts/TaskList.vim.git
-[submodule "dotvim/bundle/vim-markdown"]
-    path = dotvim/bundle/vim-markdown
-	url = https://github.com/tpope/vim-markdown.git
 [submodule "dotvim/bundle/tabular"]
     path = dotvim/bundle/tabular
 	url = https://github.com/godlygeek/tabular.git
@@ -103,12 +100,6 @@
 [submodule "dotvim/bundle/vim-notes"]
 	path = dotvim/bundle/vim-notes
 	url = https://github.com/xolox/vim-notes.git
-[submodule "dotvim/bundle/vim-kolor"]
-	path = dotvim/bundle/vim-kolor
-	url = https://github.com/zeis/vim-kolor.git
-[submodule "dotvim/bundle/vim-colors-solarized"]
-	path = dotvim/bundle/vim-colors-solarized
-	url = https://github.com/altercation/vim-colors-solarized.git
 [submodule "dotvim/bundle/CoVim"]
 	path = dotvim/bundle/CoVim
 	url = https://github.com/FredKSchott/CoVim.git
