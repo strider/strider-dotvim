@@ -80,7 +80,7 @@ au InsertLeave * match ExtraWhitespace /\s\+$/
 " mkdir -p ~/.vim/colors && cd ~/.vim/colors
 " wget -O wombat256mod.vim http://www.vim.org/scripts/download_script.php?src_id=13400
 set t_Co=256
-colorscheme wombat256mod
+colorscheme wombat256i
 
 " Enable syntax highlighting
 " You need to reload this file for the change to apply
@@ -139,6 +139,7 @@ set rtp+=/home/gchamoul/Documents/DEV/VIM-STUFFS/powerline/powerline/bindings/vi
 " cd ~/.vim/bundle
 " git clone https://github.com/kien/ctrlp.vim.git
 let g:ctrlp_max_height = 30
+nmap <leader>, :CtrlP<CR>
 set wildignore+=*.pyc,*.o,*.obj
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
@@ -174,7 +175,6 @@ set nofoldenable
 iab gc -- Gaël
 iab gcha Gaël Chamoulaud <gchamoul@redhat.com>
 iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")
-iab WR WeeklyReport
 iab BR Best Regards, ~GC
 iab RH Red Hat
 iab RHC Red Hat Consulting
@@ -185,10 +185,6 @@ iab systm système
 iab systeme système
 iab Systm Système
 iab Systeme Système
-iab reso réseau
-iab resos réseaux
-iab bra Brésil
-iab ac avec
 iab cad c'est-à-dire
 iab tjs toujours
 iab bientot bientôt
@@ -197,13 +193,8 @@ iab dasn dans
 iab dsna dans
 iab dnas dans
 iab ds dans
-iab dfo défaut
-iab dfos défauts
 iab ca ça
 iab cpdt cependant
-iab Cpdt Cependant
-iab Ca Ça
-iab reu Réunion
 iab apres après
 iab aprés après
 iab tres très
@@ -219,10 +210,9 @@ iab etais étais
 iab ecris écris
 iab paris Paris
 iab facon façon
-iab fete fête
 iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")
 
-map <F9> <Esc>:NERDTreeToggle<CR>
+nmap <leader>n :NERDTreeToggle<CR>
 let g:NERDTreeWinSize = 20
 
 map <leader>da :echo 'Current Time is ' . strftime( '%c' )<CR>
@@ -338,3 +328,18 @@ vmap <C-v> "*gP<CR>
 let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 
 let g:notes_directories = ['~/Documents/Notes']
+
+" switch spellcheck languages
+let g:myLang = 0
+let g:myLangList = [ "nospell", "fr", "en" ]
+function! MySpellLang()
+" loop through languages
+  let g:myLang = g:myLang + 1
+  if g:myLang >= len(g:myLangList) | let g:myLang = 0 | endif
+  if g:myLang == 0 | set nospell | endif
+  if g:myLang == 1 | setlocal spell spelllang=fr | endif
+  if g:myLang == 2 | setlocal spell spelllang=en | endif
+  echo "language:" g:myLangList[g:myLang]
+endf
+map <F9> :call MySpellLang()<CR>
+

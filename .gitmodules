@@ -106,9 +106,6 @@
 [submodule "dotvim/bundle/vim-kolor"]
 	path = dotvim/bundle/vim-kolor
 	url = https://github.com/zeis/vim-kolor.git
-[submodule "dotvim/bundle/gruvbox"]
-	path = dotvim/bundle/gruvbox
-	url = https://github.com/morhetz/gruvbox.git
 [submodule "dotvim/bundle/vim-colors-solarized"]
 	path = dotvim/bundle/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
