@@ -77,8 +77,6 @@ autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 au InsertLeave * match ExtraWhitespace /\s\+$/
 
 " Color scheme
-" mkdir -p ~/.vim/colors && cd ~/.vim/colors
-" wget -O wombat256mod.vim http://www.vim.org/scripts/download_script.php?src_id=13400
 set t_Co=256
 colorscheme wombat256i
 
@@ -97,8 +95,8 @@ set nowrap  " don't automatically wrap on load
 set fo-=t   " don't automatically wrap text when typing
 "hi cursorline guibg=darkblue
 "set cursorline cursorcolumn
-"set colorcolumn=81
-"highlight ColorColumn ctermbg=233
+set colorcolumn=81
+highlight ColorColumn ctermbg=233
 
 " easier formatting of paragraphs
 vmap Q gq
@@ -135,16 +133,22 @@ set noshowmode
 set rtp+=/home/gchamoul/Documents/DEV/VIM-STUFFS/powerline/powerline/bindings/vim/
 
 
-" Settings for ctrlp
-" cd ~/.vim/bundle
-" git clone https://github.com/kien/ctrlp.vim.git
+" ctrlp config
+let g:ctrlp_map = '<leader>,'
 let g:ctrlp_max_height = 30
-nmap <leader>, :CtrlP<CR>
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_match_window_reversed = 0
+
+" map git commands
+map <leader>b :Gblame<cr>
+map <leader>l :!clear && git log -p %<cr>
+map <leader>d :!clear && git diff %<cr>
+
 set wildignore+=*.pyc,*.o,*.obj
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
 
-map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+"map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
 " Better navigating through omnicomplete option list
 " See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
@@ -328,18 +332,3 @@ vmap <C-v> "*gP<CR>
 let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 
 let g:notes_directories = ['~/Documents/Notes']
-
-" switch spellcheck languages
-let g:myLang = 0
-let g:myLangList = [ "nospell", "fr", "en" ]
-function! MySpellLang()
-" loop through languages
-  let g:myLang = g:myLang + 1
-  if g:myLang >= len(g:myLangList) | let g:myLang = 0 | endif
-  if g:myLang == 0 | set nospell | endif
-  if g:myLang == 1 | setlocal spell spelllang=fr | endif
-  if g:myLang == 2 | setlocal spell spelllang=en | endif
-  echo "language:" g:myLangList[g:myLang]
-endf
-map <F9> :call MySpellLang()<CR>
-
