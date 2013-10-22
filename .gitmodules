@@ -124,3 +124,6 @@
 [submodule "dotvim/bundle/vim-snipmate"]
 	path = dotvim/bundle/vim-snipmate
 	url = https://github.com/garbas/vim-snipmate.git
+[submodule "dotvim/bundle/seoul256"]
+	path = dotvim/bundle/seoul256
+	url = https://github.com/junegunn/seoul256.vim.git
