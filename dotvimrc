@@ -6,19 +6,55 @@ execute pathogen#helptags()
 " Automatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
 
+filetype off
+filetype plugin indent on
+syntax on
+set fenc=utf-8
 set pastetoggle=<F2>
 set clipboard=unnamed
+set mouse=a
+set bs=2
+set relativenumber
+set number
+set tw=79
+set nowrap
+set fo-=t
+set history=700
+set undolevels=700
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set shiftround
+set expandtab
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set nobackup
+set nowritebackup
+set noswapfile
+set laststatus=2
+set noshowmode
+set rtp+=/home/gchamoul/Documents/DEV/VIM-STUFFS/powerline/powerline/bindings/vim/
 
-" Mouse and backspace
-set mouse=a  " on OSX press ALT and click
-set bs=2     " make backspace behave like normal again
-
+set colorcolumn=81
+highlight ColorColumn ctermbg=233
 let mapleader = ","
+
+" Show whitespace
+" MUST be inserted BEFORE the colorscheme command
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+au InsertLeave * match ExtraWhitespace /\s\+$/
+
+" Color scheme
+set t_Co=256
+colorscheme lucius
+LuciusBlack
 
 " Bind nohl
 " Removes highlight of your last search
 " ``<C>`` stands for ``CTRL`` and therefore ``<C-n>`` stands for ``CTRL+n``
-nmap <silent> <leader>l :silent :nohlsearch<CR>
+nmap <silent> <leader>; :silent :nohlsearch<CR>
 
 " Bind tabnew
 nmap T :tabnew<CR>
@@ -71,67 +107,9 @@ vnoremap > >gv  " better indentation
 "nn <F4>u yypVr-
 nn <F4>u yyp<C-V>$r-
 
-" Show whitespace
-" MUST be inserted BEFORE the colorscheme command
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-au InsertLeave * match ExtraWhitespace /\s\+$/
-
-" Color scheme
-set t_Co=256
-colorscheme wombat256i
-
-" Enable syntax highlighting
-" You need to reload this file for the change to apply
-filetype off
-filetype plugin indent on
-syntax on
-set fenc=utf-8
-
-
-" Showing line numbers and length
-set number  " show line numbers
-set tw=79   " width of document (used by gd)
-set nowrap  " don't automatically wrap on load
-set fo-=t   " don't automatically wrap text when typing
-"hi cursorline guibg=darkblue
-"set cursorline cursorcolumn
-set colorcolumn=81
-highlight ColorColumn ctermbg=233
-
 " easier formatting of paragraphs
 vmap Q gq
 nmap Q gqap
-
-" Useful settings
-set history=700
-set undolevels=700
-
-" Real programmers don't use TABs but spaces
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set shiftround
-set expandtab
-
-" Make search case insensitive
-set hlsearch
-set incsearch
-set ignorecase
-set smartcase
-
-" Disable stupid backup and swap files - they trigger too many events
-" for file system watchers
-set nobackup
-set nowritebackup
-set noswapfile
-
-" Settings for vim-powerline
-" cd ~/.vim/bundle
-" git clone git://github.com/Lokaltog/vim-powerline.git
-set laststatus=2
-set noshowmode
-set rtp+=/home/gchamoul/Documents/DEV/VIM-STUFFS/powerline/powerline/bindings/vim/
-
 
 " ctrlp config
 let g:ctrlp_map = '<leader>,'
@@ -225,8 +203,8 @@ augroup filetype
   autocmd BufNewFile,BufRead */.Postponed/* set filetype=mail
   autocmd BufNewFile,BufRead *.txt setl textwidth=70
   autocmd BufRead,BufNewFile *mutt-* set filetype=mail
-  autocmd FileType html,python,vim,javascript,dockbook setl shiftwidth=2
-  autocmd FileType html,python,vim,javascript,dockbook setl tabstop=2
+  autocmd FileType html,python,vim,javascript,dockbook,mail setl shiftwidth=2
+  autocmd FileType html,python,vim,javascript,dockbook,mail setl tabstop=2
   autocmd BufNewFile,BufRead *.markdown,*.md,*.mdown,*.mkd,*.mkdn
         \ if &ft =~# '^\%(conf\|modula2\)$' |
         \   set ft=markdown |
