@@ -11,7 +11,7 @@ cp -r dotvim/* ~/.vim
 # command-T
 vim --version | grep -q '\+ruby'
 if [ $? -eq 0 ];then
-    ruby --version | egrep -q '1\.8\.7|1.9'
+    ruby --version | egrep -q '1\.8\.7|1.9|2.0'
     if [ $? -eq 0 ];then
         cd ~/.vim/bundle/command-t/ruby/command-t 1>/dev/null
         rm -f *.o *.so
