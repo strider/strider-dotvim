@@ -36,8 +36,9 @@ set noswapfile
 set laststatus=2
 set noshowmode
 
-" put useful info in status bar
-set statusline=%F%m%r%h%w\ %{fugitive#statusline()}\ [%l,%c]\ [%L,%p%%]
+
+let g:airline_theme='serene'
+let g:airline_powerline_fonts=1
 
 " set up some custom colors
 highlight clear SignColumn
