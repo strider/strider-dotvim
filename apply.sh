@@ -15,7 +15,7 @@ if [ $? -eq 0 ];then
     if [ $? -eq 0 ];then
         cd ~/.vim/bundle/command-t/ruby/command-t 1>/dev/null
         rm -f *.o *.so
-        ruby extconf.rb
+        /usr/bin/ruby extconf.rb
         make
         cd - 1>/dev/null
     else
