@@ -115,9 +115,6 @@
 [submodule "dotvim/bundle/vim-addon-mw-utils"]
 	path = dotvim/bundle/vim-addon-mw-utils
 	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
-[submodule "dotvim/bundle/vim-snipmate"]
-	path = dotvim/bundle/vim-snipmate
-	url = https://github.com/garbas/vim-snipmate.git
 [submodule "dotvim/bundle/vim-lucius"]
 	path = dotvim/bundle/vim-lucius
 	url = https://github.com/jonathanfilip/vim-lucius
@@ -130,3 +127,6 @@
 [submodule "dotvim/bundle/webapi-vim"]
 	path = dotvim/bundle/webapi-vim
 	url = https://github.com/mattn/webapi-vim.git
+[submodule "dotvim/bundle/ultisnips"]
+	path = dotvim/bundle/ultisnips
+	url = https://github.com/MarcWeber/ultisnips.git
