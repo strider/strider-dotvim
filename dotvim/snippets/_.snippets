@@ -1,0 +1,177 @@
+# Global snippets
+# (c) holds no legal value ;)
+snippet c) copyright #1
+	`&enc[:2] == "utf" ? "©" : "(c)"` Copyright `strftime("%Y")` ${1:`g:snips_author`}. All Rights Reserved.${2}
+snippet gpl
+	# Copyright (C) `strftime("%Y")` `system("git config user.name")` (<`system("git config user.email")`>) 
+	#
+	# This program is free software: you can redistribute it and/or modify
+	# it under the terms of the GNU General Public License as published by
+	# the Free Software Foundation, version 3 of the License.
+	#
+	# This program is distributed in the hope that it will be useful,
+	# but WITHOUT ANY WARRANTY; without even the implied warranty of
+	# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	# GNU General Public License for more details.
+	#
+	# You should have received a copy of the GNU General Public License
+	# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	
+	${1}
+snippet #head head #1
+	# Author:: `system("git config user.name")` (<`system("git config user.email")`>)
+	# Date:: `system("ruby -e 'puts Time.now'")`
+	#
+	${1}
+snippet -- line -- #1
+	-----------------------------------------------------------------------------
+	${1}
+snippet __ underscore __ #1
+	_____________________________________________________________________________
+	${1}
+snippet asr
+	[source, ruby]
+	----
+	${1:source code}
+	----
+snippet asp
+	[source, python]
+	----
+	${1:source code}
+	----
+snippet ass
+	[source, sh]
+	----
+	${1:source code}
+	----
+# custom puppet
+snippet ppackage
+	package { '${1:package name}':
+	  ensure => ${2:present},${3}
+	}
+
+	${4}
+snippet pservice
+	service { '${1:service name}':
+	  ensure => ${2:running},
+	  enable => ${3:true},
+	}
+
+	${4}
+snippet sfile
+	file { '${1:filename}' :
+	  ensure => '${2:file}',
+	  source => 'puppet:///modules/${3:modulename}/${4:source}',
+	  owner  => '${5:root}',
+	  group  => '${6:root}',
+	  mode   => '${7:0640}',
+	}
+
+	${8}
+snippet tfile
+	file { '${1:filename}' :
+	  ensure  => '${2:file}',
+	  content => template('${3:modulename}/${4:tplfile}'),
+	  owner   => '${5:root}',
+	  group   => '${6:root}',
+	  mode    => '${7:0640}',
+	}
+
+	${8}
+snippet user
+	user {"${1:nobody}":
+	  ensure     => "${2:present}",
+	  home       => "${3:/var/lib/$1}",
+	  uid        => "${4:333}",
+	  gid        => "${5:$4}",
+	  comment    => "${6:$1 account}",
+	  membership => "${7:minimum}",
+	  password   => '!!',
+	  shell      => "${8:/bin/bash, /bin/false, /sbin/nologin, /bin/zsh, /bin/tcsh}",
+	}
+
+	${8}
+snippet define
+	# Define: ${1:mydefinedtype}
+	#
+	#   ${2:defined type description goes here.}
+	#
+	# Parameters:
+	#
+	# Actions:
+	#
+	# Requires:
+	#
+	# Sample Usage:
+	#
+	define $1($3) {
+	  ${4:# statements}
+	}
+	# EOF
+snippet #!
+	#! /usr/bin/env puppet
+snippet class
+	# == Class: ${1:myclass}
+	#
+	# ${2:class description goes here.}
+	#
+	# === Parameters:
+	#
+	# [${3:Class parameter}]
+	#
+	# === Variables
+	#
+	# === Examples
+	#
+	# === Authors
+	#
+	# Gaël Chamoulaud <gchamoul@redhat.com>
+	#
+	# === Copyright
+	#
+	# Copyright 2013 Gaël Chamoulaud <gchamoul@redhat.com>, unless otherwise noted.
+	#
+	class $1 {
+	  ${4:# statements}
+	}
+snippet class::
+	# == Class: ${1:parentclass}::${2:myclass}
+	#
+	#   ${3:class description goes here.}
+	#
+	# === Parameters:
+	#
+	# [*${4:Class parameter}*]
+	# - ${5:Explanation of what this parameter affects what it defaults to.}
+	#
+	# === Variables
+	#
+	# === Examples
+	#
+	# === Authors
+	#
+	# Gaël Chamoulaud <gchamoul@redhat.com>
+	#
+	# === Copyright
+	#
+	# Copyright 2013 Gaël Chamoulaud <gchamoul@redhat.com>, unless otherwise noted.
+	#
+	class $1::$2 {
+		${6:# statements}
+	}
+snippet File
+	File {
+	  owner => "${1:0}",
+	  group => "${2:$1}",
+	  mode  => "${3:0644}",
+	}
+snippet file
+	file {
+	  "${1:/dev/null}":
+	    source  => "puppet:///modules/${module}${2:$1}",
+			recurse => "${3:false}"
+	}
+snippet :
+	"${1:title}":${2}
+snippet >
+	${1:attribute} => ${2:value},${3}

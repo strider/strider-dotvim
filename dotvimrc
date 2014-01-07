@@ -42,9 +42,6 @@ let g:airline_powerline_fonts=1
 let Tlist_WinWidth = 50
 map <F5> :TlistToggle<cr>
 
-" declare global configuration dictionary so that config options can be added:
-let g:UltiSnips = {}
-
 " set up some custom colors
 highlight clear SignColumn
 highlight VertSplit    ctermbg=236
