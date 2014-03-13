@@ -14,7 +14,6 @@ set pastetoggle=<F2>
 set clipboard=unnamed
 set mouse=a
 set bs=2
-set relativenumber
 set number
 set tw=79
 set nowrap
@@ -223,7 +222,7 @@ iab paris Paris
 iab facon façon
 iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")
 
-nmap <leader>n :NERDTreeToggle<CR>
+nmap <F9> :NERDTreeToggle<CR>
 let g:NERDTreeWinSize = 20
 
 map <leader>da :echo 'Current Time is ' . strftime( '%c' )<CR>
@@ -276,6 +275,22 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 
 autocmd BufWritePost *.py call Flake8()
+
+" Awesome line number magic
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunction
+
+nnoremap <leader>k :call NumberToggle()<cr>
+:au FocusLost * set number
+:au FocusGained * set relativenumber
+autocmd InsertEnter * set number
+autocmd InsertLeave * set relativenumber
+set relativenumber
 
 function! s:DisplayStatus(msg)
   echohl Todo
