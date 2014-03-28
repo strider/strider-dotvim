@@ -130,3 +130,6 @@
 [submodule "dotvim/bundle/vim-snipmate"]
 	path = dotvim/bundle/vim-snipmate
 	url = https://github.com/garbas/vim-snipmate.git
+[submodule "dotvim/bundle/ack.vim"]
+	path = dotvim/bundle/ack.vim
+	url = https://github.com/mileszs/ack.vim.git
