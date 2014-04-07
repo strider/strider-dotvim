@@ -133,3 +133,6 @@
 [submodule "dotvim/bundle/ack.vim"]
 	path = dotvim/bundle/ack.vim
 	url = https://github.com/mileszs/ack.vim.git
+[submodule "dotvim/bundle/git-nerdtree"]
+	path = dotvim/bundle/git-nerdtree
+	url = https://github.com/Xuyuanp/git-nerdtree.git
