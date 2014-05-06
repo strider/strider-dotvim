@@ -136,3 +136,6 @@
 [submodule "dotvim/bundle/git-nerdtree"]
 	path = dotvim/bundle/git-nerdtree
 	url = https://github.com/Xuyuanp/git-nerdtree.git
+[submodule "dotvim/bundle/vim-colorschemes"]
+	path = dotvim/bundle/vim-colorschemes
+	url = https://github.com/flazz/vim-colorschemes.git
