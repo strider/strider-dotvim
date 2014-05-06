@@ -73,7 +73,7 @@ let mapleader = ","
 " Color scheme
 set t_Co=256
 set bg=dark
-colorscheme candyVirus
+colorscheme up
 
 " hint to keep lines short
 if exists('+colorcolumn')
