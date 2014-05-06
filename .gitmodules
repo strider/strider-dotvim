@@ -115,12 +115,6 @@
 [submodule "dotvim/bundle/vim-addon-mw-utils"]
 	path = dotvim/bundle/vim-addon-mw-utils
 	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
-[submodule "dotvim/bundle/vim-lucius"]
-	path = dotvim/bundle/vim-lucius
-	url = https://github.com/jonathanfilip/vim-lucius
-[submodule "dotvim/bundle/vim-airline"]
-	path = dotvim/bundle/vim-airline
-	url = https://github.com/bling/vim-airline
 [submodule "dotvim/bundle/gist-vim"]
 	path = dotvim/bundle/gist-vim
 	url = https://github.com/mattn/gist-vim.git
