@@ -133,3 +133,6 @@
 [submodule "dotvim/bundle/vim-colorschemes"]
 	path = dotvim/bundle/vim-colorschemes
 	url = https://github.com/flazz/vim-colorschemes.git
+[submodule "dotvim/bundle/vim-ctrlspace"]
+	path = dotvim/bundle/vim-ctrlspace
+	url = https://github.com/szw/vim-ctrlspace

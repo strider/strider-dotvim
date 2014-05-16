@@ -34,6 +34,7 @@ set nowritebackup
 set noswapfile
 set laststatus=2
 set noshowmode
+set hidden
 
 " put git status, column/row number, total lines, and percentage in status
 set statusline=%F%m%r%h%w\ %{fugitive#statusline()}\ [%l,%c]\ [%L,%p%%]
@@ -44,12 +45,12 @@ map <F5> :TlistToggle<cr>
 " set up some custom colors
 highlight clear SignColumn
 highlight VertSplit    ctermbg=236
-highlight ColorColumn  ctermbg=237
+highlight ColorColumn  ctermbg=255
 highlight LineNr       ctermbg=236 ctermfg=240
 highlight CursorLineNr ctermbg=236 ctermfg=240
 highlight CursorLine   ctermbg=236
 highlight StatusLineNC ctermbg=238 ctermfg=0
-highlight StatusLine   ctermbg=240 ctermfg=12
+highlight StatusLine   ctermbg=255 ctermfg=12
 highlight IncSearch    ctermbg=0   ctermfg=3
 highlight Search       ctermbg=0   ctermfg=9
 highlight Visual       ctermbg=3   ctermfg=0
@@ -63,6 +64,11 @@ if version >= 700
   au InsertLeave * hi StatusLine ctermbg=240 ctermfg=12
 endif
 
+"hi CtrlSpaceSelected term=reverse ctermfg=15   guifg=#d7d7af ctermbg=23    guibg=#005f5f cterm=bold gui=bold
+"hi CtrlSpaceNormal   term=NONE    ctermfg=244   guifg=#808080 ctermbg=232   guibg=#080808 cterm=NONE gui=NONE
+"hi CtrlSpaceSearch   ctermfg=220  guifg=#ffd700 ctermbg=NONE  guibg=NONE    cterm=bold    gui=bold
+"hi CtrlSpaceStatus   ctermfg=230  guifg=#ffffd7 ctermbg=234   guibg=#1c1c1c cterm=NONE    gui=NONE
+
 let mapleader = ","
 
 " Show whitespace
@@ -73,7 +79,7 @@ let mapleader = ","
 " Color scheme
 set t_Co=256
 set bg=dark
-colorscheme up
+colorscheme candyVirus
 
 " hint to keep lines short
 if exists('+colorcolumn')
@@ -231,8 +237,8 @@ augroup filetype
   autocmd BufNewFile,BufRead */.Postponed/* set filetype=mail
   autocmd BufNewFile,BufRead *.txt setl textwidth=70
   autocmd BufRead,BufNewFile *mutt-* set filetype=mail
-  autocmd FileType html,python,vim,javascript,dockbook,mail setl shiftwidth=2
-  autocmd FileType html,python,vim,javascript,dockbook,mail setl tabstop=2
+  autocmd FileType html,vim,javascript,dockbook,mail setl shiftwidth=2
+  autocmd FileType html,vim,javascript,dockbook,mail setl tabstop=2
   autocmd BufNewFile,BufRead *.markdown,*.md,*.mdown,*.mkd,*.mkdn
         \ if &ft =~# '^\%(conf\|modula2\)$' |
         \   set ft=markdown |
@@ -261,10 +267,6 @@ let Tlist_Show_One_File = 1
 
 " detect kickstart filetype
 autocmd BufNewFile,BufRead *.ks setl ft=kickstart
-
-" Docbook Format
-autocmd BufNewFile,BufRead *.xml set ts=2
-autocmd BufNewFile,BufRead *.xml set sw=2
 
 " Ruby
 autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
@@ -338,9 +340,46 @@ autocmd BufRead,BufNewFile *.txt,*.adoc,*.asciidoc,README,TODO,CHANGELOG,NOTES,A
         \ comments=s1:/*,ex:*/,://,b:#,:%,:XCOMM,fb:-,fb:*,fb:+,fb:.,fb:>
 
 " Switch to current dir
-map <leader>cdi :cd %:p:h<cr>
+map <Leader>cdi :cd %:p:h<cr>
 " Display Current time !!!
-map <leader>da :echo 'Current Time is ' . strftime( '%c' )<CR>
+map <Leader>da :echo 'Current Time is ' . strftime( '%c' )<CR>
+
+" Create a new window with directory listing of current buffer
+nnoremap <Leader>wd :new <C-R>=expand("%:p:h") . "/" <CR>
+nnoremap <Leader>wn :new %:p:h<CR>
+nnoremap <Leader>w. :new %:p:h<CR>
+
+nnoremap <Leader>vd :vnew <C-R>=expand("%:p:h") . "/" <CR>
+nnoremap <Leader>vn :vnew %:p:h<CR>
+nnoremap <Leader>v. :vnew %:p:h<CR>
+" Easier non-interactive command insertion
+nnoremap <Space> :
+" \F to startup an ack search
+map <leader>F :Ack<space>
+" open tabs with Leader-<tab number>
+map <Leader>1 :tabn 1<CR>
+map <Leader>2 :tabn 2<CR>
+map <Leader>3 :tabn 3<CR>
+map <Leader>4 :tabn 4<CR>
+map <Leader>5 :tabn 5<CR>
+
+" window splitting mappings
+" split vertically with <leader> v
+" split horizontally with <leader> s
+nmap <Leader>vs :vsplit<CR> <C-w><C-w>
+nmap <Leader>sp :split<CR> <C-w><C-w>
+
+"
+" From http://jetpackweb.com/blog/2010/02/15/vim-tips-for-ruby/
+" and http://technicalpickles.com/posts/vimpocalypse/
+"
+augroup strider_ruby
+  autocmd!
+
+  autocmd FileType ruby,puppet inoremap <C-l> <Space>=><Space>
+  " convert word into ruby symbol
+  autocmd FileType ruby inoremap <C-k> <C-o>b:<Esc>Ea
+augroup END
 
 map <silent> <F7> <Esc> :w! <cr> :!python % <cr>
 cmap w!! %!sudo tee > /dev/null %
