@@ -228,7 +228,7 @@ iab paris Paris
 iab facon façon
 iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")
 
-nmap <F9> :NERDTreeToggle<CR>
+nmap <F8> :NERDTreeToggle<CR>
 let g:NERDTreeWinSize = 20
 
 map <leader>da :echo 'Current Time is ' . strftime( '%c' )<CR>
