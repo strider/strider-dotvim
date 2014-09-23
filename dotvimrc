@@ -64,10 +64,10 @@ if version >= 700
   au InsertLeave * hi StatusLine ctermbg=240 ctermfg=12
 endif
 
-"hi CtrlSpaceSelected term=reverse ctermfg=15   guifg=#d7d7af ctermbg=23    guibg=#005f5f cterm=bold gui=bold
-"hi CtrlSpaceNormal   term=NONE    ctermfg=244   guifg=#808080 ctermbg=232   guibg=#080808 cterm=NONE gui=NONE
-"hi CtrlSpaceSearch   ctermfg=220  guifg=#ffd700 ctermbg=NONE  guibg=NONE    cterm=bold    gui=bold
-"hi CtrlSpaceStatus   ctermfg=230  guifg=#ffffd7 ctermbg=234   guibg=#1c1c1c cterm=NONE    gui=NONE
+hi CtrlSpaceSelected term=reverse ctermfg=15   guifg=#d7d7af ctermbg=23    guibg=#005f5f cterm=bold gui=bold
+hi CtrlSpaceNormal   term=NONE    ctermfg=244   guifg=#808080 ctermbg=232   guibg=#080808 cterm=NONE gui=NONE
+hi CtrlSpaceSearch   ctermfg=220  guifg=#ffd700 ctermbg=NONE  guibg=NONE    cterm=bold    gui=bold
+hi CtrlSpaceStatus   ctermfg=230  guifg=#ffffd7 ctermbg=234   guibg=#1c1c1c cterm=NONE    gui=NONE
 
 let mapleader = ","
 
@@ -78,8 +78,9 @@ let mapleader = ","
 
 " Color scheme
 set t_Co=256
-set bg=dark
-colorscheme candyVirus
+set background=dark
+colorscheme base16-default
+let base16colorspace=256
 
 " hint to keep lines short
 if exists('+colorcolumn')
@@ -395,6 +396,7 @@ let g:syntastic_auto_jump=1
 let g:syntastic_auto_loc_list=1
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='✗'
+let g:Syntastic_check_on_wq=0
 
 
 let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
