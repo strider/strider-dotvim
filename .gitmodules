@@ -91,9 +91,6 @@
 [submodule "dotvim/bundle/vim-rake"]
 	path = dotvim/bundle/vim-rake
 	url = https://github.com/tpope/vim-rake.git
-[submodule "dotvim/bundle/vim-rails"]
-	path = dotvim/bundle/vim-rails
-	url = https://github.com/tpope/vim-rails.git
 [submodule "dotvim/bundle/vim-notes"]
 	path = dotvim/bundle/vim-notes
 	url = https://github.com/xolox/vim-notes.git
