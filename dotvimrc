@@ -10,6 +10,8 @@ filetype off
 filetype plugin indent on
 syntax on
 set fenc=utf-8
+set encoding=utf8
+set termencoding=utf-8
 set pastetoggle=<F2>
 set clipboard=unnamed
 set mouse=a
@@ -36,8 +38,12 @@ set laststatus=2
 set noshowmode
 set hidden
 
+if v:version >= 700
+  set viminfo=!,'20,<50,s10,h
+endif
+
 " put git status, column/row number, total lines, and percentage in status
-set statusline=%F%m%r%h%w\ %{fugitive#statusline()}\ [%l,%c]\ [%L,%p%%]
+set statusline=[%n]\ %<%.99f\ %h%w%m%r%{SL('CapsLockStatusline')}%y%{SL('fugitive#statusline')}%#ErrorMsg#%{SL('SyntasticStatuslineFlag')}%*%=%-14.(%l,%c%V%)\ %P
 
 let Tlist_WinWidth = 50
 map <F5> :TlistToggle<cr>
@@ -45,7 +51,7 @@ map <F5> :TlistToggle<cr>
 " set up some custom colors
 highlight clear SignColumn
 highlight VertSplit    ctermbg=236
-highlight ColorColumn  ctermbg=255
+highlight ColorColumn  ctermbg=100
 highlight LineNr       ctermbg=236 ctermfg=240
 highlight CursorLineNr ctermbg=236 ctermfg=240
 highlight CursorLine   ctermbg=236
@@ -69,7 +75,7 @@ hi CtrlSpaceNormal   term=NONE    ctermfg=244   guifg=#808080 ctermbg=232   guib
 hi CtrlSpaceSearch   ctermfg=220  guifg=#ffd700 ctermbg=NONE  guibg=NONE    cterm=bold    gui=bold
 hi CtrlSpaceStatus   ctermfg=230  guifg=#ffffd7 ctermbg=234   guibg=#1c1c1c cterm=NONE    gui=NONE
 
-let mapleader = ","
+let mapleader = "\<Space>"
 
 " Show whitespace
 " MUST be inserted BEFORE the colorscheme command
@@ -77,14 +83,14 @@ let mapleader = ","
 "au InsertLeave * match ExtraWhitespace /\s\+$/
 
 " Color scheme
-set t_Co=256
 set background=dark
-colorscheme base16-default
-let base16colorspace=256
+colorscheme Tomorrow-Night
+set t_Co=256
 
 " hint to keep lines short
 if exists('+colorcolumn')
   set colorcolumn=80
+  highlight ColorColumn ctermbg=236
 endif
 
 " Bind nohl
@@ -112,6 +118,14 @@ nmap <leader>s<down>   :rightbelow new<CR>
 noremap <C-Z> :update<CR>
 vnoremap <C-Z> <C-C>:update<CR>
 inoremap <C-Z> <C-O>:update<CR>
+nnoremap <Leader>w :w<CR>
+
+" Enter visual line mode with <Space><Space>:
+nmap <Leader><Leader> V
+
+nnoremap <CR> G
+nnoremap <BS> gg
+
 
 " Quick quit command
 noremap <Leader>e :quit<CR>  " Quit current window
@@ -161,7 +175,7 @@ set wildignore+=*.pyc,*.o,*.obj
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
 
-"map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+map <Leader>vb Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
 " Better navigating through omnicomplete option list
 " See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
@@ -322,10 +336,25 @@ endfunction
 " :CleanCode
 command! -bar -range=% CleanCode call CleanCode()
 
-" Show tabs and trailing characters.
-"set listchars=tab:»·,trail:·,eol:¬
-set listchars=tab:»·,trail:·
+function! SL(function)
+  if exists('*'.a:function)
+    return call(a:function,[])
+  else
+    return ''
+  endif
+endfunction
+
 set list
+
+if (&termencoding ==# 'utf-8' || &encoding ==# 'utf-8') && version >= 700
+  let &listchars = "eol:↲,tab:\u21e5\u00b7,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u26ad"
+  let &fillchars = "vert:\u259a,fold:\u00b7"
+else
+  set listchars=tab:>\ ,trail:-,extends:>,precedes:<
+endif
+
+" F3: Toggle list (display unprintable characters).
+map <F3> :set list! list? <CR>
 
 " ASCIIDOC Specific
 " Reformat paragraphs and list.
@@ -350,7 +379,7 @@ nnoremap <Leader>wd :new <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <Leader>wn :new %:p:h<CR>
 nnoremap <Leader>w. :new %:p:h<CR>
 
-nnoremap <Leader>vd :vnew <C-R>=expand("%:p:h") . "/" <CR>
+nnoremap s<Leader>vd :vnew <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <Leader>vn :vnew %:p:h<CR>
 nnoremap <Leader>v. :vnew %:p:h<CR>
 " Easier non-interactive command insertion
@@ -409,3 +438,9 @@ let g:gist_post_private = 1
 " SnipMate Options
 let g:snips_author = 'Gaël Chamoulaud'
 let g:snips_email = 'gchamoul@redhat.com'
+let g:snips_github = 'https://github.com/strider'
+
+if exists("+spelllang")
+  set spelllang=en_us
+endif
+set spellfile=~/.vim/spell/en.utf-8.add
