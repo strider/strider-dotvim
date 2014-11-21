@@ -133,3 +133,12 @@
 [submodule "dotvim/bundle/vim-tomorrow-theme"]
 	path = dotvim/bundle/vim-tomorrow-theme
 	url = https://github.com/chriskempson/vim-tomorrow-theme.git
+[submodule "dotvim/bundle/vim-expand-region"]
+	path = dotvim/bundle/vim-expand-region
+	url = https://github.com/terryma/vim-expand-region.git
+[submodule "dotvim/bundle/vim-vroom"]
+	path = dotvim/bundle/vim-vroom
+	url = https://github.com/skalnik/vim-vroom.git
+[submodule "dotvim/bundle/vim-github-comment"]
+	path = dotvim/bundle/vim-github-comment
+	url = https://github.com/mmozuras/vim-github-comment.git
