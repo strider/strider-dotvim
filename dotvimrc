@@ -11,7 +11,7 @@ filetype plugin indent on
 syntax on
 set fenc=utf-8
 set encoding=utf8
-set termencoding=utf-8
+set termencoding=utf8
 set pastetoggle=<F2>
 set clipboard=unnamed
 set mouse=a
@@ -64,15 +64,35 @@ hi CtrlSpaceStatus   ctermfg=230  guifg=#ffffd7 ctermbg=234   guibg=#1c1c1c cter
 
 let mapleader = "\<Space>"
 
-" Show whitespace
-" MUST be inserted BEFORE the colorscheme command
-"autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-"au InsertLeave * match ExtraWhitespace /\s\+$/
-
 " Color scheme
-set background=dark
-colorscheme Tomorrow-Night
 set t_Co=256
+
+if has("gui_running")
+  " Nicer font
+  set guifont=Terminus\ for\ Powerline\ 08
+  set background=dark
+  colorscheme base16-solarized
+else
+  set background=dark
+  colorscheme Tomorrow-Night
+endif
+
+" No icky toolbar, menu or scrollbars in the GUI
+if has('gui')
+  set guioptions+=a " Automatically make visual selection available in system clipboard
+  set guioptions-=m
+  set guioptions-=T
+  set guioptions-=l
+  set guioptions-=L
+  set guioptions-=r
+  set guioptions-=R
+  set guioptions-=b
+  set mousehide     " Hide the mouse while typing
+end
+
+" Show whitespace
+highlight ExtraWhitespace ctermbg=darkgreen guibg=lightgreen
+
 
 " hint to keep lines short
 if exists('+colorcolumn')
@@ -424,3 +444,20 @@ let g:snips_github = 'https://github.com/strider'
 
 " Github Comments
 let g:github_user = 'strider'
+
+let g:github_dashboard = { 'username': 'strider' }
+
+" Dashboard window position
+" " - Options: tab, top, bottom, above, below, left, right
+" " - Default: tab
+let g:github_dashboard['position'] = 'top'
+
+" Customize emoji (see http://www.emoji-cheat-sheet.com/)
+let g:github_dashboard['emoji_map'] = {
+\   'user_dashboard': 'blush',
+\   'user_activity':  'smile',
+\   'repo_activity':  'laughing',
+\   'ForkEvent':      'fork_and_knife'
+\ }
+
+let g:splice_prefix = "<leader>t"
