@@ -454,3 +454,4 @@ let g:github_dashboard['emoji_map'] = {
 \ }
 
 let g:splice_prefix = "<leader>t"
+autocmd VimEnter * redraw!

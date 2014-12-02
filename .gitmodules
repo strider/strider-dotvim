@@ -22,9 +22,6 @@
 [submodule "dotvim/bundle/bash-support.vim"]
 	path = dotvim/bundle/bash-support.vim
 	url = https://github.com/vim-scripts/bash-support.vim.git
-[submodule "dotvim/bundle/vim-session"]
-	path = dotvim/bundle/vim-session
-	url = https://github.com/xolox/vim-session.git
 [submodule "dotvim/bundle/vim-surround"]
     path = dotvim/bundle/vim-surround
 	url = https://github.com/tpope/vim-surround.git
