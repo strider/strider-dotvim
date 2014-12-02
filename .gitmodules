@@ -52,9 +52,6 @@
 [submodule "dotvim/bundle/vim-rooter"]
     path = dotvim/bundle/vim-rooter
 	url = https://github.com/airblade/vim-rooter.git
-[submodule "dotvim/bundle/vim-kickstart"]
-    path = dotvim/bundle/vim-kickstart
-	url = https://github.com/vim-scripts/vim-kickstart.git
 [submodule "dotvim/bundle/nerdcommenter"]
     path = dotvim/bundle/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
@@ -64,9 +61,6 @@
 [submodule "dotvim/bundle/tabular"]
     path = dotvim/bundle/tabular
 	url = https://github.com/godlygeek/tabular.git
-[submodule "dotvim/bundle/ScrollColors"]
-    path = dotvim/bundle/ScrollColors
-	url = https://github.com/vim-scripts/ScrollColors.git
 [submodule "dotvim/bundle/supertab"]
     path = dotvim/bundle/supertab
 	url = https://github.com/ervandew/supertab.git
@@ -82,15 +76,9 @@
 [submodule "dotvim/bundle/DrawIt"]
 	path = dotvim/bundle/DrawIt
 	url = https://github.com/vim-scripts/DrawIt.git
-[submodule "dotvim/bundle/DeleteTrailingWhitespace"]
-	path = dotvim/bundle/DeleteTrailingWhitespace
-	url = https://github.com/vim-scripts/DeleteTrailingWhitespace.git
 [submodule "dotvim/bundle/asciidoc.vim"]
 	path = dotvim/bundle/asciidoc.vim
 	url = https://github.com/vim-scripts/asciidoc.vim.git
-[submodule "dotvim/bundle/vim-rake"]
-	path = dotvim/bundle/vim-rake
-	url = https://github.com/tpope/vim-rake.git
 [submodule "dotvim/bundle/vim-notes"]
 	path = dotvim/bundle/vim-notes
 	url = https://github.com/xolox/vim-notes.git
@@ -124,9 +112,6 @@
 [submodule "dotvim/bundle/ack.vim"]
 	path = dotvim/bundle/ack.vim
 	url = https://github.com/mileszs/ack.vim.git
-[submodule "dotvim/bundle/vim-colorschemes"]
-	path = dotvim/bundle/vim-colorschemes
-	url = https://github.com/flazz/vim-colorschemes.git
 [submodule "dotvim/bundle/vim-ctrlspace"]
 	path = dotvim/bundle/vim-ctrlspace
 	url = https://github.com/szw/vim-ctrlspace
@@ -145,15 +130,9 @@
 [submodule "dotvim/bundle/vim-github-dashboard"]
 	path = dotvim/bundle/vim-github-dashboard
 	url = https://github.com/junegunn/vim-github-dashboard.git
-[submodule "dotvim/bundle/vim-colors-solarized"]
-	path = dotvim/bundle/vim-colors-solarized
-	url = https://github.com/altercation/vim-colors-solarized.git
 [submodule "dotvim/bundle/vim-splice"]
 	path = dotvim/bundle/vim-splice
 	url = https://github.com/sjl/splice.vim.git
-[submodule "dotvim/bundle/base16-vim"]
-	path = dotvim/bundle/base16-vim
-	url = https://github.com/chriskempson/base16-vim.git
 [submodule "dotvim/bundle/vCoolor.vim"]
 	path = dotvim/bundle/vCoolor.vim
 	url = https://github.com/KabbAmine/vCoolor.vim.git

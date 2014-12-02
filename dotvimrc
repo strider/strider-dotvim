@@ -71,7 +71,7 @@ if has("gui_running")
   " Nicer font
   set guifont=Terminus\ for\ Powerline\ 08
   set background=dark
-  colorscheme Tomorrow-Night
+  colorscheme Tomorrow-Night-Bright
 else
   set background=dark
   colorscheme Tomorrow-Night
@@ -127,7 +127,7 @@ inoremap <C-Z> <C-O>:update<CR>
 nnoremap <Leader>w :w<CR>
 
 " Enter visual line mode with <Space><Space>:
-nmap <Leader><Leader> V
+nmap <Leader><Leader><Leader> V
 
 " Quick quit command
 noremap <Leader>e :quit<CR>  " Quit current window
@@ -139,10 +139,6 @@ map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
-
-" easier moving between tabs
-map <Leader>n <esc>:tabprevious<CR>
-map <Leader>m <esc>:tabnext<CR>
 
 " map sort function to a key
 vnoremap <Leader>s :sort<CR>
@@ -210,9 +206,6 @@ iab gcha Gaël Chamoulaud <gchamoul@redhat.com>
 iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")
 iab BR Best Regards, ~GC
 iab RH Red Hat
-iab RHC Red Hat Consulting
-iab RHEL Red Hat Enterprise Linux
-iab RHNS Red Hat Network Satellite
 iab lunix Linux
 iab systm système
 iab systeme système
@@ -385,7 +378,7 @@ nnoremap s<Leader>vd :vnew <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <Leader>vn :vnew %:p:h<CR>
 nnoremap <Leader>v. :vnew %:p:h<CR>
 " Easier non-interactive command insertion
-nnoremap <Space> :
+nnoremap <Space><Space> :
 " \F to startup an ack search
 map <leader>F :Ack<space>
 " open tabs with Leader-<tab number>
@@ -408,7 +401,7 @@ nmap <Leader>sp :split<CR> <C-w><C-w>
 augroup strider_ruby
   autocmd!
 
-  autocmd FileType ruby,puppet inoremap <C-l> <Space>=><Space>
+  autocmd FileType ruby,puppet inoremap <C-S-l> <Space>=><Space>
   " convert word into ruby symbol
   autocmd FileType ruby inoremap <C-k> <C-o>b:<Esc>Ea
 augroup END
