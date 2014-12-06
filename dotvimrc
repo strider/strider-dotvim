@@ -16,7 +16,6 @@ set pastetoggle=<F2>
 set clipboard=unnamed
 set mouse=a
 set bs=2
-set number
 set tw=79
 set nowrap
 set fo-=t
@@ -48,19 +47,11 @@ set statusline=[%n]\ %<%.99f\ %h%w%m%r%{SL('CapsLockStatusline')}%y%{SL('fugitiv
 let Tlist_WinWidth = 50
 map <F5> :TlistToggle<cr>
 
-vmap V <Plug>(expand_region_expand)
-vmap <C-V> <Plug>(expand_region_shrink)
-
 " highlight the status bar when in insert mode
 if version >= 700
   au InsertEnter * hi StatusLine ctermfg=235 ctermbg=2
   au InsertLeave * hi StatusLine ctermbg=240 ctermfg=12
 endif
-
-hi CtrlSpaceSelected term=reverse ctermfg=15   guifg=#d7d7af ctermbg=23    guibg=#005f5f cterm=bold gui=bold
-hi CtrlSpaceNormal   term=NONE    ctermfg=244   guifg=#808080 ctermbg=232   guibg=#080808 cterm=NONE gui=NONE
-hi CtrlSpaceSearch   ctermfg=220  guifg=#ffd700 ctermbg=NONE  guibg=NONE    cterm=bold    gui=bold
-hi CtrlSpaceStatus   ctermfg=230  guifg=#ffffd7 ctermbg=234   guibg=#1c1c1c cterm=NONE    gui=NONE
 
 let mapleader = "\<Space>"
 
@@ -74,8 +65,11 @@ if has("gui_running")
   colorscheme Tomorrow-Night-Bright
 else
   set background=dark
-  colorscheme Tomorrow-Night
+  colorscheme Tomorrow-Night-Bright
 endif
+
+hi SpecialKey   ctermfg=190  guifg=#F6FF15 ctermbg=NONE  guibg=NONE    cterm=bold    gui=bold
+hi NonText      ctermfg=190  guifg=#F6FF15 ctermbg=NONE  guibg=NONE    cterm=bold    gui=bold
 
 " No icky toolbar, menu or scrollbars in the GUI
 if has('gui')
@@ -89,6 +83,13 @@ if has('gui')
   set guioptions-=b
   set mousehide     " Hide the mouse while typing
 end
+
+set cursorline
+hi cursorline cterm=none term=none
+autocmd WinEnter * setlocal cursorline
+autocmd WinLeave * setlocal nocursorline
+highlight CursorLine guibg=#303000 ctermbg=234
+
 
 " Show whitespace
 highlight ExtraWhitespace ctermbg=darkgreen guibg=lightgreen
@@ -245,8 +246,9 @@ map <leader>da :echo 'Current Time is ' . strftime( '%c' )<CR>
 
 augroup filetype
   autocmd BufNewFile,BufRead */.Postponed/* set filetype=mail
-  autocmd BufNewFile,BufRead *.txt setl textwidth=70
-  autocmd BufRead,BufNewFile *mutt-* set filetype=mail
+  autocmd BufNewFile,BufRead *.txt setl textwidth=79
+  autocmd BufRead,BufNewFile *mutt-* set filetype=mail setl shiftwidth=2
+  autocmd BufRead,BufNewFile *mutt-* set filetype=mail setl tabstop=2
   autocmd FileType html,vim,javascript,dockbook,mail setl shiftwidth=2
   autocmd FileType html,vim,javascript,dockbook,mail setl tabstop=2
   autocmd BufNewFile,BufRead *.markdown,*.md,*.mdown,*.mkd,*.mkdn
@@ -268,7 +270,6 @@ set ffs=unix,dos,mac
 
 nmap <leader>fd :se ff=dos<cr>
 nmap <leader>fu :se ff=unix<cr>
-nmap <leader>o :OpenSession<CR>
 
 let Tlist_Show_Menu = 1
 let Tlist_Auto_Update = 1
@@ -289,8 +290,10 @@ autocmd BufWritePost *.py call Flake8()
 " Awesome line number magic
 function! NumberToggle()
   if(&relativenumber == 1)
+    set norelativenumber
     set number
   else
+    set nonumber
     set relativenumber
   endif
 endfunction
@@ -379,6 +382,7 @@ nnoremap <Leader>vn :vnew %:p:h<CR>
 nnoremap <Leader>v. :vnew %:p:h<CR>
 " Easier non-interactive command insertion
 nnoremap <Space><Space> :
+nnoremap <Leader>, :h<Space>
 " \F to startup an ack search
 map <leader>F :Ack<space>
 " open tabs with Leader-<tab number>
@@ -443,7 +447,7 @@ let g:github_dashboard = { 'username': 'strider' }
 " Dashboard window position
 " " - Options: tab, top, bottom, above, below, left, right
 " " - Default: tab
-let g:github_dashboard['position'] = 'top'
+let g:github_dashboard['position'] = 'tab'
 
 " Customize emoji (see http://www.emoji-cheat-sheet.com/)
 let g:github_dashboard['emoji_map'] = {
@@ -455,3 +459,41 @@ let g:github_dashboard['emoji_map'] = {
 
 let g:splice_prefix = "<leader>t"
 autocmd VimEnter * redraw!
+
+noremap <silent> <Leader>h :call ToggleWrap()<CR>
+function ToggleWrap()
+  if &wrap
+    echo "Wrap OFF"
+    setlocal nowrap
+    set virtualedit=all
+    silent! nunmap <buffer> <Up>
+    silent! nunmap <buffer> <Down>
+    silent! nunmap <buffer> <Home>
+    silent! nunmap <buffer> <End>
+    silent! iunmap <buffer> <Up>
+    silent! iunmap <buffer> <Down>
+    silent! iunmap <buffer> <Home>
+    silent! iunmap <buffer> <End>
+  else
+    echo "Wrap ON"
+    setlocal wrap linebreak nolist
+    set virtualedit=
+    setlocal display+=lastline
+    noremap  <buffer> <silent> <Up>   gk
+    noremap  <buffer> <silent> <Down> gj
+    noremap  <buffer> <silent> <Home> g<Home>
+    noremap  <buffer> <silent> <End>  g<End>
+    inoremap <buffer> <silent> <Up>   <C-o>gk
+    inoremap <buffer> <silent> <Down> <C-o>gj
+    inoremap <buffer> <silent> <Home> <C-o>g<Home>
+    inoremap <buffer> <silent> <End>  <C-o>g<End>
+  endif
+endfunction
+
+"Print current path
+"   'test'
+cmap <C-e> <C-r>=expand('%:p:h')<CR>/
+
+" Jump to the start or end of line without leaving the home row
+noremap H ^
+noremap L $
