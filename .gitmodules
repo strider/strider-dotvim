@@ -133,3 +133,6 @@
 [submodule "dotvim/bundle/vCoolor.vim"]
 	path = dotvim/bundle/vCoolor.vim
 	url = https://github.com/KabbAmine/vCoolor.vim.git
+[submodule "dotvim/bundle/vim-solarized"]
+	path = dotvim/bundle/vim-solarized
+	url = https://github.com/altercation/vim-colors-solarized

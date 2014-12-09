@@ -1,3 +1,5 @@
+" dotvimrc by Gaël Chamoulaud <gchamoul@redhat.com>
+"
 " pathogen for plugin  bundles
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
@@ -60,9 +62,9 @@ set t_Co=256
 
 if has("gui_running")
   " Nicer font
-  set guifont=Terminus\ for\ Powerline\ 08
-  set background=dark
-  colorscheme Tomorrow-Night-Bright
+  set guifont=Ubuntu\ Mono\ 12
+  set background=light
+  colorscheme solarized
 else
   set background=dark
   colorscheme Tomorrow-Night-Bright
@@ -168,7 +170,7 @@ let g:ctrlp_match_window_reversed = 0
 " map git commands
 map <leader>b :Gblame<cr>
 map <leader>l :!clear && git log -p %<cr>
-map <leader>d :!clear && git diff %<cr>
+map <leader>d :Gvdiff<cr>
 
 set wildignore+=*.pyc,*.o,*.obj
 set wildignore+=*_build/*
@@ -247,10 +249,9 @@ map <leader>da :echo 'Current Time is ' . strftime( '%c' )<CR>
 augroup filetype
   autocmd BufNewFile,BufRead */.Postponed/* set filetype=mail
   autocmd BufNewFile,BufRead *.txt setl textwidth=79
-  autocmd BufRead,BufNewFile *mutt-* set filetype=mail setl shiftwidth=2
-  autocmd BufRead,BufNewFile *mutt-* set filetype=mail setl tabstop=2
+  autocmd BufRead,BufNewFile *mutt-* set filetype=mail
   autocmd FileType html,vim,javascript,dockbook,mail setl shiftwidth=2
-  autocmd FileType html,vim,javascript,dockbook,mail setl tabstop=2
+  autocmd FileType html,vim,javascript,dockbook,mail setl softtabstop=2
   autocmd BufNewFile,BufRead *.markdown,*.md,*.mdown,*.mkd,*.mkdn
         \ if &ft =~# '^\%(conf\|modula2\)$' |
         \   set ft=markdown |
