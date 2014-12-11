@@ -62,8 +62,8 @@ set t_Co=256
 
 if has("gui_running")
   " Nicer font
-  set guifont=Ubuntu\ Mono\ 12
-  set background=light
+  set guifont=Ubuntu\ Mono\ 09
+  set bg=light
   colorscheme solarized
 else
   set background=dark

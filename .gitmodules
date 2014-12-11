@@ -73,9 +73,6 @@
 [submodule "dotvim/bundle/DrawIt"]
 	path = dotvim/bundle/DrawIt
 	url = https://github.com/vim-scripts/DrawIt.git
-[submodule "dotvim/bundle/asciidoc.vim"]
-	path = dotvim/bundle/asciidoc.vim
-	url = https://github.com/vim-scripts/asciidoc.vim.git
 [submodule "dotvim/bundle/vim-notes"]
 	path = dotvim/bundle/vim-notes
 	url = https://github.com/xolox/vim-notes.git
