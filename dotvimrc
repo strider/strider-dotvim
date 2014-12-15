@@ -1,115 +1,250 @@
 " dotvimrc by Gaël Chamoulaud <gchamoul@redhat.com>
 "
-" pathogen for plugin  bundles
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-execute pathogen#infect()
-execute pathogen#helptags()
-
-" Automatic reloading of .vimrc
-autocmd! bufwritepost .vimrc source %
-
-filetype off
-filetype plugin indent on
+" Settings {{{
+" Switch syntax highlighting on, when the terminal has colors
 syntax on
+
+" Use vim, not vi api
+set nocompatible
+
+" No backup files
+set nobackup
+
+" No write backup
+set nowritebackup
+
+" No swap file
+set noswapfile
+
+" Turn word wrap off
+set nowrap
+
+" Allow backspace to delete end of line, indent and start of line characters
+set backspace=indent,eol,start
+
+" Convert tabs to spaces
+set expandtab
+
+" Set tab size in spaces (this is for manual indenting)
+set tabstop=4
+
+" The number of spaces inserted for a tab (used for auto indenting)
+set shiftwidth=4
+
+" Turn on line numbers
+set number
+
+" Highlight trailing whitespaces and CR
+set nolist
+
+if (&termencoding ==# 'utf-8' || &encoding ==# 'utf-8') && version >= 700
+  let &listchars = "eol:↲,tab:\u21e5\u00b7,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u26ad"
+  let &fillchars = "vert:\u259a,fold:\u00b7"
+else
+  set listchars=tab:>\ ,trail:-,extends:>,precedes:<
+endif
+
+" Get rid of the delay when pressing O (for example)
+" http://stackoverflow.com/questions/2158516/vim-delay-before-o-opens-a-new-line
+set timeout timeoutlen=1000 ttimeoutlen=100
+
+" Always show status bar
+set laststatus=2
+
+" Set the status line to something useful
+set statusline=%f\ %=L:%l/%L\ %c\ (%p%%)
+
+" UTF encoding
 set fenc=utf-8
 set encoding=utf8
 set termencoding=utf8
+
 set pastetoggle=<F2>
-set clipboard=unnamed
+
+" Use system clipboard
+" http://stackoverflow.com/questions/8134647/copy-and-paste-in-vim-via-keyboard-between-different-mac-terminals
+set clipboard+=unnamed
+
+" Enable the mouse in all four modes
 set mouse=a
-set bs=2
-set tw=79
-set nowrap
-set fo-=t
+
+" Better splits (new windows appear below and to the right)
+set splitbelow
+set splitright
+
+" Command history
 set history=700
+
+" Maximum number of changes that can be undone.
 set undolevels=700
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set shiftround
-set expandtab
-set hlsearch
+
+" Show incomplete commands
+set showcmd
+
+" Incremental searching (search as you type)
 set incsearch
-set ignorecase
+
+" Highlight search matches
+set hlsearch
+
+" Ignore case in search
 set smartcase
-set nobackup
-set nowritebackup
-set noswapfile
-set laststatus=2
-set noshowmode
+
+" Make sure any searches /searchPhrase doesn't need the \c escape character
+set ignorecase
+
+" A buffer is marked as ‘hidden’ if it has unsaved changes, and it is not
+" currently loaded in a window if you try and quit Vim while there are hidden
+" buffers, you will raise an error: E162: No write since last change for buffer
+" “a.txt”
 set hidden
+
+" Highlight the current line
+set cursorline
+
+" Ensure Vim doesn't beep at you every time you make a mistype
+set visualbell
+
+" Visual autocomplete for command menu (e.g. :e ~/path/to/file)
+set wildmenu
+
+" redraw only when we need to (i.e. don't redraw when executing a macro)
+set lazyredraw
+
+" highlight a matching [{()}] when cursor is placed on start/end character
+set showmatch
+
+" Set built-in file system explorer to use layout similar to the NERDTree plugin
+let g:netrw_liststyle=3
+
+" Always highlight column 80 so it's easier to see where
+" cutoff appears on longer screens
+set colorcolumn=80
+
+" Round indent to multiple of 'shiftwidth'
+set shiftround
+
+" Always show status bar
+set laststatus=2
+
+" Set the status line to something useful
+set statusline=%f\ %=L:%l/%L\ %c\ (%p%%)
+
+" If in Insert, Replace or Visual mode, don't put a message on the last line.
+set noshowmode
 
 if v:version >= 700
   set viminfo=!,'20,<50,s10,h
 endif
 
-" put git status, column/row number, total lines, and percentage in status
-set statusline=[%n]\ %<%.99f\ %h%w%m%r%{SL('CapsLockStatusline')}%y%{SL('fugitive#statusline')}%#ErrorMsg#%{SL('SyntasticStatuslineFlag')}%*%=%-14.(%l,%c%V%)\ %P
+" Automatic reloading of .vimrc
+autocmd! bufwritepost .vimrc source %
+" }}}
+
+" Plugins {{{
+" pathogen for plugin  bundles
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+execute pathogen#infect()
+execute pathogen#helptags()
+
+filetype off
+" Require by Pathogen Plugin Manager
+filetype plugin indent on
+
+" My Map Leader
+let mapleader = "\<Space>"
+
+" Theme
+set background=dark
+colorscheme Tomorrow-Night-Bright
+
+" Airline (status line)
+let g:airline_powerline_fonts = 1
+let g:airline_theme='tomorrow'
 
 let Tlist_WinWidth = 50
 map <F5> :TlistToggle<cr>
 
-" highlight the status bar when in insert mode
-if version >= 700
-  au InsertEnter * hi StatusLine ctermfg=235 ctermbg=2
-  au InsertLeave * hi StatusLine ctermbg=240 ctermfg=12
-endif
+" ctrlp config
+let g:ctrlp_map = '<leader>f'
+let g:ctrlp_max_height = 30
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_match_window_reversed = 0
 
-let mapleader = "\<Space>"
+set wildignore+=*.pyc,*.o,*.obj
+set wildignore+=*_build/*
+set wildignore+=*/coverage/*
 
-" Color scheme
-set t_Co=256
+nmap <Leader>` :NERDTreeToggle<CR>
+let g:NERDTreeWinSize = 20
 
-if has("gui_running")
-  " Nicer font
-  set guifont=Ubuntu\ Mono\ 09
-  set bg=light
-  colorscheme solarized
-else
-  set background=dark
-  colorscheme Tomorrow-Night-Bright
-endif
-
-hi SpecialKey   ctermfg=190  guifg=#F6FF15 ctermbg=NONE  guibg=NONE    cterm=bold    gui=bold
-hi NonText      ctermfg=190  guifg=#F6FF15 ctermbg=NONE  guibg=NONE    cterm=bold    gui=bold
-
-" No icky toolbar, menu or scrollbars in the GUI
-if has('gui')
-  set guioptions+=a " Automatically make visual selection available in system clipboard
-  set guioptions-=m
-  set guioptions-=T
-  set guioptions-=l
-  set guioptions-=L
-  set guioptions-=r
-  set guioptions-=R
-  set guioptions-=b
-  set mousehide     " Hide the mouse while typing
-end
-
-set cursorline
-hi cursorline cterm=none term=none
-autocmd WinEnter * setlocal cursorline
-autocmd WinLeave * setlocal nocursorline
-highlight CursorLine guibg=#303000 ctermbg=234
+map <F10> :SyntasticToggleMode<CR>
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_jump=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='✗'
+let g:Syntastic_check_on_wq=0
 
 
-" Show whitespace
-highlight ExtraWhitespace ctermbg=darkgreen guibg=lightgreen
+let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 
+let g:notes_directories = ['~/Documents/Notes']
 
-" hint to keep lines short
-if exists('+colorcolumn')
-  set colorcolumn=80
-endif
+" Private Gist by default
+let g:gist_post_private = 1
 
-" Bind nohl
+" SnipMate Options
+let g:snips_author = 'Gaël Chamoulaud'
+let g:snips_email = 'gchamoul@redhat.com'
+let g:snips_github = 'https://github.com/strider'
+
+" Github Comments
+let g:github_user = 'strider'
+
+let g:github_dashboard = { 'username': 'strider' }
+
+" Dashboard window position
+" " - Options: tab, top, bottom, above, below, left, right
+" " - Default: tab
+let g:github_dashboard['position'] = 'tab'
+
+" Customize emoji (see http://www.emoji-cheat-sheet.com/)
+let g:github_dashboard['emoji_map'] = {
+\   'user_dashboard': 'blush',
+\   'user_activity':  'smile',
+\   'repo_activity':  'laughing',
+\   'ForkEvent':      'fork_and_knife'
+\ }
+
+let g:splice_prefix = "<leader>t"
+
+" Git gutter
+let g:gitgutter_enabled = 1
+let g:gitgutter_eager = 0
+let g:gitgutter_sign_column_always = 1
+highlight clear SignColumn
+
+" Tabularize
+map <Leader>e :Tabularize /=<cr>
+map <Leader>c :Tabularize /:<cr>
+map <Leader>es :Tabularize /=\zs<cr>
+map <Leader>cs :Tabularize /:\zs<cr>
+
+let Tlist_Show_Menu = 1
+let Tlist_Auto_Update = 1
+let Tlist_Use_Right_Window = 1
+let Tlist_Show_One_File = 1
+" }}}
+
+" Mappings {{{
 " Removes highlight of your last search
 nmap <silent> <leader>; :silent :nohlsearch<CR>
 
 " Bind tabnew
 nmap T :tabnew<CR>
 
-nmap <leader>q :split ~/.buffer<cr>
+"nmap <leader>q :split ~/.buffer<cr>
 nmap <leader>v :tabnew $HOME/.vimrc<CR>
 
 " window
@@ -124,17 +259,17 @@ nmap <leader>s<up>     :leftabove  new<CR>
 nmap <leader>s<down>   :rightbelow new<CR>
 
 "" Quicksave command
-noremap <C-Z> :update<CR>
-vnoremap <C-Z> <C-C>:update<CR>
-inoremap <C-Z> <C-O>:update<CR>
-nnoremap <Leader>w :w<CR>
+"noremap <C-Z> :update<CR>
+"vnoremap <C-Z> <C-C>:update<CR>
+"inoremap <C-Z> <C-O>:update<CR>
+"nnoremap <Leader>w :w<CR>
 
 " Enter visual line mode with <Space><Space>:
 nmap <Leader><Leader><Leader> V
 
 " Quick quit command
-noremap <Leader>e :quit<CR>  " Quit current window
-noremap <Leader>E :qa!<CR>   " Quit all windows
+"noremap <Leader>e :quit<CR>  " Quit current window
+"noremap <Leader>E :qa!<CR>   " Quit all windows
 
 " bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
 " Every unnecessary keystroke that can be saved is good for your health :)
@@ -161,45 +296,16 @@ nn <F4>u yyp<C-V>$r-
 vmap Q gq
 nmap Q gqap
 
-" ctrlp config
-let g:ctrlp_map = '<leader>f'
-let g:ctrlp_max_height = 30
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_match_window_reversed = 0
-
 " map git commands
 map <leader>b :Gblame<cr>
 map <leader>l :!clear && git log -p %<cr>
 map <leader>d :Gvdiff<cr>
 
-set wildignore+=*.pyc,*.o,*.obj
-set wildignore+=*_build/*
-set wildignore+=*/coverage/*
-
 map <Leader>vb Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
-
-" Better navigating through omnicomplete option list
-" See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
-set completeopt=longest,menuone
-function! OmniPopup(action)
-    if pumvisible()
-        if a:action == 'j'
-            return "\<C-N>"
-        elseif a:action == 'k'
-            return "\<C-P>"
-        endif
-    endif
-    return a:action
-endfunction
+map <leader>da :echo 'Current Time is ' . strftime( '%c' )<CR>
 
 inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
 inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
-
-
-" Python folding
-" mkdir -p ~/.vim/ftplugin
-" wget -O ~/.vim/ftplugin/python_editing.vim http://www.vim.org/scripts/download_script.php?src_id=5492
-set nofoldenable
 
 " =========================================
 "        Abreviation
@@ -241,10 +347,67 @@ iab paris Paris
 iab facon façon
 iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")
 
-nmap <F8> :NERDTreeToggle<CR>
-let g:NERDTreeWinSize = 20
+nmap <leader>fd :se ff=dos<cr>
+nmap <leader>fu :se ff=unix<cr>
 
-map <leader>da :echo 'Current Time is ' . strftime( '%c' )<CR>
+" Switch to current dir
+map <Leader>cdi :cd %:p:h<cr>
+" Display Current time !!!
+map <Leader>da :echo 'Current Time is ' . strftime( '%c' )<CR>
+
+" Create a new window with directory listing of current buffer
+nnoremap <Leader>wd :new <C-R>=expand("%:p:h") . "/" <CR>
+nnoremap <Leader>wn :new %:p:h<CR>
+nnoremap <Leader>w. :new %:p:h<CR>
+
+nnoremap s<Leader>vd :vnew <C-R>=expand("%:p:h") . "/" <CR>
+nnoremap <Leader>vn :vnew %:p:h<CR>
+nnoremap <Leader>v. :vnew %:p:h<CR>
+" Easier non-interactive command insertion
+nnoremap <Space><Space> :
+nnoremap <Leader>, :h<Space>
+" \F to startup an ack search
+map <leader>F :Ack<space>
+" open tabs with Leader-<tab number>
+map <Leader>1 :tabn 1<CR>
+map <Leader>2 :tabn 2<CR>
+map <Leader>3 :tabn 3<CR>
+map <Leader>4 :tabn 4<CR>
+map <Leader>5 :tabn 5<CR>
+
+" window splitting mappings
+" split vertically with <leader> v
+" split horizontally with <leader> s
+nmap <Leader>vs :vsplit<CR> <C-w><C-w>
+nmap <Leader>sp :split<CR> <C-w><C-w>
+
+"Print current path
+"   'test'
+cmap <C-e> <C-r>=expand('%:p:h')<CR>/
+
+" Jump to the start or end of line without leaving the home row
+noremap H ^
+noremap L $
+" }}}
+
+" Commands {{{
+" Close all folds when opening a new buffer
+autocmd BufRead * setlocal foldmethod=marker
+autocmd BufRead * normal zM
+
+" Better navigating through omnicomplete option list
+" See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
+set completeopt=longest,menuone
+function! OmniPopup(action)
+    if pumvisible()
+        if a:action == 'j'
+            return "\<C-N>"
+        elseif a:action == 'k'
+            return "\<C-P>"
+        endif
+    endif
+    return a:action
+endfunction
 
 augroup filetype
   autocmd BufNewFile,BufRead */.Postponed/* set filetype=mail
@@ -268,14 +431,6 @@ autocmd FileType ruby setl tabstop=2
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Favorite filetypes
 set ffs=unix,dos,mac
-
-nmap <leader>fd :se ff=dos<cr>
-nmap <leader>fu :se ff=unix<cr>
-
-let Tlist_Show_Menu = 1
-let Tlist_Auto_Update = 1
-let Tlist_Use_Right_Window = 1
-let Tlist_Show_One_File = 1
 
 " detect kickstart filetype
 autocmd BufNewFile,BufRead *.ks setl ft=kickstart
@@ -343,14 +498,6 @@ function! SL(function)
   endif
 endfunction
 
-set list
-
-if (&termencoding ==# 'utf-8' || &encoding ==# 'utf-8') && version >= 700
-  let &listchars = "eol:↲,tab:\u21e5\u00b7,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u26ad"
-  let &fillchars = "vert:\u259a,fold:\u00b7"
-else
-  set listchars=tab:>\ ,trail:-,extends:>,precedes:<
-endif
 
 " F3: Toggle list (display unprintable characters).
 map <F3> :set list! list? <CR>
@@ -359,45 +506,11 @@ map <F3> :set list! list? <CR>
 " Reformat paragraphs and list.
 nnoremap <Leader>r gq}
 
-" Delete trailing white space and Dos-returns and to expand tabs to spaces.
-nnoremap <Leader>tr :set et<CR>:retab!<CR>:%s/[\r \t]\+$//<CR>
-
 autocmd BufRead,BufNewFile *.txt,*.adoc,*.asciidoc,README,TODO,CHANGELOG,NOTES,ABOUT
         \ setlocal autoindent expandtab tabstop=8 softtabstop=2 shiftwidth=2 filetype=asciidoc
         \ textwidth=70 wrap formatoptions=tcqn
         \ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\\|^\\s*<\\d\\+>\\s\\+\\\\|^\\s*[a-zA-Z.]\\.\\s\\+\\\\|^\\s*[ivxIVX]\\+\\.\\s\\+
         \ comments=s1:/*,ex:*/,://,b:#,:%,:XCOMM,fb:-,fb:*,fb:+,fb:.,fb:>
-
-" Switch to current dir
-map <Leader>cdi :cd %:p:h<cr>
-" Display Current time !!!
-map <Leader>da :echo 'Current Time is ' . strftime( '%c' )<CR>
-
-" Create a new window with directory listing of current buffer
-nnoremap <Leader>wd :new <C-R>=expand("%:p:h") . "/" <CR>
-nnoremap <Leader>wn :new %:p:h<CR>
-nnoremap <Leader>w. :new %:p:h<CR>
-
-nnoremap s<Leader>vd :vnew <C-R>=expand("%:p:h") . "/" <CR>
-nnoremap <Leader>vn :vnew %:p:h<CR>
-nnoremap <Leader>v. :vnew %:p:h<CR>
-" Easier non-interactive command insertion
-nnoremap <Space><Space> :
-nnoremap <Leader>, :h<Space>
-" \F to startup an ack search
-map <leader>F :Ack<space>
-" open tabs with Leader-<tab number>
-map <Leader>1 :tabn 1<CR>
-map <Leader>2 :tabn 2<CR>
-map <Leader>3 :tabn 3<CR>
-map <Leader>4 :tabn 4<CR>
-map <Leader>5 :tabn 5<CR>
-
-" window splitting mappings
-" split vertically with <leader> v
-" split horizontally with <leader> s
-nmap <Leader>vs :vsplit<CR> <C-w><C-w>
-nmap <Leader>sp :split<CR> <C-w><C-w>
 
 "
 " From http://jetpackweb.com/blog/2010/02/15/vim-tips-for-ruby/
@@ -419,46 +532,6 @@ nmap <C-S-F3> ggVG
 vmap <C-c> "*y<CR>
 vmap <C-v> "*gP<CR>
 
-map <F10> :SyntasticToggleMode<CR>
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_jump=1
-let g:syntastic_auto_loc_list=1
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='✗'
-let g:Syntastic_check_on_wq=0
-
-
-let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
-
-let g:notes_directories = ['~/Documents/Notes']
-
-" Private Gist by default
-let g:gist_post_private = 1
-
-" SnipMate Options
-let g:snips_author = 'Gaël Chamoulaud'
-let g:snips_email = 'gchamoul@redhat.com'
-let g:snips_github = 'https://github.com/strider'
-
-" Github Comments
-let g:github_user = 'strider'
-
-let g:github_dashboard = { 'username': 'strider' }
-
-" Dashboard window position
-" " - Options: tab, top, bottom, above, below, left, right
-" " - Default: tab
-let g:github_dashboard['position'] = 'tab'
-
-" Customize emoji (see http://www.emoji-cheat-sheet.com/)
-let g:github_dashboard['emoji_map'] = {
-\   'user_dashboard': 'blush',
-\   'user_activity':  'smile',
-\   'repo_activity':  'laughing',
-\   'ForkEvent':      'fork_and_knife'
-\ }
-
-let g:splice_prefix = "<leader>t"
 autocmd VimEnter * redraw!
 
 noremap <silent> <Leader>h :call ToggleWrap()<CR>
@@ -491,10 +564,40 @@ function ToggleWrap()
   endif
 endfunction
 
-"Print current path
-"   'test'
-cmap <C-e> <C-r>=expand('%:p:h')<CR>/
+" Highlight words to avoid in tech writing
+" http://css-tricks.com/words-avoid-educational-writing/
+highlight TechWordsToAvoid ctermbg=red ctermfg=white
+match TechWordsToAvoid /\cobviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however\|so,\|easy/
+autocmd BufWinEnter * match TechWordsToAvoid /\cobviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however,\|so,\|easy/
+autocmd InsertEnter * match TechWordsToAvoid /\cobviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however,\|so,\|easy/
+autocmd InsertLeave * match TechWordsToAvoid /\cobviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however,\|so,\|easy/
+autocmd BufWinLeave * call clearmatches()
 
-" Jump to the start or end of line without leaving the home row
-noremap H ^
-noremap L $
+" Rainbow parenthesis always on!
+if exists(':RainbowParenthesesToggle')
+  autocmd VimEnter * RainbowParenthesesToggle
+  autocmd Syntax * RainbowParenthesesLoadRound
+  autocmd Syntax * RainbowParenthesesLoadSquare
+  autocmd Syntax * RainbowParenthesesLoadBraces
+endif
+
+" Reset spelling colours when reading a new buffer
+" This works around an issue where the colorscheme is changed by .local.vimrc
+fun! SetSpellingColors()
+  highlight SpellBad cterm=bold ctermfg=white ctermbg=red
+  highlight SpellCap cterm=bold ctermfg=red ctermbg=white
+endfun
+autocmd BufWinEnter * call SetSpellingColors()
+autocmd BufNewFile * call SetSpellingColors()
+autocmd BufRead * call SetSpellingColors()
+autocmd InsertEnter * call SetSpellingColors()
+autocmd InsertLeave * call SetSpellingColors()
+
+" Change colourscheme when diffing
+fun! SetDiffColors()
+  highlight DiffAdd    cterm=bold ctermfg=white ctermbg=DarkGreen
+  highlight DiffDelete cterm=bold ctermfg=white ctermbg=DarkGrey
+  highlight DiffChange cterm=bold ctermfg=white ctermbg=DarkBlue
+  highlight DiffText   cterm=bold ctermfg=white ctermbg=DarkRed
+endfun
+autocmd FilterWritePre * call SetDiffColors()

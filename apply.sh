@@ -2,6 +2,7 @@
 
 echo -e "Applying vim configuration\n"
 cp -f dotvimrc ~/.vimrc
+cp -f gvimrc ~/.gvimrc
 
 echo -e "Applying ~/.vim folder\n"
 rm -Rf ~/.vim

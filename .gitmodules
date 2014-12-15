@@ -136,3 +136,24 @@
 [submodule "dotvim/bundle/asciidoc-vim"]
 	path = dotvim/bundle/asciidoc-vim
 	url = https://github.com/dagwieers/asciidoc-vim.git
+[submodule "dotvim/bundle/vim-airline"]
+	path = dotvim/bundle/vim-airline
+	url = https://github.com/bling/vim-airline.git
+[submodule "dotvim/bundle/ZoomWin"]
+	path = dotvim/bundle/ZoomWin
+	url = https://github.com/vim-scripts/ZoomWin.git
+[submodule "dotvim/bundle/Tabmerge"]
+	path = dotvim/bundle/Tabmerge
+	url = https://github.com/vim-scripts/Tabmerge.git
+[submodule "dotvim/bundle/rainbow_parentheses.vim"]
+	path = dotvim/bundle/rainbow_parentheses.vim
+	url = https://github.com/kien/rainbow_parentheses.vim.git
+[submodule "dotvim/bundle/vim-bookmarks"]
+	path = dotvim/bundle/vim-bookmarks
+	url = https://github.com/MattesGroeger/vim-bookmarks.git
+[submodule "dotvim/bundle/vim-choosewin"]
+	path = dotvim/bundle/vim-choosewin
+	url = https://github.com/t9md/vim-choosewin.git
+[submodule "dotvim/bundle/vim-css-color"]
+	path = dotvim/bundle/vim-css-color
+	url = https://github.com/skammer/vim-css-color.git
