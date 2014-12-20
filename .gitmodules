@@ -157,3 +157,6 @@
 [submodule "dotvim/bundle/vim-css-color"]
 	path = dotvim/bundle/vim-css-color
 	url = https://github.com/skammer/vim-css-color.git
+[submodule "dotvim/bundle/candyVirus"]
+	path = dotvim/bundle/candyVirus
+	url = https://github.com/ercolanelli-leo/candyVirus.git
