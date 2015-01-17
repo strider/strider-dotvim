@@ -160,3 +160,12 @@
 [submodule "dotvim/bundle/candyVirus"]
 	path = dotvim/bundle/candyVirus
 	url = https://github.com/ercolanelli-leo/candyVirus.git
+[submodule "dotvim/bundle/vim-nerdtree-tabs"]
+	path = dotvim/bundle/vim-nerdtree-tabs
+	url = https://github.com/jistr/vim-nerdtree-tabs.git
+[submodule "dotvim/bundle/vim-easymotion"]
+	path = dotvim/bundle/vim-easymotion
+	url = https://github.com/Lokaltog/vim-easymotion.git
+[submodule "dotvim/bundle/vim-preview"]
+	path = dotvim/bundle/vim-preview
+	url = https://github.com/spf13/vim-preview.git
