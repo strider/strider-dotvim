@@ -163,7 +163,7 @@ filetype plugin indent on
 " Theme
 set t_Co=256
 set background=dark
-colorscheme Tomorrow-Night-Bright
+colorscheme Tomorrow-Night
 
 " My Map Leader
 let mapleader = "\<Space>"
