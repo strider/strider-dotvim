@@ -2,11 +2,11 @@ if has("gui_running")
   " Nicer font
   set guifont=Terminus\ for\ Powerline\ 08
   set bg=dark
-  colorscheme distinguished
+  colorscheme Tomorrow-Night-Bright
   " Airline (status line)
-  let g:airline_powerline_fonts = 1
-  let g:airline_theme='kalisi'
+  let g:airline_theme='tomorrow'
 endif
+
 
 " No icky toolbar, menu or scrollbars in the GUI
 if has('gui')

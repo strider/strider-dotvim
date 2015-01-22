@@ -172,3 +172,6 @@
 [submodule "dotvim/bundle/base16-vim"]
 	path = dotvim/bundle/base16-vim
 	url = https://github.com/chriskempson/base16-vim.git
+[submodule "dotvim/bundle/vim-l9"]
+	path = dotvim/bundle/vim-l9
+	url = hg::https://bitbucket.org/ns9tks/vim-l9.git
