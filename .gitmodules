@@ -157,18 +157,9 @@
 [submodule "dotvim/bundle/vim-css-color"]
 	path = dotvim/bundle/vim-css-color
 	url = https://github.com/skammer/vim-css-color.git
-[submodule "dotvim/bundle/candyVirus"]
-	path = dotvim/bundle/candyVirus
-	url = https://github.com/ercolanelli-leo/candyVirus.git
 [submodule "dotvim/bundle/vim-nerdtree-tabs"]
 	path = dotvim/bundle/vim-nerdtree-tabs
 	url = https://github.com/jistr/vim-nerdtree-tabs.git
 [submodule "dotvim/bundle/vim-easymotion"]
 	path = dotvim/bundle/vim-easymotion
 	url = https://github.com/Lokaltog/vim-easymotion.git
-[submodule "dotvim/bundle/vim-preview"]
-	path = dotvim/bundle/vim-preview
-	url = https://github.com/spf13/vim-preview.git
-[submodule "dotvim/bundle/base16-vim"]
-	path = dotvim/bundle/base16-vim
-	url = https://github.com/chriskempson/base16-vim.git

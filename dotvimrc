@@ -252,6 +252,16 @@ let Tlist_Show_One_File = 1
 " Invoke Choosevim with '-'
 nmap - <Plug>(choosewin)
 let g:choosewin_overlay_enable = 1
+
+" Vim-Bookmark
+nmap <Leader>r <Plug>BookmarkToggle
+nmap <Leader>i <Plug>BookmarkAnnotate
+nmap <Leader>a <Plug>BookmarkShowAll
+nmap <Leader>j <Plug>BookmarkNext
+nmap <Leader>k <Plug>BookmarkPrev
+nmap <Leader>c <Plug>BookmarkClear
+nmap <Leader>x <Plug>BookmarkClearAll
+
 " }}}
 
 " Mappings {{{
@@ -519,7 +529,7 @@ function! NumberToggle()
   endif
 endfunction
 
-nnoremap <leader>k :call NumberToggle()<cr>
+nnoremap <leader>n :call NumberToggle()<cr>
 :au FocusLost * set number
 :au FocusGained * set relativenumber
 autocmd InsertEnter * set number
