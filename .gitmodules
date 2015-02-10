@@ -163,3 +163,12 @@
 [submodule "dotvim/bundle/vim-easymotion"]
 	path = dotvim/bundle/vim-easymotion
 	url = https://github.com/Lokaltog/vim-easymotion.git
+[submodule "dotvim/bundle/gundo-vim"]
+	path = dotvim/bundle/gundo-vim
+	url = https://github.com/sjl/gundo.vim.git
+[submodule "dotvim/bundle/vim-tmux-navigator"]
+	path = dotvim/bundle/vim-tmux-navigator
+	url = https://github.com/christoomey/vim-tmux-navigator.git
+[submodule "dotvim/bundle/vim-abolish"]
+	path = dotvim/bundle/vim-abolish
+	url = https://github.com/tpope/vim-abolish.git

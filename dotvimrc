@@ -147,6 +147,10 @@ endif
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
 
+" Using par program for formatting paragraph
+set formatprg=par\ -w79rjq
+set formatoptions+=t
+
 " Automatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
 " }}}
@@ -262,6 +266,14 @@ nmap <Leader>k <Plug>BookmarkPrev
 nmap <Leader>c <Plug>BookmarkClear
 nmap <Leader>x <Plug>BookmarkClearAll
 
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <c-\\> :TmuxNavigatePrevious<cr>
+
 " }}}
 
 " Mappings {{{
@@ -300,10 +312,10 @@ noremap <Leader>E :qa!<CR>   " Quit all windows
 
 " bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
 " Every unnecessary keystroke that can be saved is good for your health :)
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-l> <c-w>l
-map <c-h> <c-w>h
+"map <c-j> <c-w>j
+"map <c-k> <c-w>k
+"map <c-l> <c-w>l
+"map <c-h> <c-w>h
 
 " map sort function to a key
 vnoremap <Leader>s :sort<CR>
@@ -579,7 +591,7 @@ nnoremap <Leader>r gq}
 
 autocmd BufRead,BufNewFile *.txt,*.adoc,*.asciidoc,README,TODO,CHANGELOG,NOTES,ABOUT
         \ setlocal autoindent expandtab tabstop=8 softtabstop=2 shiftwidth=2 filetype=asciidoc
-        \ textwidth=70 wrap formatoptions=tcqn
+        \ textwidth=79 wrap formatoptions=tcqn
         \ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\\|^\\s*<\\d\\+>\\s\\+\\\\|^\\s*[a-zA-Z.]\\.\\s\\+\\\\|^\\s*[ivxIVX]\\+\\.\\s\\+
         \ comments=s1:/*,ex:*/,://,b:#,:%,:XCOMM,fb:-,fb:*,fb:+,fb:.,fb:>
 
@@ -663,4 +675,15 @@ fun! SetDiffColors()
   highlight DiffText   cterm=bold ctermfg=white ctermbg=DarkRed
 endfun
 autocmd FilterWritePre * call SetDiffColors()
+
+fun! RangerChooser()
+    exec "silent !ranger --choosefile=/tmp/chosenfile " . expand("%:p:h")
+    if filereadable('/tmp/chosenfile')
+        exec 'edit ' . system('cat /tmp/chosenfile')
+        call system('rm /tmp/chosenfile')
+    endif
+    redraw!
+endfun
+map <Leader>r :call RangerChooser()<CR>
+
 " }}}
