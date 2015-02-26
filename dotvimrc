@@ -1,6 +1,5 @@
 " dotvimrc by Gaël Chamoulaud <gchamoul@redhat.com>
-"
-" Settings {{{
+" => Settings {{{
 " Switch syntax highlighting on, when the terminal has colors
 syntax on
 
@@ -56,7 +55,8 @@ set encoding=utf-8
 set termencoding=utf-8
 
 set pastetoggle=<F2>
-set nolist
+set list
+set listchars=eol:¬,tab:→→,extends:>,precedes:<
 
 " Use system clipboard
 " http://stackoverflow.com/questions/8134647/copy-and-paste-in-vim-via-keyboard-between-different-mac-terminals
@@ -154,8 +154,7 @@ set formatoptions+=t
 " Automatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
 " }}}
-
-" Plugins {{{
+" => Plugins {{{
 " pathogen for plugin  bundles
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
@@ -166,16 +165,15 @@ filetype off
 filetype plugin indent on
 
 " Theme
-set t_Co=256
-set background=dark
-colorscheme Tomorrow-Night-Bright
+colorscheme wombat256i
+highlight ColorColumn cterm=bold ctermfg=none ctermbg=235
 
 " My Map Leader
 let mapleader = "\<Space>"
 
 " Airline (status line)
 let g:airline_powerline_fonts = 1
-let g:airline_theme='tomorrow'
+let g:airline_theme='kalisi'
 
 let T_WinWidth = 50
 map <F5> :TlistToggle<cr>
@@ -275,15 +273,14 @@ nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <c-\\> :TmuxNavigatePrevious<cr>
 
 " }}}
-
-" Mappings {{{
+" => Mappings {{{
 " Removes highlight of your last search
 nmap <silent> <leader>; :silent :nohlsearch<CR>
 
 " Bind tabnew
 nmap T :tabnew<CR>
 
-"nmap <leader>q :split ~/.buffer<cr>
+nmap <leader>q :split ~/.buffer<cr>
 nmap <leader>v :tabnew $HOME/.vimrc<CR>
 
 " window
@@ -356,7 +353,7 @@ iab gc -- Gaël
 iab me Gaël Chamoulaud
 iab gcha Gaël Chamoulaud <gchamoul@redhat.com>
 iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")
-iab br Best Regards, Gaël.
+iab br Best Regards, Gaël.<c-r>
 iab rh Red Hat
 iab linux Linux
 iab cad c'est-à-dire
@@ -469,8 +466,7 @@ ino jj <esc>
 cno jj <c-c>
 vno v <esc>
 " }}}
-
-" Commands {{{
+" => Commands {{{
 " Close all folds when opening a new buffer
 autocmd BufRead * setlocal foldmethod=marker
 autocmd BufRead * normal zM
@@ -686,4 +682,22 @@ fun! RangerChooser()
 endfun
 map <Leader>r :call RangerChooser()<CR>
 
+" }}}
+" => Scrolling {{{
+" Start scrolling when we are 8 lines away from margins
+set scrolloff=8
+
+" Minimum lines to keep above and below
+set sidescrolloff=15
+
+" Lines to scroll when cursor leaves screen
+set scrolljump=5
+set sidescroll=1
+
+" }}}
+" => Folding {{{
+set foldmethod=marker
+set foldmarker={{{,}}}
+set foldlevelstart=0
+set foldnestmax=3
 " }}}
