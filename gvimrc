@@ -1,9 +1,9 @@
 if has("gui_running")
   " Nicer font
-  set guifont=Ubuntu\ Mono\ for\ Powerline\ 12
-  colorscheme Tomorrow
+  set guifont=Terminus\ for\ Powerline\ 08
+  colorscheme molokayo
   " Airline (status line)
-  let g:airline_theme='solarized'
+  let g:airline_theme='molokai'
 endif
 
 

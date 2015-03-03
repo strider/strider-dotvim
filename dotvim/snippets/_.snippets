@@ -46,7 +46,8 @@ snippet pdoc
 	# [*${1:parameter name}*]
 	#   (${2:Optional or Required?}) ${3:Description}
 	#   Defaults to '${4:Default value}'.
-	# ${5:}
+	#
+	${5:}
 snippet ppackage
 	package { '${1:package name}':
 	  ensure => ${2:present},${3}
