@@ -15,6 +15,7 @@ set nocompatible
 " No backup files
 set nobackup
 
+
 " No write backup
 set nowritebackup
 
@@ -46,9 +47,6 @@ set timeout timeoutlen=1000 ttimeoutlen=100
 " Always show status bar
 set laststatus=2
 
-" Set the status line to something useful
-set statusline=%f\ %=L:%l/%L\ %c\ (%p%%)
-
 " UTF encoding
 set fenc=utf-8
 set encoding=utf-8
@@ -56,7 +54,18 @@ set termencoding=utf-8
 
 set pastetoggle=<F2>
 set list
-set listchars=eol:¬,tab:→→,extends:>,precedes:<
+
+" Invisible characters
+set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:_,extends:❯,precedes:❮
+
+" Syntax coloring lines that are too long just slows down the world
+set synmaxcol=1200
+
+" Use only 1 space after "." when joining lines instead of 2
+set nojoinspaces
+
+" Don't reset cursor to start of line when moving around
+set nostartofline
 
 " Use system clipboard
 " http://stackoverflow.com/questions/8134647/copy-and-paste-in-vim-via-keyboard-between-different-mac-terminals
@@ -165,8 +174,8 @@ filetype off
 filetype plugin indent on
 
 " Theme
-colorscheme wombat256i
-highlight ColorColumn cterm=bold ctermfg=none ctermbg=235
+colorscheme molokayo
+highlight ColorColumn cterm=none ctermfg=none ctermbg=235
 
 " My Map Leader
 let mapleader = "\<Space>"
@@ -179,7 +188,7 @@ let T_WinWidth = 50
 map <F5> :TlistToggle<cr>
 
 " ctrlp config
-let g:ctrlp_map = '<leader>f'
+let g:ctrlp_map = '<leader>p'
 let g:ctrlp_max_height = 30
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 0
@@ -194,10 +203,10 @@ map <Leader>` :NERDTreeFind<CR>
 let g:NERDTreeShowBookmarks=1
 let g:NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
 let g:NERDTreeChDirMode=0
-let g:NERDTreeQuitOnOpen=1
+let g:NERDTreeQuitOnOpen=0
 let g:NERDTreeShowHidden=1
 let g:NERDTreeKeepTreeInNewTab=1
-let g:NERDTreeWinSize = 20
+let g:NERDTreeWinSize = 30
 
 map <F10> :SyntasticToggleMode<CR>
 let g:syntastic_enable_signs=1
@@ -244,6 +253,10 @@ let g:splice_prefix = "<leader>t"
 let g:gitgutter_enabled = 1
 let g:gitgutter_eager = 0
 let g:gitgutter_sign_column_always = 1
+let g:gitgutter_sign_added = '++'
+let g:gitgutter_sign_modified = '--'
+let g:gitgutter_sign_removed = 'xx'
+let g:gitgutter_sign_modified_removed = 'ww'
 highlight clear SignColumn
 
 let Tlist_Show_Menu = 1
@@ -272,6 +285,10 @@ nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <c-\\> :TmuxNavigatePrevious<cr>
 
+let g:Gitv_OpenHorizontal = 1
+nmap <leader>gv :Gitv --all<cr>
+nmap <leader>gV :Gitv! --all<cr>
+vmap <leader>gV :Gitv! --all<cr>
 " }}}
 " => Mappings {{{
 " Removes highlight of your last search
@@ -333,9 +350,7 @@ vmap Q gq
 nmap Q gqap
 
 " map git commands
-map <leader>b :Gblame<cr>
 map <leader>l :!clear && git log -p %<cr>
-map <leader>d :Gvdiff<cr>
 
 map <Leader>vb Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 map <leader>da :echo 'Current Time is ' . strftime( '%c' )<CR>
@@ -427,7 +442,6 @@ nnoremap <silent> <leader>gs :Gstatus<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
 nnoremap <silent> <leader>gc :Gcommit<CR>
 nnoremap <silent> <leader>gb :Gblame<CR>
-nnoremap <silent> <leader>gl :Glog<CR>
 nnoremap <silent> <leader>gp :Git push<CR>
 nnoremap <silent> <leader>gr :Gread<CR>:GitGutter<CR>
 nnoremap <silent> <leader>gw :Gwrite<CR>:GitGutter<CR>
@@ -666,7 +680,7 @@ autocmd InsertLeave * call SetSpellingColors()
 " Change colourscheme when diffing
 fun! SetDiffColors()
   highlight DiffAdd    cterm=bold ctermfg=white ctermbg=DarkGreen
-  highlight DiffDelete cterm=bold ctermfg=white ctermbg=DarkGrey
+  highlight DiffDelete cterm=bold ctermfg=white ctermbg=DarkRed
   highlight DiffChange cterm=bold ctermfg=white ctermbg=DarkBlue
   highlight DiffText   cterm=bold ctermfg=white ctermbg=DarkRed
 endfun
@@ -700,4 +714,16 @@ set foldmethod=marker
 set foldmarker={{{,}}}
 set foldlevelstart=0
 set foldnestmax=3
+
+nmap <Leader>zz :call <SID>ToggleFold()<CR>
+function! s:ToggleFold()
+    if &foldmethod == 'marker'
+        let &l:foldmethod = 'syntax'
+        let &l:foldlevelstart = '0'
+        let &l:foldnestmax = '2'
+    else
+        let &l:foldmethod = 'marker'
+    endif
+    echo 'foldmethod is now ' . &l:foldmethod
+endfunction
 " }}}
