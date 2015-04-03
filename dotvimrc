@@ -53,10 +53,9 @@ set encoding=utf-8
 set termencoding=utf-8
 
 set pastetoggle=<F2>
-set list
 
 " Invisible characters
-set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:_,extends:❯,precedes:❮
+set list listchars=nbsp:¤,tab:··,trail:¤,extends:▶,precedes:◀
 
 " Syntax coloring lines that are too long just slows down the world
 set synmaxcol=1200
@@ -174,7 +173,7 @@ filetype off
 filetype plugin indent on
 
 " Theme
-colorscheme molokayo
+colorscheme distinguished
 highlight ColorColumn cterm=none ctermfg=none ctermbg=235
 
 " My Map Leader
@@ -182,7 +181,7 @@ let mapleader = "\<Space>"
 
 " Airline (status line)
 let g:airline_powerline_fonts = 1
-let g:airline_theme='kalisi'
+let g:airline_theme='laederon'
 
 let T_WinWidth = 50
 map <F5> :TlistToggle<cr>
@@ -211,10 +210,15 @@ let g:NERDTreeWinSize = 30
 map <F10> :SyntasticToggleMode<CR>
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_jump=1
-let g:syntastic_auto_loc_=1
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_auto_loc_list=1
 let g:syntastic_error_symbol='E'
 let g:syntastic_warning_symbol='W'
-let g:Syntastic_check_on_wq=0
+let g:syntastic_check_on_wq=0
+let g:syntastic_check_on_open=1
+let g:pymode_lint_write=0
+let g:pymode_indent=1
+let g:pymode_doc=1
 
 
 let g:vimwiki_ = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
@@ -409,14 +413,14 @@ nnoremap <Leader>wd :new <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <Leader>wn :new %:p:h<CR>
 nnoremap <Leader>w. :new %:p:h<CR>
 
-nnoremap s<Leader>vd :vnew <C-R>=expand("%:p:h") . "/" <CR>
+nnoremap <Leader>vd :vnew <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <Leader>vn :vnew %:p:h<CR>
 nnoremap <Leader>v. :vnew %:p:h<CR>
 " Easier non-interactive command insertion
 "nnoremap <Space><Space> :
 nnoremap <Leader>, :h<Space>
 " \F to startup an ack search
-map <leader>F :Ack<space>
+map <leader>fa :Ack<space>
 " open tabs with Leader-<tab number>
 map <Leader>1 :tabn 1<CR>
 map <Leader>2 :tabn 2<CR>
@@ -617,7 +621,8 @@ augroup strider_ruby
 augroup END
 
 map <silent> <F7> <Esc> :w! <cr> :!python % <cr>
-cmap w!! %!sudo tee > /dev/null %
+command! W w !sudo tee "%" > /dev/null
+
 "delete all lines in the current buffer
 nmap <C-S-F2> ggdG
 nmap <C-S-F3> ggVG
@@ -696,6 +701,7 @@ fun! RangerChooser()
 endfun
 map <Leader>r :call RangerChooser()<CR>
 
+autocmd VimResized * :wincmd =
 " }}}
 " => Scrolling {{{
 " Start scrolling when we are 8 lines away from margins

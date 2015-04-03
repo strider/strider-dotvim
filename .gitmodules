@@ -196,3 +196,24 @@
 [submodule "dotvim/bundle/vim-virtualenv"]
 	path = dotvim/bundle/vim-virtualenv
 	url = https://github.com/jmcantrell/vim-virtualenv.git
+[submodule "dotvim/bundle/BufOnly"]
+	path = dotvim/bundle/BufOnly
+	url = https://github.com/vim-scripts/BufOnly.vim.git
+[submodule "dotvim/bundle/vim-scratch"]
+	path = dotvim/bundle/vim-scratch
+	url = https://github.com/duff/vim-scratch.git
+[submodule "dotvim/bundle/targets.vim"]
+	path = dotvim/bundle/targets.vim
+	url = https://github.com/wellle/targets.vim.git
+[submodule "dotvim/bundle/wildfire.vim"]
+	path = dotvim/bundle/wildfire.vim
+	url = https://github.com/gcmt/wildfire.vim.git
+[submodule "dotvim/bundle/python-mode"]
+	path = dotvim/bundle/python-mode
+	url = https://github.com/klen/python-mode.git
+[submodule "dotvim/bundle/vim-tbone"]
+	path = dotvim/bundle/vim-tbone
+	url = https://github.com/tpope/vim-tbone.git
+[submodule "dotvim/bundle/vim-multiple-cursors"]
+	path = dotvim/bundle/vim-multiple-cursors
+	url = https://github.com/terryma/vim-multiple-cursors.git
