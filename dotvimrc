@@ -219,6 +219,7 @@ let g:syntastic_check_on_open=0
 let g:pymode_lint_write=0
 let g:pymode_indent=1
 let g:pymode_doc=1
+let g:pymode_rope=0
 
 let g:conoline_auto_enable = 1
 let g:conoline_use_colorscheme_default_normal=1
@@ -404,7 +405,6 @@ iab ost OpenStack
 iab pk PackStack
 iab rdo RDO
 iab opm OpenStack-Puppet-Modules
-iab rpm RPM
 
 nmap <leader>fd :se ff=dos<cr>
 nmap <leader>fu :se ff=unix<cr>
