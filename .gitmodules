@@ -172,9 +172,6 @@
 [submodule "dotvim/bundle/vim-abolish"]
 	path = dotvim/bundle/vim-abolish
 	url = https://github.com/tpope/vim-abolish.git
-[submodule "dotvim/bundle/vim-wombat256i"]
-	path = dotvim/bundle/vim-wombat256i
-	url = https://github.com/dsolstad/vim-wombat256i.git
 [submodule "dotvim/bundle/vim-better-whitespace"]
 	path = dotvim/bundle/vim-better-whitespace
 	url = git@github.com:ntpeters/vim-better-whitespace.git
