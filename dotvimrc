@@ -55,7 +55,8 @@ set termencoding=utf-8
 set pastetoggle=<F2>
 
 " Invisible characters
-set list listchars=nbsp:¤,tab:··,trail:¤,extends:▶,precedes:◀
+set nolist
+set listchars=nbsp:¤,tab:··,trail:¤,extends:▶,precedes:◀
 
 " Syntax coloring lines that are too long just slows down the world
 set synmaxcol=1200
@@ -175,6 +176,7 @@ filetype plugin indent on
 " Theme
 set bg=dark
 colorscheme gruvbox
+let g:gruvbox_italic = 0
 highlight ColorColumn cterm=none ctermfg=none ctermbg=236
 
 " My Map Leader

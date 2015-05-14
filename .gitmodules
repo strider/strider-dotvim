@@ -223,9 +223,6 @@
 [submodule "dotvim/bundle/vim-go"]
 	path = dotvim/bundle/vim-go
 	url = https://github.com/fatih/vim-go.git
-[submodule "dotvim/bundle/vim-railscasts-theme"]
-	path = dotvim/bundle/vim-railscasts-theme
-	url = https://github.com/jpo/vim-railscasts-theme.git
 [submodule "dotvim/bundle/gruvbox"]
 	path = dotvim/bundle/gruvbox
 	url = https://github.com/morhetz/gruvbox.git
