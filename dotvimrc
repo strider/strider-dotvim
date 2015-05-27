@@ -55,7 +55,7 @@ set termencoding=utf-8
 set pastetoggle=<F2>
 
 " Invisible characters
-set nolist
+map \ :set list!<CR>
 set listchars=nbsp:¤,tab:··,trail:¤,extends:▶,precedes:◀
 
 " Syntax coloring lines that are too long just slows down the world
@@ -176,15 +176,16 @@ filetype plugin indent on
 " Theme
 set bg=dark
 colorscheme gruvbox
-let g:gruvbox_italic = 0
-highlight ColorColumn cterm=none ctermfg=none ctermbg=236
+"hi Normal ctermbg=none
+"hi NonText ctermbg=none
+hi ColorColumn cterm=none ctermfg=none ctermbg=236
 
 " My Map Leader
 let mapleader = "\<Space>"
 
 " Airline (status line)
 let g:airline_powerline_fonts = 1
-let g:airline_theme='gruvbox'
+let g:airline_theme='laederon'
 
 nmap <F5> :TagbarToggle<CR>
 
@@ -213,15 +214,19 @@ map <F10> :SyntasticToggleMode<CR>
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_jump=1
 let g:syntastic_always_populate_loc_list=1
-let g:syntastic_auto_loc_list=1
+let g:syntastic_auto_loc_list=0
 let g:syntastic_error_symbol='E'
 let g:syntastic_warning_symbol='W'
 let g:syntastic_check_on_wq=0
 let g:syntastic_check_on_open=0
-let g:pymode_lint_write=0
-let g:pymode_indent=1
-let g:pymode_doc=1
-let g:pymode_rope=0
+
+let g:jedi#popup_on_dot = 0
+let g:jedi#popup_select_first = 0
+let g:jedi#show_call_signatures = "2"
+
+let g:calendar_google_calendar = 1
+let g:calendar_first_day = "monday"
+let g:calendar_view = 'week'
 
 let g:conoline_auto_enable = 1
 let g:conoline_use_colorscheme_default_normal=1
@@ -504,12 +509,15 @@ function! OmniPopup(action)
     if pumvisible()
         if a:action == 'j'
             return "\<C-N>"
-        elseif a:action == 'k'
+        elseif a:action == 'k
             return "\<C-P>"
         endif
     endif
     return a:action
 endfunction
+
+inoremap <silent>j <C-R>=OmniPopup('j')<CR>
+inoremap <silent>k <C-R>=OmniPopup('k')<CR>
 
 augroup filetype
   autocmd BufNewFile,BufRead */.Postponed/* set filetype=mail

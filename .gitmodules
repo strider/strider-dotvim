@@ -205,9 +205,6 @@
 [submodule "dotvim/bundle/wildfire.vim"]
 	path = dotvim/bundle/wildfire.vim
 	url = https://github.com/gcmt/wildfire.vim.git
-[submodule "dotvim/bundle/python-mode"]
-	path = dotvim/bundle/python-mode
-	url = https://github.com/klen/python-mode.git
 [submodule "dotvim/bundle/vim-tbone"]
 	path = dotvim/bundle/vim-tbone
 	url = https://github.com/tpope/vim-tbone.git
@@ -232,3 +229,6 @@
 [submodule "dotvim/bundle/indentLine"]
 	path = dotvim/bundle/indentLine
 	url = https://github.com/Yggdroot/indentLine.git
+[submodule "dotvim/bundle/calendar.vim"]
+	path = dotvim/bundle/calendar.vim
+	url = https://github.com/itchyny/calendar.vim.git
