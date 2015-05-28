@@ -214,9 +214,6 @@
 [submodule "dotvim/bundle/conoline.vim"]
 	path = dotvim/bundle/conoline.vim
 	url = git@github.com:miyakogi/conoline.vim.git
-[submodule "dotvim/bundle/vim-go"]
-	path = dotvim/bundle/vim-go
-	url = https://github.com/fatih/vim-go.git
 [submodule "dotvim/bundle/gruvbox"]
 	path = dotvim/bundle/gruvbox
 	url = https://github.com/morhetz/gruvbox.git
