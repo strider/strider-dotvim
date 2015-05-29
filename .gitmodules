@@ -174,10 +174,10 @@
 	url = https://github.com/tpope/vim-abolish.git
 [submodule "dotvim/bundle/vim-better-whitespace"]
 	path = dotvim/bundle/vim-better-whitespace
-	url = git@github.com:ntpeters/vim-better-whitespace.git
+	url = https://github.com/ntpeters/vim-better-whitespace.git
 [submodule "dotvim/bundle/vim-eunuch"]
 	path = dotvim/bundle/vim-eunuch
-	url = git@github.com:tpope/vim-eunuch.git
+	url = https://github.com/tpope/vim-eunuch.git
 [submodule "dotvim/bundle/nerdsnippets"]
 	path = dotvim/bundle/nerdsnippets
 	url = https://github.com/scrooloose/nerdsnippets
@@ -213,13 +213,13 @@
 	url = https://github.com/terryma/vim-multiple-cursors.git
 [submodule "dotvim/bundle/conoline.vim"]
 	path = dotvim/bundle/conoline.vim
-	url = git@github.com:miyakogi/conoline.vim.git
+	url = https://github.com/miyakogi/conoline.vim.git
 [submodule "dotvim/bundle/gruvbox"]
 	path = dotvim/bundle/gruvbox
 	url = https://github.com/morhetz/gruvbox.git
 [submodule "dotvim/bundle/tagbar"]
 	path = dotvim/bundle/tagbar
-	url = git@github.com:majutsushi/tagbar.git
+	url = https://github.com/majutsushi/tagbar.git
 [submodule "dotvim/bundle/vim-easy-align"]
 	path = dotvim/bundle/vim-easy-align
 	url = https://github.com/junegunn/vim-easy-align.git
@@ -229,3 +229,12 @@
 [submodule "dotvim/bundle/calendar.vim"]
 	path = dotvim/bundle/calendar.vim
 	url = https://github.com/itchyny/calendar.vim.git
+[submodule "dotvim/bundle/vim-diff-enhanced"]
+	path = dotvim/bundle/vim-diff-enhanced
+	url = https://github.com/chrisbra/vim-diff-enhanced.git
+[submodule "dotvim/bundle/unite.vim"]
+	path = dotvim/bundle/unite.vim
+	url = https://github.com/Shougo/unite.vim.git
+[submodule "dotvim/bundle/vison"]
+	path = dotvim/bundle/vison
+	url = https://github.com/Quramy/vison.git
