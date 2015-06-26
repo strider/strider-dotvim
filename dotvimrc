@@ -307,6 +307,12 @@ let g:Gitv_OpenHorizontal = 0
 nmap <leader>gv :Gitv --all<cr>
 nmap <leader>gV :Gitv! --all<cr>
 vmap <leader>gV :Gitv! --all<cr>
+
+let g:auto_save = 1
+let g:auto_save_in_insert_mode = 0
+let g:auto_save_silent = 1
+
+
 " }}}
 " => Mappings {{{
 " Removes highlight of your last search

@@ -106,9 +106,6 @@
 [submodule "dotvim/bundle/ack.vim"]
 	path = dotvim/bundle/ack.vim
 	url = https://github.com/mileszs/ack.vim.git
-[submodule "dotvim/bundle/vim-ctrlspace"]
-	path = dotvim/bundle/vim-ctrlspace
-	url = https://github.com/szw/vim-ctrlspace
 [submodule "dotvim/bundle/vim-tomorrow-theme"]
 	path = dotvim/bundle/vim-tomorrow-theme
 	url = https://github.com/chriskempson/vim-tomorrow-theme.git
@@ -238,3 +235,9 @@
 [submodule "dotvim/bundle/vison"]
 	path = dotvim/bundle/vison
 	url = https://github.com/Quramy/vison.git
+[submodule "dotvim/bundle/vim-bracketed-paste"]
+	path = dotvim/bundle/vim-bracketed-paste
+	url = https://github.com/ConradIrwin/vim-bracketed-paste.git
+[submodule "dotvim/bundle/vim-auto-save"]
+	path = dotvim/bundle/vim-auto-save
+	url = https://github.com/907th/vim-auto-save.git
