@@ -185,7 +185,7 @@ let mapleader = "\<Space>"
 
 " Airline (status line)
 let g:airline_powerline_fonts = 1
-let g:airline_theme='laederon'
+let g:airline_theme='powerlineish'
 
 nmap <F5> :TagbarToggle<CR>
 
