@@ -1,4 +1,4 @@
-" dotvimrc by Gaël Chamoulaud <gchamoul@redhat.com>
+" dotvIMRc by Gaël Chamoulaud <gchamoul@redhat.com>
 " => Settings {{{
 " Switch syntax highlighting on, when the terminal has colors
 syntax on
