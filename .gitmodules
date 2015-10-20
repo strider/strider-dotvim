@@ -241,3 +241,9 @@
 [submodule "dotvim/bundle/vim-auto-save"]
 	path = dotvim/bundle/vim-auto-save
 	url = https://github.com/907th/vim-auto-save.git
+[submodule "dotvim/bundle/vim-follow-my-lead"]
+	path = dotvim/bundle/vim-follow-my-lead
+	url = https://github.com/ktonga/vim-follow-my-lead.git
+[submodule "dotvim/bundle/vim-lint"]
+	path = dotvim/bundle/vim-lint
+	url = https://github.com/dbakker/vim-lint.git

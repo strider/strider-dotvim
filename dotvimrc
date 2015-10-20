@@ -174,8 +174,9 @@ filetype off
 filetype plugin indent on
 
 " Theme
-set bg=dark
 colorscheme gruvbox
+set bg=dark
+set t_Co=256
 "hi Normal ctermbg=none
 "hi NonText ctermbg=none
 hi ColorColumn cterm=none ctermfg=none ctermbg=236
@@ -185,7 +186,15 @@ let mapleader = "\<Space>"
 
 " Airline (status line)
 let g:airline_powerline_fonts = 1
-let g:airline_theme='kalisi'
+let g:airline_theme='gruvbox'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#bufferline#enabled = 1
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#hunks#enabled = 1
+let g:airline#extensions#virtualenv#enabled = 1
 
 nmap <F5> :TagbarToggle<CR>
 
@@ -212,13 +221,15 @@ let g:NERDTreeWinSize = 30
 
 map <F10> :SyntasticToggleMode<CR>
 let g:syntastic_enable_signs=1
-let g:syntastic_auto_jump=1
+let g:syntastic_auto_jump=0
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_auto_loc_list=0
 let g:syntastic_error_symbol='E'
 let g:syntastic_warning_symbol='W'
 let g:syntastic_check_on_wq=0
 let g:syntastic_check_on_open=0
+let g:syntastic_enable_perl_checker = 1
+let g:syntastic_sh_checkers = ['bashate']
 
 let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 0
@@ -669,7 +680,7 @@ function! ToggleWrap()
     silent! iunmap <buffer> <End>
   else
     echo "Wrap ON"
-    setlocal wrap linebreak no
+    setlocal wrap linebreak
     set virtualedit=
     setlocal display+=lastline
     noremap  <buffer> <silent> <Up>   gk
