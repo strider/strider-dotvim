@@ -95,3 +95,17 @@ snippet inc
 
 snippet imp
 	import ${1:module}
+
+snippet puser
+	user { '${1:user}':
+	  ensure      => present,
+	  comment     => '${2:$1}',
+	  managehome  => true,
+	  home        => '${0:/home/$1}',
+	}
+
+snippet prj
+	- project: puppet-${1}
+	  conf: puppet
+	  upstream: git://github.com/${2}/%(project)s
+

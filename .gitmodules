@@ -247,3 +247,12 @@
 [submodule "dotvim/bundle/vim-lint"]
 	path = dotvim/bundle/vim-lint
 	url = https://github.com/dbakker/vim-lint.git
+[submodule "dotvim/bundle/vim-go"]
+	path = dotvim/bundle/vim-go
+	url = https://github.com/fatih/vim-go.git
+[submodule "dotvim/bundle/Dockerfile-vim"]
+	path = dotvim/bundle/Dockerfile-vim
+	url = https://github.com/ekalinin/Dockerfile.vim.git
+[submodule "dotvim/bundle/vim-airline-themes"]
+	path = dotvim/bundle/vim-airline-themes
+	url = https://github.com/vim-airline/vim-airline-themes.git

@@ -1,6 +1,7 @@
 " dotvIMRc by Gaël Chamoulaud <gchamoul@redhat.com>
 " => Settings {{{
 " Switch syntax highlighting on, when the terminal has colors
+let python_highlight_all=1
 syntax on
 
 " UTF encoding
@@ -229,6 +230,7 @@ let g:syntastic_warning_symbol='W'
 let g:syntastic_check_on_wq=0
 let g:syntastic_check_on_open=0
 let g:syntastic_enable_perl_checker = 1
+let g:syntastic_sh_bashate_checker = 1
 let g:syntastic_sh_checkers = ['bashate']
 
 let g:jedi#popup_on_dot = 0
@@ -296,6 +298,8 @@ let g:choosewin_overlay_enable = 1
 
 " IdentLine
 let g:indentLine_char = '┆'
+let g:indentLine_color_term = 184
+let g:indentLine_enabled = 1
 
 " Vim-Bookmark
 nmap <Leader>r <Plug>BookmarkToggle
@@ -323,6 +327,13 @@ let g:auto_save = 1
 let g:auto_save_in_insert_mode = 0
 let g:auto_save_silent = 1
 
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_fmt_command = "goimports"
+let g:go_bin_path = expand("~/.gotools")
 
 " }}}
 " => Mappings {{{
@@ -400,35 +411,14 @@ map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>"
 "        Abreviation
 " =========================================
 iab gc -- Gaël
-iab me Gaël Chamoulaud
+iab Me Gaël Chamoulaud
 iab gcha Gaël Chamoulaud <gchamoul@redhat.com>
 iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")
 iab br Best Regards, Gaël.<c-r>
 iab rh Red Hat
 iab linux Linux
-iab cad c'est-à-dire
-iab tjs toujours
-iab bientot bientôt
-iab ds dans
-iab ca ça
-iab cpdt cependant
-iab apres après
-iab tres très
-iab etre être
-iab Etre Être
-iab etes êtes
-iab meme même
-iab deja déjà
-iab decu déçu
-iab recu reçu
-iab etait était
-iab etais étais
-iab ecris écris
-iab facon façon
-iab ost OpenStack
-iab pk PackStack
 iab rdo RDO
-iab opm OpenStack-Puppet-Modules
+iab openstack OpenStack
 
 nmap <leader>fd :se ff=dos<cr>
 nmap <leader>fu :se ff=unix<cr>
