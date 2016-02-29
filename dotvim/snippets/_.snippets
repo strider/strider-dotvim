@@ -84,18 +84,6 @@ snippet tfile
 	  mode    => '${7:0640}',
 	}
 
-snippet #!
-	#! /usr/bin/env puppet
-
-snippet :
-	'${1:title}':${2}
-
-snippet inc
-	include ::${1:classname}
-
-snippet imp
-	import ${1:module}
-
 snippet puser
 	user { '${1:user}':
 	  ensure      => present,
