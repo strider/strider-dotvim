@@ -127,9 +127,6 @@
 [submodule "dotvim/bundle/vCoolor.vim"]
 	path = dotvim/bundle/vCoolor.vim
 	url = https://github.com/KabbAmine/vCoolor.vim.git
-[submodule "dotvim/bundle/vim-solarized"]
-	path = dotvim/bundle/vim-solarized
-	url = https://github.com/altercation/vim-colors-solarized
 [submodule "dotvim/bundle/asciidoc-vim"]
 	path = dotvim/bundle/asciidoc-vim
 	url = https://github.com/dagwieers/asciidoc-vim.git
@@ -220,9 +217,6 @@
 [submodule "dotvim/bundle/indentLine"]
 	path = dotvim/bundle/indentLine
 	url = https://github.com/Yggdroot/indentLine.git
-[submodule "dotvim/bundle/calendar.vim"]
-	path = dotvim/bundle/calendar.vim
-	url = https://github.com/itchyny/calendar.vim.git
 [submodule "dotvim/bundle/vim-diff-enhanced"]
 	path = dotvim/bundle/vim-diff-enhanced
 	url = https://github.com/chrisbra/vim-diff-enhanced.git
