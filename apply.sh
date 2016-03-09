@@ -8,7 +8,7 @@ echo -e "Applying ~/.vim folder\n"
 rm -Rf ~/.vim
 mkdir -p ~/.vim
 cp -r dotvim/* ~/.vim
-#rm -Rf ~/.vim/bundle/vim-rooter/
+rm -Rf ~/.vim/bundle/vim-rooter/
 
 # Pyflakes, Flake8 and Jedi only for Python 2.5+
 python -V 2>&1 | grep -q '2\.4'
