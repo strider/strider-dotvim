@@ -187,7 +187,7 @@ let mapleader = "\<Space>"
 
 " Airline (status line)
 let g:airline_powerline_fonts = 1
-let g:airline_theme='gruvbox'
+let g:airline_theme='cool'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#bufferline#enabled = 1
@@ -236,10 +236,6 @@ let g:syntastic_sh_checkers = ['bashate']
 let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 0
 let g:jedi#show_call_signatures = "2"
-
-let g:calendar_google_calendar = 1
-let g:calendar_first_day = "monday"
-let g:calendar_view = 'week'
 
 let g:conoline_auto_enable = 1
 let g:conoline_use_colorscheme_default_normal=1
@@ -323,6 +319,8 @@ nmap <leader>gv :GV<cr>
 let g:auto_save = 1
 let g:auto_save_in_insert_mode = 0
 let g:auto_save_silent = 1
+
+
 
 " }}}
 " => Mappings {{{
