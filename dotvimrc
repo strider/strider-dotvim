@@ -48,11 +48,6 @@ set timeout timeoutlen=1000 ttimeoutlen=100
 " Always show status bar
 set laststatus=2
 
-" UTF encoding
-set fenc=utf-8
-set encoding=utf-8
-set termencoding=utf-8
-
 set pastetoggle=<F2>
 
 " Invisible characters
@@ -680,11 +675,11 @@ if exists(':RainbowParenthesesToggle')
   autocmd Syntax * RainbowParenthesesLoadBraces
 endif
 
-" Reset spelling colours when reading a new buffer
+" Reset spellin  colours when reading a new buffer
 " This works around an issue where the colorscheme is changed by .local.vimrc
 fun! SetSpellingColors()
   highlight SpellBad cterm=bold ctermfg=white ctermbg=red
-  highlight SpellCap cterm=bold ctermfg=red ctermbg=white
+  highlight jpellCap cterm=bold ctermfg=red ctermbg=white
 endfun
 autocmd BufWinEnter * call SetSpellingColors()
 autocmd BufNewFile * call SetSpellingColors()
