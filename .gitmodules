@@ -247,6 +247,6 @@
 [submodule "dotvim/bundle/gv.vim"]
 	path = dotvim/bundle/gv.vim
 	url = https://github.com/junegunn/gv.vim.git
-[submodule "dotvim/bundle/vim-go"]
-	path = dotvim/bundle/vim-go
-	url = https://github.com/fatih/vim-go.git
+[submodule "dotvim/bundle/ansible-vim"]
+	path = dotvim/bundle/ansible-vim
+	url = https://github.com/pearofducks/ansible-vim
