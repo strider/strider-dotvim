@@ -2,6 +2,94 @@
 " => Settings {{{
 " Switch syntax highlighting on, when the terminal has colors
 let python_highlight_all=1
+
+" Vim-plug
+call plug#begin('~/.vim/plugged')
+Plug 'vim-scripts/vimwiki'
+Plug 'vim-scripts/taglist.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/syntastic'
+Plug 'Raimondi/delimitMate'
+Plug 'vim-scripts/unimpaired.vim'
+Plug 'vim-scripts/bash-support.vim'
+Plug 'tpope/vim-surround'
+Plug 'vim-scripts/autocorrect.vim'
+Plug 'kien/ctrlp.vim'
+Plug 'godlygeek/csapprox'
+Plug 'tpope/vim-endwise'
+Plug 'vim-scripts/TextFormat'
+Plug 'nvie/vim-flake8'
+Plug 'vim-ruby/vim-ruby'
+Plug 'airblade/vim-rooter'
+Plug 'scrooloose/nerdcommenter'
+Plug 'vim-scripts/TaskList.vim'
+Plug 'godlygeek/tabular'
+Plug 'ervandew/supertab'
+Plug 'rodjek/vim-puppet'
+Plug 'davidhalter/jedi-vim'
+Plug 'vim-scripts/DrawIt'
+Plug 'xolox/vim-notes'
+Plug 'xolox/vim-misc'
+Plug 'airblade/vim-gitgutter'
+Plug 'mattn/emmet-vim'
+Plug 'honza/vim-snippets'
+Plug 'tomtom/tlib_vim'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'mattn/gist-vim'
+Plug 'mattn/webapi-vim'
+Plug 'garbas/vim-snipmate'
+Plug 'mileszs/ack.vim'
+Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'terryma/vim-expand-region'
+Plug 'skalnik/vim-vroom'
+Plug 'mmozuras/vim-github-comment'
+Plug 'junegunn/vim-github-dashboard'
+Plug 'sjl/splice.vim'
+Plug 'KabbAmine/vCoolor.vim'
+Plug 'dagwieers/asciidoc-vim'
+Plug 'bling/vim-airline'
+Plug 'vim-scripts/ZoomWin'
+Plug 'vim-scripts/Tabmerge'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'MattesGroeger/vim-bookmarks'
+Plug 't9md/vim-choosewin'
+Plug 'skammer/vim-css-color'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'sjl/gundo.vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'tpope/vim-abolish'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'tpope/vim-eunuch'
+Plug 'scrooloose/nerdsnippets'
+Plug 'tpope/vim-git'
+Plug 'tpope/vim-speeddating'
+Plug 'jmcantrell/vim-virtualenv'
+Plug 'vim-scripts/BufOnly.vim'
+Plug 'duff/vim-scratch'
+Plug 'wellle/targets.vim'
+Plug 'gcmt/wildfire.vim'
+Plug 'tpope/vim-tbone'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'miyakogi/conoline.vim'
+Plug 'morhetz/gruvbox'
+Plug 'majutsushi/tagbar'
+Plug 'junegunn/vim-easy-align'
+Plug 'Yggdroot/indentLine'
+Plug 'chrisbra/vim-diff-enhanced'
+Plug 'Shougo/unite.vim'
+Plug 'Quramy/vison'
+Plug 'ConradIrwin/vim-bracketed-paste'
+Plug '907th/vim-auto-save'
+Plug 'ktonga/vim-follow-my-lead'
+Plug 'dbakker/vim-lint'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'junegunn/gv.vim'
+Plug 'pearofducks/ansible-vim'
+call plug#end()
+
 syntax on
 
 " UTF encoding
@@ -160,13 +248,8 @@ set formatoptions+=t
 autocmd! bufwritepost .vimrc source %
 " }}}
 " => Plugins {{{
-" pathogen for plugin  bundles
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-execute pathogen#infect()
-execute pathogen#helptags()
 
 filetype off
-" Require by Pathogen Plugin Manager
 filetype plugin indent on
 
 " Theme
