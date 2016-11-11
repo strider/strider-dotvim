@@ -1,6 +1,6 @@
 if has("gui_running")
   " Nicer font
-  set guifont=Ubuntu\ Mono\ for\ Powerline\ 12
+  set guifont=Terminus\ for\ Powerline\ 10
   set background=dark
   colorscheme gruvbox
   " Airline (status line)
