@@ -5,6 +5,8 @@ let python_highlight_all=1
 
 " Vim-plug
 call plug#begin('~/.vim/plugged')
+Plug 'w0ng/vim-hybrid'
+Plug 'flazz/vim-colorschemes'
 Plug 'vim-scripts/vimwiki'
 Plug 'vim-scripts/taglist.vim'
 Plug 'scrooloose/nerdtree'
@@ -52,7 +54,6 @@ Plug 'bling/vim-airline'
 Plug 'vim-scripts/ZoomWin'
 Plug 'vim-scripts/Tabmerge'
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'MattesGroeger/vim-bookmarks'
 Plug 't9md/vim-choosewin'
 Plug 'skammer/vim-css-color'
 Plug 'jistr/vim-nerdtree-tabs'
@@ -83,7 +84,7 @@ Plug 'ConradIrwin/vim-bracketed-paste'
 Plug '907th/vim-auto-save'
 Plug 'ktonga/vim-follow-my-lead'
 Plug 'dbakker/vim-lint'
-Plug 'ekalinin/Dockerfile.vim'
+"Plug 'ekalinin/Dockerfile.vim'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/gv.vim'
 Plug 'pearofducks/ansible-vim'
@@ -252,19 +253,31 @@ filetype off
 filetype plugin indent on
 
 " Theme
-colorscheme gruvbox
-set bg=dark
 set t_Co=256
+set bg=dark
+colorscheme gruvbox
 "hi Normal ctermbg=none
 "hi NonText ctermbg=none
 hi ColorColumn cterm=none ctermfg=none ctermbg=236
+
+" Allow to trigger background
+function! ToggleBG()
+    let s:tbg = &background
+    " Inversion
+    if s:tbg == "dark"
+        set background=light
+    else
+        set background=dark
+    endif
+endfunction
+noremap <leader>bg :call ToggleBG()<CR>
 
 " My Map Leader
 let mapleader = "\<Space>"
 
 " Airline (status line)
 let g:airline_powerline_fonts = 1
-let g:airline_theme='serene'
+let g:airline_theme='cool'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#bufferline#enabled = 1
@@ -273,6 +286,10 @@ let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#hunks#enabled = 1
 let g:airline#extensions#virtualenv#enabled = 1
+
+let g:ansible_attribute_highlight = "ob"
+let g:ansible_name_highlight = 'd'
+let g:ansible_extra_keywords_highlight = 1
 
 nmap <F5> :TagbarToggle<CR>
 
@@ -288,7 +305,7 @@ set wildignore+=*_build/*
 set wildignore+=*/coverage/*
 
 map <C-e> <plug>NERDTreeTabsToggle<CR>
-map <Leader>` :NERDTreeFind<CR>
+map <Leader>` :NERDTreeTabsFind<CR>
 let g:NERDTreeShowBookmarks=0
 let g:NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
 let g:NERDTreeChDirMode=0
@@ -374,15 +391,6 @@ let g:indentLine_char = '┆'
 let g:indentLine_color_term = 184
 let g:indentLine_enabled = 1
 
-" Vim-Bookmark
-nmap <Leader>r <Plug>BookmarkToggle
-nmap <Leader>i <Plug>BookmarkAnnotate
-nmap <Leader>a <Plug>BookmarkShowAll
-nmap <Leader>j <Plug>BookmarkNext
-nmap <Leader>k <Plug>BookmarkPrev
-nmap <Leader>c <Plug>BookmarkClear
-nmap <Leader>x <Plug>BookmarkClearAll
-
 let g:tmux_navigator_no_mappings = 1
 
 nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
@@ -396,8 +404,6 @@ nmap <leader>gv :GV<cr>
 let g:auto_save = 1
 let g:auto_save_in_insert_mode = 0
 let g:auto_save_silent = 1
-
-
 
 " }}}
 " => Mappings {{{
@@ -513,6 +519,16 @@ map <Leader>4 :tabn 4<CR>
 map <Leader>5 :tabn 5<CR>
 
 " window splitting mappings
+" Vim-Bookmark
+nmap <Leader>r <Plug>BookmarkToggle
+nmap <Leader>i <Plug>BookmarkAnnotate
+nmap <Leader>a <Plug>BookmarkShowAll
+nmap <Leader>j <Plug>BookmarkNext
+nmap <Leader>k <Plug>BookmarkPrev
+nmap <Leader>c <Plug>BookmarkClear
+nmap <Leader>x <Plug>BookmarkClearAll
+
+
 " split vertically with <leader> v
 " split horizontally with <leader> s
 nmap <Leader>vs :vsplit<CR> <C-w><C-w>
@@ -608,10 +624,10 @@ autocmd FileType ruby,yaml setl shiftwidth=2
 autocmd FileType ruby,yaml setl tabstop=2
 
 " Yaml indentation and tab correction
-autocmd FileType yaml set foldmethod=indent
-autocmd FileType yaml set foldcolumn=4
-hi link yamlTab Error
-autocmd FileType yaml match yamlTab /\t\+/
+"autocmd FileType yaml set foldmethod=indent
+"autocmd FileType yaml set foldcolumn=4
+"hi link yamlTab Error
+"autocmd FileType yaml match yamlTab /\t\+/
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -786,7 +802,7 @@ fun! RangerChooser()
     endif
     redraw!
 endfun
-map <Leader>r :call RangerChooser()<CR>
+map <Leader>ra :call RangerChooser()<CR>
 
 autocmd VimResized * :wincmd =
 " }}}
@@ -819,4 +835,4 @@ function! s:ToggleFold()
     endif
     echo 'foldmethod is now ' . &l:foldmethod
 endfunction
-" }}}
+" }}
