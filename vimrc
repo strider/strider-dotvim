@@ -1,4 +1,5 @@
 " dotvIMRc by Gaël Chamoulaud <gchamoul@redhat.com>
+
 " => Settings {{{
 " Switch syntax highlighting on, when the terminal has colors
 let python_highlight_all=1
@@ -6,6 +7,7 @@ let python_highlight_all=1
 " Vim-plug
 call plug#begin('~/.vim/plugged')
 Plug 'w0ng/vim-hybrid'
+Plug 'benmills/vimux'
 Plug 'flazz/vim-colorschemes'
 Plug 'vim-scripts/vimwiki'
 Plug 'vim-scripts/taglist.vim'
@@ -41,6 +43,7 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
 Plug 'garbas/vim-snipmate'
+Plug 'tomasr/molokai'
 Plug 'mileszs/ack.vim'
 Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'terryma/vim-expand-region'
@@ -84,7 +87,6 @@ Plug 'ConradIrwin/vim-bracketed-paste'
 Plug '907th/vim-auto-save'
 Plug 'ktonga/vim-follow-my-lead'
 Plug 'dbakker/vim-lint'
-"Plug 'ekalinin/Dockerfile.vim'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/gv.vim'
 Plug 'pearofducks/ansible-vim'
@@ -139,8 +141,10 @@ set laststatus=2
 set pastetoggle=<F2>
 
 " Invisible characters
-map \ :set list!<CR>
-set listchars=nbsp:¤,tab:··,trail:¤,extends:▶,precedes:◀
+map \ :set invlist<CR>
+"set listchars=nbsp:¤,tab:··,trail:¤,extends:▶,precedes:◀
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:␣
+set showbreak=↪
 
 " Syntax coloring lines that are too long just slows down the world
 set synmaxcol=1200
@@ -191,6 +195,15 @@ set hidden
 
 " Highlight the current line
 set cursorline
+
+" Only show cursorline in the current window and in normal mode.
+augroup cline
+    au!
+    au WinLeave * set nocursorline
+    au WinEnter * set cursorline
+    au InsertEnter * set nocursorline
+    au InsertLeave * set cursorline
+augroup END
 
 " Ensure Vim doesn't beep at you every time you make a mistype
 set visualbell
@@ -304,7 +317,7 @@ set wildignore+=*.pyc,*.o,*.obj
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
 
-map <C-e> <plug>NERDTreeTabsToggle<CR>
+nmap <tab> :NERDTreeTabsToggle<CR>
 map <Leader>` :NERDTreeTabsFind<CR>
 let g:NERDTreeShowBookmarks=0
 let g:NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
@@ -405,6 +418,9 @@ let g:auto_save = 1
 let g:auto_save_in_insert_mode = 0
 let g:auto_save_silent = 1
 
+map <Leader>rc :VimuxPromptCommand<CR>
+map <Leader>rl :VimuxRunLastCommand<CR>
+
 " }}}
 " => Mappings {{{
 " Removes highlight of your last search
@@ -415,6 +431,10 @@ nmap T :tabnew<CR>
 
 nmap <leader>q :split ~/.buffer<cr>
 nmap <leader>v :tabnew $HOME/.vimrc<CR>
+nnoremap <leader>ev <C-w>s<C-w>j:e $MYVIMRC<cr>
+nnoremap <leader>eg <C-w>s<C-w>j:e ~/.gitconfig<cr>
+nnoremap <leader>ez <C-w>s<C-w>j:e ~/.zshrc<cr>
+nnoremap <leader>et <C-w>s<C-w>j:e ~/.tmux.conf<cr>
 
 " window
 nmap <leader>sw<left>  :topleft  vnew<CR>
@@ -461,6 +481,9 @@ vnoremap > >gv  " better indentation
 "nn <F4>u yypVr-
 nn <F4>u yyp<C-V>$r-
 
+" Yank from current cursor position to end of line
+map Y y$
+
 " easier formatting of paragraphs
 vmap Q gq
 nmap Q gqap
@@ -483,6 +506,7 @@ map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>"
 iab gc -- Gaël
 iab Me Gaël Chamoulaud
 iab gcha Gaël Chamoulaud <gchamoul@redhat.com>
+iab g@ gael@redhat.com
 iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")
 iab br Best Regards, Gaël.<c-r>
 iab rh Red Hat
@@ -544,13 +568,17 @@ noremap L $
 
 nnoremap <silent> <leader>gs :Gstatus<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
-nnoremap <silent> <leader>gc :Gcommit<CR>
+nnoremap <silent> <leader>gc :Gcommit -a -v -s<CR>
+nnoremap <silent> <leader>gac :Gcommit --amend -v<CR>
 nnoremap <silent> <leader>gb :Gblame<CR>
 nnoremap <silent> <leader>gp :Git push<CR>
 nnoremap <silent> <leader>gr :Gread<CR>:GitGutter<CR>
 nnoremap <silent> <leader>gw :Gwrite<CR>:GitGutter<CR>
 nnoremap <silent> <leader>ge :Gedit<CR>
 nnoremap <silent> <leader>gg :GitGutterToggle<CR>
+
+autocmd FileType gitcommit set tw=68 spell
+autocmd FileType gitcommit setlocal foldmethod=manual
 
 " God Like mode. U can't use the arrow keys! Muahahah!
 noremap <left> <nop>
@@ -583,6 +611,7 @@ onoremap <right> <nop>
 ino jj <esc>
 cno jj <c-c>
 vno v <esc>
+
 " }}}
 " => Commands {{{
 " Close all folds when opening a new buffer
@@ -620,14 +649,9 @@ augroup filetype
         \ endif
 augroup END
 
-autocmd FileType ruby,yaml setl shiftwidth=2
-autocmd FileType ruby,yaml setl tabstop=2
-
-" Yaml indentation and tab correction
-"autocmd FileType yaml set foldmethod=indent
-"autocmd FileType yaml set foldcolumn=4
-"hi link yamlTab Error
-"autocmd FileType yaml match yamlTab /\t\+/
+autocmd FileType ruby,eruby,yaml set tw=80 ai sw=2 sts=2 et
+autocmd FileType ruby,eruby,yaml setlocal foldmethod=manual
+autocmd User Rails set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -836,3 +860,13 @@ function! s:ToggleFold()
     echo 'foldmethod is now ' . &l:foldmethod
 endfunction
 " }}
+
+" _ Vim {{{
+augroup ft_vim
+    au!
+
+    au FileType vim setlocal foldmethod=marker
+    au FileType help setlocal textwidth=78
+    au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
+augroup END
+" }}}
