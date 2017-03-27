@@ -6,90 +6,91 @@ let python_highlight_all=1
 
 " Vim-plug
 call plug#begin('~/.vim/plugged')
-Plug 'w0ng/vim-hybrid'
-Plug 'benmills/vimux'
-Plug 'flazz/vim-colorschemes'
-Plug 'vim-scripts/vimwiki'
-Plug 'vim-scripts/taglist.vim'
-Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/syntastic'
-Plug 'Raimondi/delimitMate'
-Plug 'vim-scripts/unimpaired.vim'
-Plug 'vim-scripts/bash-support.vim'
-Plug 'tpope/vim-surround'
-Plug 'vim-scripts/autocorrect.vim'
-Plug 'kien/ctrlp.vim'
-Plug 'godlygeek/csapprox'
-Plug 'tpope/vim-endwise'
-Plug 'vim-scripts/TextFormat'
-Plug 'nvie/vim-flake8'
-Plug 'vim-ruby/vim-ruby'
-Plug 'airblade/vim-rooter'
-Plug 'scrooloose/nerdcommenter'
-Plug 'vim-scripts/TaskList.vim'
-Plug 'godlygeek/tabular'
-Plug 'ervandew/supertab'
-Plug 'rodjek/vim-puppet'
-Plug 'davidhalter/jedi-vim'
-Plug 'vim-scripts/DrawIt'
-Plug 'xolox/vim-notes'
-Plug 'xolox/vim-misc'
+Plug '907th/vim-auto-save'
 Plug 'airblade/vim-gitgutter'
-Plug 'mattn/emmet-vim'
+Plug 'airblade/vim-rooter'
+Plug 'benmills/vimux'
+Plug 'chrisbra/vim-diff-enhanced'
+Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'ConradIrwin/vim-bracketed-paste'
+Plug 'dagwieers/asciidoc-vim'
+Plug 'davidhalter/jedi-vim'
+Plug 'dbakker/vim-lint'
+Plug 'duff/vim-scratch'
+Plug 'ervandew/supertab'
+Plug 'FooSoft/vim-argwrap'
+Plug 'garbas/vim-snipmate'
+Plug 'gcmt/wildfire.vim'
+Plug 'Glench/Vim-jinja2-Syntax'
+Plug 'godlygeek/csapprox'
+Plug 'godlygeek/tabular'
 Plug 'honza/vim-snippets'
-Plug 'tomtom/tlib_vim'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'jmcantrell/vim-virtualenv'
+Plug 'junegunn/gv.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'kien/ctrlp.vim'
+Plug 'ktonga/vim-follow-my-lead'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'majutsushi/tagbar'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
-Plug 'garbas/vim-snipmate'
-Plug 'tomasr/molokai'
 Plug 'mileszs/ack.vim'
-Plug 'chriskempson/vim-tomorrow-theme'
-Plug 'terryma/vim-expand-region'
-Plug 'skalnik/vim-vroom'
-Plug 'mmozuras/vim-github-comment'
-Plug 'junegunn/vim-github-dashboard'
-Plug 'sjl/splice.vim'
-Plug 'KabbAmine/vCoolor.vim'
-Plug 'dagwieers/asciidoc-vim'
-Plug 'bling/vim-airline'
-Plug 'vim-scripts/ZoomWin'
-Plug 'vim-scripts/Tabmerge'
-Plug 'kien/rainbow_parentheses.vim'
-Plug 't9md/vim-choosewin'
-Plug 'skammer/vim-css-color'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'Lokaltog/vim-easymotion'
-Plug 'sjl/gundo.vim'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'tpope/vim-abolish'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-git'
-Plug 'tpope/vim-speeddating'
-Plug 'jmcantrell/vim-virtualenv'
-Plug 'vim-scripts/BufOnly.vim'
-Plug 'duff/vim-scratch'
-Plug 'wellle/targets.vim'
-Plug 'gcmt/wildfire.vim'
-Plug 'tpope/vim-tbone'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'miyakogi/conoline.vim'
 Plug 'morhetz/gruvbox'
-Plug 'majutsushi/tagbar'
-Plug 'junegunn/vim-easy-align'
-Plug 'Yggdroot/indentLine'
-Plug 'chrisbra/vim-diff-enhanced'
-Plug 'Shougo/unite.vim'
-Plug 'Quramy/vison'
-Plug 'ConradIrwin/vim-bracketed-paste'
-Plug '907th/vim-auto-save'
-Plug 'ktonga/vim-follow-my-lead'
-Plug 'dbakker/vim-lint'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'junegunn/gv.vim'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'nvie/vim-flake8'
+Plug 'pbrisbin/vim-mkdir'
 Plug 'pearofducks/ansible-vim'
+Plug 'Raimondi/delimitMate'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
+Plug 'Shougo/neocomplete.vim'
+Plug 'sjl/splice.vim'
+Plug 't9md/vim-choosewin'
+Plug 'terryma/vim-expand-region'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tomtom/tlib_vim'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-git'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-tbone'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-scripts/autocorrect.vim'
+Plug 'vim-scripts/bash-support.vim'
+Plug 'vim-scripts/BufOnly.vim'
+Plug 'vim-scripts/Tabmerge'
+Plug 'vim-scripts/taglist.vim'
+Plug 'vim-scripts/TaskList.vim'
+Plug 'vim-scripts/TextFormat'
+Plug 'vim-scripts/unimpaired.vim'
+Plug 'vim-scripts/vimwiki'
+Plug 'wellle/targets.vim'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-notes'
+Plug 'Yggdroot/indentLine'
+"Plug 'Shougo/unite.vim'
+"Plug 'flazz/vim-colorschemes'
+"Plug 'vim-scripts/DrawIt'
+"Plug 'mattn/emmet-vim'
+"Plug 'rodjek/vim-puppet'
+"Plug 'vim-ruby/vim-ruby'
+"Plug 'mmozuras/vim-github-comment'
+"Plug 'junegunn/vim-github-dashboard'
+"Plug 'KabbAmine/vCoolor.vim'
+"Plug 'vim-scripts/ZoomWin'
+"Plug 'kien/rainbow_parentheses.vim'
+"Plug 'skammer/vim-css-color'
+"Plug 'sjl/gundo.vim'
+"Plug 'Quramy/vison'
 call plug#end()
 
 syntax on
@@ -256,7 +257,7 @@ endif
 set so=7
 
 " Using par program for formatting paragraph
-set formatprg=par\ -w79rjq
+set formatprg=par\ -w80q
 set formatoptions+=t
 
 " Automatic reloading of .vimrc
@@ -339,8 +340,8 @@ let g:syntastic_warning_symbol='W'
 let g:syntastic_check_on_wq=0
 let g:syntastic_check_on_open=0
 let g:syntastic_enable_perl_checker = 1
-let g:syntastic_sh_bashate_checker = 1
-let g:syntastic_sh_checkers = ['bashate']
+let g:syntastic_sh_shellcheck_checker = 1
+let g:syntastic_sh_checkers = ['bashate', 'shellcheck']
 
 let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 0
@@ -406,7 +407,7 @@ let g:indentLine_char = '┆'
 let g:indentLine_color_term = 184
 let g:indentLine_enabled = 1
 
-let g:tmux_navigator_no_mappings = 1
+let g:tmux_navigator_no_mappings = 0
 
 nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
 nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
@@ -422,6 +423,57 @@ let g:auto_save_silent = 1
 
 map <Leader>rc :VimuxPromptCommand<CR>
 map <Leader>rl :VimuxRunLastCommand<CR>
+
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+" Set minimum syntax keyword length.
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+
+" Enable omni completion.
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
 
 " }}}
 " => Mappings {{{
@@ -464,13 +516,14 @@ noremap <Leader>E :qa!<CR>   " Quit all windows
 
 " bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
 " Every unnecessary keystroke that can be saved is good for your health :)
-"map <c-j> <c-w>j
-"map <c-k> <c-w>k
-"map <c-l> <c-w>l
-"map <c-h> <c-w>h
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
 
 " map sort function to a key
-vnoremap <Leader>s :sort<CR>
+nnoremap <Leader>s vip:!sort<CR>
+vnoremap <Leader>s :!sort<CR>
 
 " easier moving of code blocks
 " Try to go into visual mode (v), thenselect several lines of code here and
@@ -496,8 +549,8 @@ map <leader>l :!clear && git log -p %<cr>
 map <Leader>vb Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 map <leader>da :echo 'Current Time is ' . strftime( '%c' )<CR>
 
-inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
-inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
+"inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
+"inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
 
 "open tag in new tab
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>"
@@ -514,7 +567,6 @@ iab br Best Regards, Gaël.<c-r>
 iab rh Red Hat
 iab linux Linux
 iab rdo RDO
-iab openstack OpenStack
 
 nmap <leader>fd :se ff=dos<cr>
 nmap <leader>fu :se ff=unix<cr>
@@ -543,17 +595,6 @@ map <Leader>2 :tabn 2<CR>
 map <Leader>3 :tabn 3<CR>
 map <Leader>4 :tabn 4<CR>
 map <Leader>5 :tabn 5<CR>
-
-" window splitting mappings
-" Vim-Bookmark
-nmap <Leader>r <Plug>BookmarkToggle
-nmap <Leader>i <Plug>BookmarkAnnotate
-nmap <Leader>a <Plug>BookmarkShowAll
-nmap <Leader>j <Plug>BookmarkNext
-nmap <Leader>k <Plug>BookmarkPrev
-nmap <Leader>c <Plug>BookmarkClear
-nmap <Leader>x <Plug>BookmarkClearAll
-
 
 " split vertically with <leader> v
 " split horizontally with <leader> s
@@ -614,28 +655,31 @@ ino jj <esc>
 cno jj <c-c>
 vno v <esc>
 
+" argwrap binding
+nnoremap <silent> <leader>a :ArgWrap<CR>
+
 " }}}
 " => Commands {{{
 " Close all folds when opening a new buffer
 autocmd BufRead * setlocal foldmethod=marker
 autocmd BufRead * normal zM
 
-" Better navigating through omnicomplete option
-" See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
-set completeopt=longest,menuone
-function! OmniPopup(action)
-    if pumvisible()
-        if a:action == 'j'
-            return "\<C-N>"
-        elseif a:action == 'k
-            return "\<C-P>"
-        endif
-    endif
-    return a:action
-endfunction
+"" Better navigating through omnicomplete option
+"" See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
+"set completeopt=longest,menuone
+"function! OmniPopup(action)
+    "if pumvisible()
+        "if a:action == 'j'
+            "return "\<C-N>"
+        "elseif a:action == 'k
+            "return "\<C-P>"
+        "endif
+    "endif
+    "return a:action
+"endfunction
 
-inoremap <silent>j <C-R>=OmniPopup('j')<CR>
-inoremap <silent>k <C-R>=OmniPopup('k')<CR>
+"inoremap <silent>j <C-R>=OmniPopup('j')<CR>
+"inoremap <silent>k <C-R>=OmniPopup('k')<CR>
 
 augroup filetype
   autocmd BufNewFile,BufRead */.Postponed/* set filetype=mail
@@ -871,4 +915,6 @@ augroup ft_vim
     au FileType help setlocal textwidth=78
     au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
 augroup END
+
 " }}}
+"
