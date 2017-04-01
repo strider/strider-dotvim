@@ -6,12 +6,10 @@ let python_highlight_all=1
 
 " Vim-plug
 call plug#begin('~/.vim/plugged')
-Plug '907th/vim-auto-save'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'benmills/vimux'
 Plug 'chrisbra/vim-diff-enhanced'
-Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'dagwieers/asciidoc-vim'
@@ -69,14 +67,17 @@ Plug 'vim-scripts/bash-support.vim'
 Plug 'vim-scripts/BufOnly.vim'
 Plug 'vim-scripts/Tabmerge'
 Plug 'vim-scripts/taglist.vim'
-Plug 'vim-scripts/TaskList.vim'
 Plug 'vim-scripts/TextFormat'
 Plug 'vim-scripts/unimpaired.vim'
 Plug 'vim-scripts/vimwiki'
 Plug 'wellle/targets.vim'
+Plug 'wikitopian/hardmode'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
 Plug 'Yggdroot/indentLine'
+"Plug 'vim-scripts/TaskList.vim'
+"Plug 'chriskempson/vim-tomorrow-theme'
+"Plug '907th/vim-auto-save'
 "Plug 'Shougo/unite.vim'
 "Plug 'flazz/vim-colorschemes'
 "Plug 'vim-scripts/DrawIt'
@@ -107,6 +108,7 @@ set nocompatible
 " No backup files
 set nobackup
 
+set path+=**
 
 " No write backup
 set nowritebackup
@@ -293,7 +295,7 @@ let mapleader = "\<Space>"
 
 " Airline (status line)
 let g:airline_powerline_fonts = 1
-let g:airline_theme='cool'
+let g:airline_theme='base16'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#bufferline#enabled = 1
@@ -314,6 +316,7 @@ let g:ctrlp_map = '<leader>p'
 let g:ctrlp_max_height = 30
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 0
+let g:ctrlp_max_history = 50
 map <Leader>u :CtrlPMRU<CR>
 
 set wildignore+=*.pyc,*.o,*.obj
@@ -417,10 +420,6 @@ nnoremap <silent> <c-\\> :TmuxNavigatePrevious<cr>
 
 nmap <leader>gv :GV<cr>
 
-let g:auto_save = 1
-let g:auto_save_in_insert_mode = 0
-let g:auto_save_silent = 1
-
 map <Leader>rc :VimuxPromptCommand<CR>
 map <Leader>rl :VimuxRunLastCommand<CR>
 
@@ -475,6 +474,8 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
 endif
 
+nnoremap <leader>rp <Esc>:call ToggleHardMode()<CR>
+
 " }}}
 " => Mappings {{{
 " Removes highlight of your last search
@@ -484,7 +485,7 @@ nmap <silent> <leader>; :silent :nohlsearch<CR>
 nmap T :tabnew<CR>
 
 nmap <leader>q :split ~/.buffer<cr>
-nmap <leader>v :tabnew $HOME/.vimrc<CR>
+nmap <leader>v :tabnew $HOME/.vim/vimrc<CR>
 nnoremap <leader>ev <C-w>s<C-w>j:e $MYVIMRC<cr>
 nnoremap <leader>eg <C-w>s<C-w>j:e ~/.gitconfig<cr>
 nnoremap <leader>ez <C-w>s<C-w>j:e ~/.zshrc<cr>
@@ -581,9 +582,13 @@ nnoremap <Leader>wd :new <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <Leader>wn :new %:p:h<CR>
 nnoremap <Leader>w. :new %:p:h<CR>
 
+nnoremap <Leader>wtd :tabnew <C-R>=expand("%:p:h") . "/" <CR>
+nnoremap <Leader>wtn :tabnew %:p:h<CR>
+nnoremap <Leader>wt. :tabnew %:p:h<CR>
+
 nnoremap <Leader>vd :vnew <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <Leader>vn :vnew %:p:h<CR>
-nnoremap <Leader>v. :vnew %:p:h<CR>
+"nnoremap <Leader>v. :vnew %:p:h<CR>
 " Easier non-interactive command insertion
 "nnoremap <Space><Space> :
 nnoremap <Leader>, :h<Space>
@@ -663,23 +668,6 @@ nnoremap <silent> <leader>a :ArgWrap<CR>
 " Close all folds when opening a new buffer
 autocmd BufRead * setlocal foldmethod=marker
 autocmd BufRead * normal zM
-
-"" Better navigating through omnicomplete option
-"" See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
-"set completeopt=longest,menuone
-"function! OmniPopup(action)
-    "if pumvisible()
-        "if a:action == 'j'
-            "return "\<C-N>"
-        "elseif a:action == 'k
-            "return "\<C-P>"
-        "endif
-    "endif
-    "return a:action
-"endfunction
-
-"inoremap <silent>j <C-R>=OmniPopup('j')<CR>
-"inoremap <silent>k <C-R>=OmniPopup('k')<CR>
 
 augroup filetype
   autocmd BufNewFile,BufRead */.Postponed/* set filetype=mail
@@ -782,17 +770,6 @@ autocmd BufRead,BufNewFile *.txt,*.adoc,*.asciidoc,README,TODO,CHANGELOG,NOTES,A
         \ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\\|^\\s*<\\d\\+>\\s\\+\\\\|^\\s*[a-zA-Z.]\\.\\s\\+\\\\|^\\s*[ivxIVX]\\+\\.\\s\\+
         \ comments=s1:/*,ex:*/,://,b:#,:%,:XCOMM,fb:-,fb:*,fb:+,fb:.,fb:>
 
-"
-" From http://jetpackweb.com/blog/2010/02/15/vim-tips-for-ruby/
-" and http://technicalpickles.com/posts/vimpocalypse/
-"
-augroup strider_ruby
-  autocmd!
-  autocmd FileType ruby,puppet inoremap <C-S-l> <Space>=><Space>
-  " convert word into ruby symbol
-  autocmd FileType ruby inoremap <C-k> <C-o>b:<Esc>Ea
-augroup END
-
 map <silent> <F7> <Esc> :w! <cr> :!python % <cr>
 command! W w !sudo tee "%" > /dev/null
 
@@ -833,15 +810,6 @@ function! ToggleWrap()
     inoremap <buffer> <silent> <End>  <C-o>g<End>
   endif
 endfunction
-
-" Rainbow parenthesis always on!
-noremap <silent> <Leader>rp :RainbowParenthesesToggle<CR>
-if exists(':RainbowParenthesesToggle')
-  autocmd VimEnter * RainbowParenthesesToggle
-  autocmd Syntax * RainbowParenthesesLoadRound
-  autocmd Syntax * RainbowParenthesesLoadSquare
-  autocmd Syntax * RainbowParenthesesLoadBraces
-endif
 
 " Reset spellin  colours when reading a new buffer
 " This works around an issue where the colorscheme is changed by .local.vimrc
