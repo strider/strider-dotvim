@@ -1,13 +1,12 @@
 " dotvIMRc by Gaël Chamoulaud <gchamoul@redhat.com>
 
 " => Settings {{{
-" Switch syntax highlighting on, when the terminal has colors
-let python_highlight_all=1
 
-" Vim-plug
+" ==> Vim-plug {{{
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
+Plug 'beloglazov/vim-online-thesaurus'
 Plug 'benmills/vimux'
 Plug 'chrisbra/vim-diff-enhanced'
 Plug 'christoomey/vim-tmux-navigator'
@@ -37,18 +36,18 @@ Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
 Plug 'mileszs/ack.vim'
 Plug 'miyakogi/conoline.vim'
-Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'nvie/vim-flake8'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'pearofducks/ansible-vim'
+Plug 'PotatoesMaster/i3-vim-syntax'
+Plug 'rafi/awesome-vim-colorschemes'
 Plug 'Raimondi/delimitMate'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'Shougo/neocomplete.vim'
 Plug 'sjl/splice.vim'
-Plug 't9md/vim-choosewin'
 Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tomtom/tlib_vim'
@@ -75,24 +74,26 @@ Plug 'wikitopian/hardmode'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
 Plug 'Yggdroot/indentLine'
-"Plug 'vim-scripts/TaskList.vim'
-"Plug 'chriskempson/vim-tomorrow-theme'
+"Plug 'morhetz/gruvbox'
 "Plug '907th/vim-auto-save'
-"Plug 'Shougo/unite.vim'
+"Plug 'chriskempson/vim-tomorrow-theme'
 "Plug 'flazz/vim-colorschemes'
-"Plug 'vim-scripts/DrawIt'
-"Plug 'mattn/emmet-vim'
-"Plug 'rodjek/vim-puppet'
-"Plug 'vim-ruby/vim-ruby'
-"Plug 'mmozuras/vim-github-comment'
 "Plug 'junegunn/vim-github-dashboard'
 "Plug 'KabbAmine/vCoolor.vim'
-"Plug 'vim-scripts/ZoomWin'
 "Plug 'kien/rainbow_parentheses.vim'
-"Plug 'skammer/vim-css-color'
-"Plug 'sjl/gundo.vim'
+"Plug 'mattn/emmet-vim'
+"Plug 'mmozuras/vim-github-comment'
 "Plug 'Quramy/vison'
+"Plug 'rodjek/vim-puppet'
+"Plug 'sjl/gundo.vim'
+"Plug 'skammer/vim-css-color'
+"Plug 't9md/vim-choosewin'
+"Plug 'vim-ruby/vim-ruby'
+"Plug 'vim-scripts/DrawIt'
+"Plug 'vim-scripts/TaskList.vim'
+"Plug 'vim-scripts/ZoomWin'
 call plug#end()
+" }}}
 
 syntax on
 
@@ -255,6 +256,19 @@ if has('cmd_info')
     set showcmd
 endif
 
+" => Scrolling {{{
+" Start scrolling when we are 8 lines away from margins
+set scrolloff=8
+
+" Minimum lines to keep above and below
+set sidescrolloff=15
+
+" Lines to scroll when cursor leaves screen
+set scrolljump=5
+set sidescroll=1
+
+" }}}
+
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
 
@@ -273,7 +287,7 @@ filetype plugin indent on
 " Theme
 set t_Co=256
 set bg=dark
-colorscheme gruvbox
+colorscheme PaperColor
 "hi Normal ctermbg=none
 "hi NonText ctermbg=none
 hi ColorColumn cterm=none ctermfg=none ctermbg=236
@@ -295,7 +309,7 @@ let mapleader = "\<Space>"
 
 " Airline (status line)
 let g:airline_powerline_fonts = 1
-let g:airline_theme='base16'
+let g:airline_theme='minimalist'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#bufferline#enabled = 1
@@ -320,10 +334,12 @@ let g:ctrlp_max_history = 50
 map <Leader>u :CtrlPMRU<CR>
 
 set wildignore+=*.pyc,*.o,*.obj
+set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
+set wildignore+=*.pdf,*.psd
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
 
-nmap <tab> :NERDTreeTabsToggle<CR>
+nmap <F3> :NERDTreeToggle<CR>
 map <Leader>` :NERDTreeTabsFind<CR>
 let g:NERDTreeShowBookmarks=0
 let g:NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
@@ -371,19 +387,6 @@ let g:github_user = 'strider'
 
 let g:github_dashboard = { 'username': 'strider' }
 
-" Dashboard window position
-" " - Options: tab, top, bottom, above, below, left, right
-" " - Default: tab
-let g:github_dashboard['position'] = 'tab'
-
-" Customize emoji (see http://www.emoji-cheat-sheet.com/)
-let g:github_dashboard['emoji_map'] = {
-\   'user_dashboard': 'blush',
-\   'user_activity':  'smile',
-\   'repo_activity':  'laughing',
-\   'ForkEvent':      'fork_and_knife'
-\ }
-
 let g:splice_prefix = "<leader>t"
 
 " Git gutter
@@ -402,8 +405,8 @@ let Tlist_Use_Right_Window = 1
 let Tlist_Show_One_File = 1
 
 " Invoke Choosevim with '-'
-nmap - <Plug>(choosewin)
-let g:choosewin_overlay_enable = 1
+"nmap - <Plug>(choosewin)
+"let g:choosewin_overlay_enable = 1
 
 " IdentLine
 let g:indentLine_char = '┆'
@@ -465,9 +468,6 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-
-" Enable omni completion.
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
@@ -588,9 +588,7 @@ nnoremap <Leader>wt. :tabnew %:p:h<CR>
 
 nnoremap <Leader>vd :vnew <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <Leader>vn :vnew %:p:h<CR>
-"nnoremap <Leader>v. :vnew %:p:h<CR>
-" Easier non-interactive command insertion
-"nnoremap <Space><Space> :
+nnoremap <Leader>v. :vnew %:p:h<CR>
 nnoremap <Leader>, :h<Space>
 " \F to startup an ack search
 map <leader>fa :Ack<space>
@@ -617,7 +615,7 @@ noremap L $
 nnoremap <silent> <leader>gs :Gstatus<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
 nnoremap <silent> <leader>gc :Gcommit -a -v -s<CR>
-nnoremap <silent> <leader>gac :Gcommit --amend -v<CR>
+nnoremap <silent> <leader>gac :Gcommit -a --amend -v<CR>
 nnoremap <silent> <leader>gb :Gblame<CR>
 nnoremap <silent> <leader>gp :Git push<CR>
 nnoremap <silent> <leader>gr :Gread<CR>:GitGutter<CR>
@@ -774,10 +772,10 @@ map <silent> <F7> <Esc> :w! <cr> :!python % <cr>
 command! W w !sudo tee "%" > /dev/null
 
 "delete all lines in the current buffer
-nmap <C-S-F2> ggdG
-nmap <C-S-F3> ggVG
-vmap <C-c> "*y<CR>
-vmap <C-v> "*gP<CR>
+"nmap <C-S-F2> ggdG
+"nmap <C-S-F3> ggVG
+"vmap <C-c> "*y<CR>
+"vmap <C-v> "*gP<CR>
 
 autocmd VimEnter * redraw!
 
@@ -814,7 +812,7 @@ endfunction
 " Reset spellin  colours when reading a new buffer
 " This works around an issue where the colorscheme is changed by .local.vimrc
 fun! SetSpellingColors()
-  highlight SpellBad cterm=bold ctermfg=white ctermbg=red
+  highlight spellbad cterm=bold ctermfg=white ctermbg=red
   highlight jpellCap cterm=bold ctermfg=red ctermbg=white
 endfun
 autocmd BufWinEnter * call SetSpellingColors()
@@ -843,18 +841,6 @@ endfun
 map <Leader>ra :call RangerChooser()<CR>
 
 autocmd VimResized * :wincmd =
-" }}}
-" => Scrolling {{{
-" Start scrolling when we are 8 lines away from margins
-set scrolloff=8
-
-" Minimum lines to keep above and below
-set sidescrolloff=15
-
-" Lines to scroll when cursor leaves screen
-set scrolljump=5
-set sidescroll=1
-
 " }}}
 " => Folding {{{
 set foldmethod=marker
