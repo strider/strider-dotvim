@@ -56,7 +56,6 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
-Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-tbone'
 Plug 'vim-airline/vim-airline'
@@ -312,7 +311,6 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme='minimalist'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
-let g:airline#extensions#bufferline#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
@@ -403,10 +401,6 @@ let Tlist_Show_Menu = 1
 let Tlist_Auto_Update = 1
 let Tlist_Use_Right_Window = 1
 let Tlist_Show_One_File = 1
-
-" Invoke Choosevim with '-'
-"nmap - <Plug>(choosewin)
-"let g:choosewin_overlay_enable = 1
 
 " IdentLine
 let g:indentLine_char = '┆'
@@ -563,11 +557,17 @@ iab gc -- Gaël
 iab Me Gaël Chamoulaud
 iab gcha Gaël Chamoulaud <gchamoul@redhat.com>
 iab g@ gael@redhat.com
-iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")
+iab xdate <c-r>=strftime("%m/%d/%Y")
 iab br Best Regards, Gaël.<c-r>
 iab rh Red Hat
 iab linux Linux
 iab rdo RDO
+
+function! Today()
+  let today = strftime("%A %m\/%d\/%Y")
+  exe "normal a". today
+endfunction
+command! Today :call Today()
 
 nmap <leader>fd :se ff=dos<cr>
 nmap <leader>fu :se ff=unix<cr>
@@ -658,9 +658,30 @@ ino jj <esc>
 cno jj <c-c>
 vno v <esc>
 
+" Always move through visual lines:
+nnoremap j gj
+nnoremap k gk
+xnoremap j gj
+xnoremap k gk
+
+" Faster scrolling:
+nmap J 5j
+nmap K 5k
+xmap J 5j
+xmap K 5k
+
 " argwrap binding
 nnoremap <silent> <leader>a :ArgWrap<CR>
 
+nnoremap g= gg=Gg``
+
+" Use tab and shift-tab to cycle through windows.
+nnoremap <Tab> <C-W>w
+nnoremap <S-Tab> <C-W>W
+
+nmap / <Plug>(easymotion-sn)
+xmap / <Esc><Plug>(easymotion-sn)\v%V
+omap / <Plug>(easymotion-tn)
 " }}}
 " => Commands {{{
 " Close all folds when opening a new buffer
@@ -749,14 +770,6 @@ endfunction
 " Use with :
 " :CleanCode
 command! -bar -range=% CleanCode call CleanCode()
-
-function! SL(function)
-  if exists('*'.a:function)
-    return call(a:function,[])
-  else
-    return ''
-  endif
-endfunction
 
 " ASCIIDOC Specific
 " Reformat paragraphs and .
