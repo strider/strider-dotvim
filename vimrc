@@ -23,7 +23,6 @@ Plug 'Glench/Vim-jinja2-Syntax'
 Plug 'godlygeek/csapprox'
 Plug 'godlygeek/tabular'
 Plug 'honza/vim-snippets'
-Plug 'jistr/vim-nerdtree-tabs'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'junegunn/gv.vim'
 Plug 'junegunn/vim-easy-align'
@@ -44,7 +43,7 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'Raimondi/delimitMate'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree' , { 'on':  'NERDTreeToggle' }
 Plug 'scrooloose/syntastic'
 Plug 'Shougo/neocomplete.vim'
 Plug 'sjl/splice.vim'
@@ -151,7 +150,6 @@ set pastetoggle=<F2>
 
 " Invisible characters
 map \ :set invlist<CR>
-"set listchars=nbsp:¤,tab:··,trail:¤,extends:▶,precedes:◀
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:␣
 set showbreak=↪
 
