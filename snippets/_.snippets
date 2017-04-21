@@ -45,55 +45,5 @@ snippet mysign
 	Best regards,
 	Gaël.
 
-# custom puppet
-snippet pdoc
-	# [*${1:parameter name}*]
-	#   (${2:Optional or Required?}) ${3:Description}
-	#   Defaults to '${4:Default value}'.
-	#
-	${5:pdoc}
-snippet ppackage
-	package { '${1:package name}':
-	  ensure => ${2:present},${3}
-	}
-
-	${4}
-snippet pservice
-	service { '${1:service name}':
-	  ensure => ${2:running},
-	  enable => ${3:true},
-	}
-
-	${4}
-snippet sfile
-	file { '${1:filename}' :
-	  ensure => '${2:file}',
-	  source => 'puppet:///modules/${3:modulename}/${4:source}',
-	  owner  => '${5:root}',
-	  group  => '${6:root}',
-	  mode   => '${7:0640}',
-	}
-
-	${8}
-snippet tfile
-	file { '${1:filename}' :
-	  ensure  => '${2:file}',
-	  content => template('${3:modulename}/${4:tplfile}'),
-	  owner   => '${5:root}',
-	  group   => '${6:root}',
-	  mode    => '${7:0640}',
-	}
-
-snippet puser
-	user { '${1:user}':
-	  ensure      => present,
-	  comment     => '${2:$1}',
-	  managehome  => true,
-	  home        => '${0:/home/$1}',
-	}
-
-snippet prj
-	- project: puppet-${1}
-	  conf: puppet
-	  upstream: git://github.com/${2}/%(project)s
+# custom ansible
 

@@ -2,7 +2,7 @@ if has("gui_running")
   " Nicer font
   set guifont=Terminus\ for\ Powerline\ 08
   set background=dark
-  colorscheme ayu
+  colorscheme PaperColor
   " Airline (status line)
   let g:airline_theme='cool'
   let g:airline_powerline_fonts = 1

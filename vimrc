@@ -8,11 +8,10 @@ Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'beloglazov/vim-online-thesaurus'
 Plug 'benmills/vimux'
-Plug 'chrisbra/vim-diff-enhanced'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'dagwieers/asciidoc-vim'
-Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim' , {'for': 'python'}
 Plug 'dbakker/vim-lint'
 Plug 'duff/vim-scratch'
 Plug 'ervandew/supertab'
@@ -23,7 +22,6 @@ Plug 'Glench/Vim-jinja2-Syntax'
 Plug 'godlygeek/csapprox'
 Plug 'godlygeek/tabular'
 Plug 'honza/vim-snippets'
-Plug 'jmcantrell/vim-virtualenv'
 Plug 'junegunn/gv.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'kien/ctrlp.vim'
@@ -70,7 +68,6 @@ Plug 'vim-scripts/vimwiki'
 Plug 'wellle/targets.vim'
 Plug 'wikitopian/hardmode'
 Plug 'xolox/vim-misc'
-Plug 'xolox/vim-notes'
 Plug 'Yggdroot/indentLine'
 "Plug 'morhetz/gruvbox'
 "Plug '907th/vim-auto-save'
@@ -138,6 +135,10 @@ set shiftwidth=4
 
 " Turn on line numbers
 set number
+
+" Maintain undo history between sessions
+set undofile
+set undodir=~/.vim_undodir
 
 " Get rid of the delay when pressing O (for example)
 " http://stackoverflow.com/questions/2158516/vim-delay-before-o-opens-a-new-line
@@ -329,6 +330,7 @@ nmap <F5> :TagbarToggle<CR>
 let g:ctrlp_map = '<leader>p'
 let g:ctrlp_max_height = 30
 let g:ctrlp_working_path_mode = 0
+let g:ctrlp_show_hidden = 1
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_max_history = 50
 map <Leader>u :CtrlPMRU<CR>
@@ -362,17 +364,15 @@ let g:syntastic_enable_perl_checker = 1
 let g:syntastic_sh_shellcheck_checker = 1
 let g:syntastic_sh_checkers = ['bashate', 'shellcheck']
 
-let g:jedi#popup_on_dot = 0
-let g:jedi#popup_select_first = 0
-let g:jedi#show_call_signatures = "2"
+if (has("python3"))
+    let g:jedi#force_py_version = 3
+endif
 
 let g:conoline_auto_enable = 1
 let g:conoline_use_colorscheme_default_normal=1
 let g:conoline_use_colorscheme_default_insert=1
 
 let g:vimwiki_ = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
-
-let g:notes_directories = ['~/Documents/Notes']
 
 " Private Gist by default
 let g:gist_post_private = 1
@@ -406,8 +406,12 @@ let Tlist_Show_One_File = 1
 
 " IdentLine
 let g:indentLine_char = '┆'
+let g:indentLine_setColors = 0
+let g:indentLine_concealcursor = 'inc'
+let g:indentLine_conceallevel = 2
 let g:indentLine_color_term = 184
 let g:indentLine_enabled = 1
+let g:indentLine_fileTypeExclude = ['help', 'nerdtree']
 
 let g:tmux_navigator_no_mappings = 0
 
@@ -465,12 +469,27 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
+"" Enable heavy omni completion.
+"if !exists('g:neocomplete#sources#omni#input_patterns')
+  "let g:neocomplete#sources#omni#input_patterns = {}
+"endif
+
+if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
 endif
 
+autocmd FileType python setlocal omnifunc=jedi#completions
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#popup_on_dot = 0
+let g:jedi#use_tabs_not_buffers = 1
+let g:jedi#popup_select_first = 0
+let g:jedi#show_call_signatures = "1"
+let g:neocomplete#force_omni_input_patterns.python = '[^. \t]\.\w*'
+
 nnoremap <leader>rp <Esc>:call ToggleHardMode()<CR>
+
+let delimitMate_expand_cr = 1
+let delimitMate_expand_space = 1
 
 " }}}
 " => Mappings {{{
@@ -692,7 +711,7 @@ autocmd BufRead * normal zM
 
 augroup filetype
   autocmd BufNewFile,BufRead */.Postponed/* set filetype=mail
-  autocmd BufNewFile,BufRead *.txt setl textwidth=79
+  autocmd BufNewFile,BufRead *.txt setl textwidth=80
   autocmd BufRead,BufNewFile *mutt-* set filetype=mail
   autocmd FileType html,vim,javascript,dockbook,mail setl shiftwidth=2
   autocmd FileType html,vim,javascript,dockbook,mail setl softtabstop=2
@@ -717,14 +736,6 @@ set ffs=unix
 
 " detect kickstart filetype
 autocmd BufNewFile,BufRead *.ks setl ft=kickstart
-
-" Ruby
-autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
-autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-
-"autocmd BufWritePost *.py call Flake8()
 
 " Awesome line number magic
 function! NumberToggle()
@@ -777,9 +788,9 @@ command! -bar -range=% CleanCode call CleanCode()
 " Reformat paragraphs and .
 nnoremap <Leader>r gq}
 
-autocmd BufRead,BufNewFile *.txt,*.adoc,*.asciidoc,README,TODO,CHANGELOG,NOTES,ABOUT
+autocmd BufRead,BufNewFile *.txt,*.adoc,*.asciidoc,README,TODO,CHANGELOG,ABOUT
         \ setlocal autoindent expandtab tabstop=8 softtabstop=2 shiftwidth=2 filetype=asciidoc
-        \ textwidth=79 wrap formatoptions=tcqn
+        \ textwidth=80 wrap formatoptions=tcqn
         \ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\\|^\\s*<\\d\\+>\\s\\+\\\\|^\\s*[a-zA-Z.]\\.\\s\\+\\\\|^\\s*[ivxIVX]\\+\\.\\s\\+
         \ comments=s1:/*,ex:*/,://,b:#,:%,:XCOMM,fb:-,fb:*,fb:+,fb:.,fb:>
 
@@ -881,7 +892,7 @@ augroup ft_vim
     au!
 
     au FileType vim setlocal foldmethod=marker
-    au FileType help setlocal textwidth=78
+    au FileType help setlocal textwidth=80
     au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
 augroup END
 
