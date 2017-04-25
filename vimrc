@@ -41,7 +41,7 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'Raimondi/delimitMate'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree' , { 'on':  'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'Shougo/neocomplete.vim'
 Plug 'sjl/splice.vim'
@@ -330,7 +330,8 @@ nmap <F5> :TagbarToggle<CR>
 let g:ctrlp_map = '<leader>p'
 let g:ctrlp_max_height = 30
 let g:ctrlp_working_path_mode = 0
-let g:ctrlp_show_hidden = 1
+"let g:ctrlp_show_hidden = 1
+"let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|tox|lib)$'
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_max_history = 50
 map <Leader>u :CtrlPMRU<CR>
@@ -342,7 +343,7 @@ set wildignore+=*_build/*
 set wildignore+=*/coverage/*
 
 nmap <F3> :NERDTreeToggle<CR>
-map <Leader>` :NERDTreeTabsFind<CR>
+map <Leader>` :NERDTreeFind<CR>
 let g:NERDTreeShowBookmarks=0
 let g:NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
 let g:NERDTreeChDirMode=0
@@ -500,11 +501,11 @@ nmap <silent> <leader>; :silent :nohlsearch<CR>
 nmap T :tabnew<CR>
 
 nmap <leader>q :split ~/.buffer<cr>
-nmap <leader>v :tabnew $HOME/.vim/vimrc<CR>
+nmap <leader>v :tabedit $HOME/.vim/vimrc<CR>
 nnoremap <leader>ev <C-w>s<C-w>j:e $MYVIMRC<cr>
-nnoremap <leader>eg <C-w>s<C-w>j:e ~/.gitconfig<cr>
-nnoremap <leader>ez <C-w>s<C-w>j:e ~/.zshrc<cr>
-nnoremap <leader>et <C-w>s<C-w>j:e ~/.tmux.conf<cr>
+
+" vv to generate new vertical split
+ nnoremap <silent> vv <C-w>v
 
 " window
 nmap <leader>sw<left>  :topleft  vnew<CR>
@@ -698,11 +699,21 @@ nnoremap g= gg=Gg``
 
 " Use tab and shift-tab to cycle through windows.
 nnoremap <Tab> <C-W>w
+nnoremap <C-i> <C-W>w
 nnoremap <S-Tab> <C-W>W
 
 nmap / <Plug>(easymotion-sn)
 xmap / <Esc><Plug>(easymotion-sn)\v%V
 omap / <Plug>(easymotion-tn)
+
+" Quickly move current line
+nnoremap [e  :<c-u>execute 'move -1-'. v:count1<cr>
+nnoremap ]e  :<c-u>execute 'move +'. v:count1<cr>
+
+" Quickly add empty lines
+nnoremap [<space>  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[
+nnoremap ]<space>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
+
 " }}}
 " => Commands {{{
 " Close all folds when opening a new buffer
