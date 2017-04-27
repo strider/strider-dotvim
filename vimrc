@@ -1,8 +1,6 @@
 " dotvIMRc by Gaël Chamoulaud <gchamoul@redhat.com>
 
-" => Settings {{{
-
-" ==> Vim-plug {{{
+" => Vim-plug {{{
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
@@ -44,6 +42,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'Shougo/neocomplete.vim'
+Plug 'Shougo/denite.nvim'
 Plug 'sjl/splice.vim'
 Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
@@ -69,31 +68,9 @@ Plug 'wellle/targets.vim'
 Plug 'wikitopian/hardmode'
 Plug 'xolox/vim-misc'
 Plug 'Yggdroot/indentLine'
-"Plug 'morhetz/gruvbox'
-"Plug '907th/vim-auto-save'
-"Plug 'chriskempson/vim-tomorrow-theme'
-"Plug 'vim-scripts/TaskList.vim'
-"Plug 'chriskempson/vim-tomorrow-theme'
-"Plug '907th/vim-auto-save'
-"Plug 'Shougo/unite.vim'
-"Plug 'flazz/vim-colorschemes'
-"Plug 'junegunn/vim-github-dashboard'
-"Plug 'KabbAmine/vCoolor.vim'
-"Plug 'kien/rainbow_parentheses.vim'
-"Plug 'mattn/emmet-vim'
-"Plug 'mmozuras/vim-github-comment'
-"Plug 'Quramy/vison'
-"Plug 'rodjek/vim-puppet'
-"Plug 'sjl/gundo.vim'
-"Plug 'skammer/vim-css-color'
-"Plug 't9md/vim-choosewin'
-"Plug 'vim-ruby/vim-ruby'
-"Plug 'vim-scripts/DrawIt'
-"Plug 'vim-scripts/TaskList.vim'
-"Plug 'vim-scripts/ZoomWin'
 call plug#end()
 " }}}
-
+" => Settings {{{
 syntax on
 
 " UTF encoding
@@ -206,11 +183,11 @@ set cursorline
 
 " Only show cursorline in the current window and in normal mode.
 augroup cline
-    au!
-    au WinLeave * set nocursorline
-    au WinEnter * set cursorline
-    au InsertEnter * set nocursorline
-    au InsertLeave * set cursorline
+  au!
+  au WinLeave * set nocursorline
+  au WinEnter * set cursorline
+  au InsertEnter * set nocursorline
+  au InsertLeave * set cursorline
 augroup END
 
 " Ensure Vim doesn't beep at you every time you make a mistype
@@ -249,16 +226,15 @@ if v:version >= 700
 endif
 
 if has('cmd_info')
-    " Always show the current cursor position
-    set ruler
-    set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " taken from spf13-vim
+  " Always show the current cursor position
+  set ruler
+  set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " taken from spf13-vim
 
-    " Show partial commands in statusline and selected chars/lines in
-    " visual mode
-    set showcmd
+  " Show partial commands in statusline and selected chars/lines in
+  " visual mode
+  set showcmd
 endif
 
-" => Scrolling {{{
 " Start scrolling when we are 8 lines away from margins
 set scrolloff=8
 
@@ -268,8 +244,6 @@ set sidescrolloff=15
 " Lines to scroll when cursor leaves screen
 set scrolljump=5
 set sidescroll=1
-
-" }}}
 
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
@@ -296,13 +270,13 @@ hi ColorColumn cterm=none ctermfg=none ctermbg=236
 
 " Allow to trigger background
 function! ToggleBG()
-    let s:tbg = &background
-    " Inversion
-    if s:tbg == "dark"
-        set background=light
-    else
-        set background=dark
-    endif
+  let s:tbg = &background
+  " Inversion
+  if s:tbg == "dark"
+    set background=light
+  else
+    set background=dark
+  endif
 endfunction
 noremap <leader>bg :call ToggleBG()<CR>
 
@@ -311,7 +285,7 @@ let mapleader = "\<Space>"
 
 " Airline (status line)
 let g:airline_powerline_fonts = 1
-let g:airline_theme='minimalist'
+let g:airline_theme='dracula'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#branch#enabled = 1
@@ -366,7 +340,7 @@ let g:syntastic_sh_shellcheck_checker = 1
 let g:syntastic_sh_checkers = ['bashate', 'shellcheck']
 
 if (has("python3"))
-    let g:jedi#force_py_version = 3
+  let g:jedi#force_py_version = 3
 endif
 
 let g:conoline_auto_enable = 1
@@ -441,14 +415,14 @@ let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
+      \ 'default' : '',
+      \ 'vimshell' : $HOME.'/.vimshell_hist',
+      \ 'scheme' : $HOME.'/.gosh_completions'
+      \ }
 
 " Define keyword.
 if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
+  let g:neocomplete#keyword_patterns = {}
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
@@ -472,11 +446,11 @@ inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 
 "" Enable heavy omni completion.
 "if !exists('g:neocomplete#sources#omni#input_patterns')
-  "let g:neocomplete#sources#omni#input_patterns = {}
+"let g:neocomplete#sources#omni#input_patterns = {}
 "endif
 
 if !exists('g:neocomplete#force_omni_input_patterns')
-    let g:neocomplete#force_omni_input_patterns = {}
+  let g:neocomplete#force_omni_input_patterns = {}
 endif
 
 autocmd FileType python setlocal omnifunc=jedi#completions
@@ -505,7 +479,7 @@ nmap <leader>v :tabedit $HOME/.vim/vimrc<CR>
 nnoremap <leader>ev <C-w>s<C-w>j:e $MYVIMRC<cr>
 
 " vv to generate new vertical split
- nnoremap <silent> vv <C-w>v
+nnoremap <silent> vv <C-w>v
 
 " window
 nmap <leader>sw<left>  :topleft  vnew<CR>
@@ -540,13 +514,13 @@ map <c-h> <c-w>h
 
 " map sort function to a key
 nnoremap <Leader>s vip:!sort<CR>
-vnoremap <Leader>s :!sort<CR>
+xnoremap <Leader>s :!sort<CR>
 
 " easier moving of code blocks
 " Try to go into visual mode (v), thenselect several lines of code here and
 " then press ``>`` several times.
 vnoremap < <gv  " better indentation
-vnoremap > >gv  " better indentation
+xnoremap > >gv  " better indentation
 
 " underline the current line with : <F4><u>
 " useful for asciidoc sections
@@ -556,8 +530,13 @@ nn <F4>u yyp<C-V>$r-
 " Yank from current cursor position to end of line
 map Y y$
 
+" Yank content in OS's clipboard. `o` stands for "OS's Clipoard".
+xnoremap <leader>yo "*y
+" Paste content from OS's clipboard
+nnoremap <leader>po "*p
+
 " easier formatting of paragraphs
-vmap Q gq
+xmap Q gq
 nmap Q gqap
 
 " map git commands
@@ -674,11 +653,11 @@ onoremap <up> <nop>
 onoremap <down> <nop>
 onoremap <right> <nop>
 
-" Less god like mode - change the escape key to jj in
+" Less god like mode - change the escape key to C-k in
 " command and insert mode and to v in visual mode
-ino jj <esc>
-cno jj <c-c>
-vno v <esc>
+ino <C-k> <esc>
+cno <C-k> <c-c>
+xno v <esc>
 
 " Always move through visual lines:
 nnoremap j gj
@@ -760,8 +739,8 @@ function! NumberToggle()
 endfunction
 
 nnoremap <leader>n :call NumberToggle()<cr>
-:au FocusLost * set number
-:au FocusGained * set relativenumber
+au FocusLost * set number
+au FocusGained * set relativenumber
 autocmd InsertEnter * set number
 autocmd InsertLeave * set relativenumber
 set relativenumber
@@ -800,10 +779,10 @@ command! -bar -range=% CleanCode call CleanCode()
 nnoremap <Leader>r gq}
 
 autocmd BufRead,BufNewFile *.txt,*.adoc,*.asciidoc,README,TODO,CHANGELOG,ABOUT
-        \ setlocal autoindent expandtab tabstop=8 softtabstop=2 shiftwidth=2 filetype=asciidoc
-        \ textwidth=80 wrap formatoptions=tcqn
-        \ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\\|^\\s*<\\d\\+>\\s\\+\\\\|^\\s*[a-zA-Z.]\\.\\s\\+\\\\|^\\s*[ivxIVX]\\+\\.\\s\\+
-        \ comments=s1:/*,ex:*/,://,b:#,:%,:XCOMM,fb:-,fb:*,fb:+,fb:.,fb:>
+      \ setlocal autoindent expandtab tabstop=8 softtabstop=2 shiftwidth=2 filetype=asciidoc
+      \ textwidth=80 wrap formatoptions=tcqn
+      \ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\\|^\\s*<\\d\\+>\\s\\+\\\\|^\\s*[a-zA-Z.]\\.\\s\\+\\\\|^\\s*[ivxIVX]\\+\\.\\s\\+
+      \ comments=s1:/*,ex:*/,://,b:#,:%,:XCOMM,fb:-,fb:*,fb:+,fb:.,fb:>
 
 map <silent> <F7> <Esc> :w! <cr> :!python % <cr>
 command! W w !sudo tee "%" > /dev/null
@@ -868,12 +847,12 @@ endfun
 autocmd FilterWritePre * call SetDiffColors()
 
 fun! RangerChooser()
-    exec "silent !ranger --choosefile=/tmp/chosenfile " . expand("%:p:h")
-    if filereadable('/tmp/chosenfile')
-        exec 'edit ' . system('cat /tmp/chosenfile')
-        call system('rm /tmp/chosenfile')
-    endif
-    redraw!
+  exec "silent !ranger --choosefile=/tmp/chosenfile " . expand("%:p:h")
+  if filereadable('/tmp/chosenfile')
+    exec 'edit ' . system('cat /tmp/chosenfile')
+    call system('rm /tmp/chosenfile')
+  endif
+  redraw!
 endfun
 map <Leader>ra :call RangerChooser()<CR>
 
@@ -887,24 +866,24 @@ set foldnestmax=3
 
 nmap <Leader>zz :call <SID>ToggleFold()<CR>
 function! s:ToggleFold()
-    if &foldmethod == 'marker'
-        let &l:foldmethod = 'syntax'
-        let &l:foldlevelstart = '0'
-        let &l:foldnestmax = '2'
-    else
-        let &l:foldmethod = 'marker'
-    endif
-    echo 'foldmethod is now ' . &l:foldmethod
+  if &foldmethod == 'marker'
+    let &l:foldmethod = 'syntax'
+    let &l:foldlevelstart = '0'
+    let &l:foldnestmax = '2'
+  else
+    let &l:foldmethod = 'marker'
+  endif
+  echo 'foldmethod is now ' . &l:foldmethod
 endfunction
 " }}
 
 " _ Vim {{{
 augroup ft_vim
-    au!
+  au!
 
-    au FileType vim setlocal foldmethod=marker
-    au FileType help setlocal textwidth=80
-    au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
+  au FileType vim setlocal foldmethod=marker
+  au FileType help setlocal textwidth=80
+  au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
 augroup END
 
 " }}}
