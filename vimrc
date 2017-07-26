@@ -3,6 +3,7 @@
 " => Vim-plug {{{
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
+Plug 'thaerkh/vim-workspace'
 Plug 'airblade/vim-rooter'
 Plug 'beloglazov/vim-online-thesaurus'
 Plug 'benmills/vimux'
@@ -10,6 +11,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'dagwieers/asciidoc-vim'
 Plug 'davidhalter/jedi-vim' , {'for': 'python'}
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'dbakker/vim-lint'
 Plug 'duff/vim-scratch'
 Plug 'ervandew/supertab'
@@ -116,6 +118,8 @@ set number
 " Maintain undo history between sessions
 set undofile
 set undodir=~/.vim_undodir
+
+let g:workspace_undodir='~/.vim_undodir'
 
 " Get rid of the delay when pressing O (for example)
 " http://stackoverflow.com/questions/2158516/vim-delay-before-o-opens-a-new-line
@@ -285,7 +289,7 @@ let mapleader = "\<Space>"
 
 " Airline (status line)
 let g:airline_powerline_fonts = 1
-let g:airline_theme='dracula'
+let g:airline_theme='tender'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#branch#enabled = 1
@@ -308,7 +312,8 @@ let g:ctrlp_working_path_mode = 0
 "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|tox|lib)$'
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_max_history = 50
-map <Leader>u :CtrlPMRU<CR>
+nmap ; :CtrlPMRU<CR>
+nmap ;; :CtrlPBuffer<CR>
 
 set wildignore+=*.pyc,*.o,*.obj
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
@@ -476,6 +481,7 @@ nmap T :tabnew<CR>
 
 nmap <leader>q :split ~/.buffer<cr>
 nmap <leader>v :tabedit $HOME/.vim/vimrc<CR>
+nmap <leader>t :source ~/.vimrc<CR>
 nnoremap <leader>ev <C-w>s<C-w>j:e $MYVIMRC<cr>
 
 " vv to generate new vertical split
@@ -511,6 +517,11 @@ map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
+
+" make the view port scroll faster
+nnoremap <C-e> 5<C-e>
+nnoremap <C-y> 5<C-y>
+nnoremap <C-p> 5<C-p>
 
 " map sort function to a key
 nnoremap <Leader>s vip:!sort<CR>
@@ -550,6 +561,9 @@ map <leader>da :echo 'Current Time is ' . strftime( '%c' )<CR>
 
 "open tag in new tab
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>"
+
+" pull word under cursor into Ack for a global search
+map <leader>za :Ack "<C-r>=expand("<cword>")<CR>"
 
 " =========================================
 "        Abreviation
@@ -624,7 +638,7 @@ nnoremap <silent> <leader>gw :Gwrite<CR>:GitGutter<CR>
 nnoremap <silent> <leader>ge :Gedit<CR>
 nnoremap <silent> <leader>gg :GitGutterToggle<CR>
 
-autocmd FileType gitcommit set tw=68 spell
+autocmd FileType gitcommit set tw=79 spell
 autocmd FileType gitcommit setlocal foldmethod=manual
 
 " God Like mode. U can't use the arrow keys! Muahahah!
@@ -685,6 +699,12 @@ nmap / <Plug>(easymotion-sn)
 xmap / <Esc><Plug>(easymotion-sn)\v%V
 omap / <Plug>(easymotion-tn)
 
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
 " Quickly move current line
 nnoremap [e  :<c-u>execute 'move -1-'. v:count1<cr>
 nnoremap ]e  :<c-u>execute 'move +'. v:count1<cr>
@@ -692,6 +712,33 @@ nnoremap ]e  :<c-u>execute 'move +'. v:count1<cr>
 " Quickly add empty lines
 nnoremap [<space>  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[
 nnoremap ]<space>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
+
+nnoremap <silent> <Leader>C :call fzf#run({
+\   'source':
+\     map(split(globpath(&rtp, "colors/*.vim"), "\n"),
+\         "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')"),
+\   'sink':    'colo',
+\   'options': '+m',
+\   'left':    30
+\ })<CR>
+
+function! s:buflist()
+  redir => ls
+  silent ls
+  redir END
+  return split(ls, '\n')
+endfunction
+
+function! s:bufopen(e)
+  execute 'buffer' matchstr(a:e, '^[ 0-9]*')
+endfunction
+
+nnoremap <silent> <Leader><Enter> :call fzf#run({
+\   'source':  reverse(<sid>buflist()),
+\   'sink':    function('<sid>bufopen'),
+\   'options': '+m',
+\   'down':    len(<sid>buflist()) + 2
+\ })<CR>
 
 " }}}
 " => Commands {{{
