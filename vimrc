@@ -14,6 +14,7 @@ Plug 'davidhalter/jedi-vim' , {'for': 'python'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'dbakker/vim-lint'
 Plug 'duff/vim-scratch'
+Plug 'rodjek/vim-puppet'
 Plug 'ervandew/supertab'
 Plug 'FooSoft/vim-argwrap'
 Plug 'garbas/vim-snipmate'
@@ -372,7 +373,7 @@ let g:splice_prefix = "<leader>t"
 " Git gutter
 let g:gitgutter_enabled = 1
 let g:gitgutter_eager = 0
-let g:gitgutter_sign_column_always = 1
+set signcolumn=yes
 let g:gitgutter_sign_added = '++'
 let g:gitgutter_sign_modified = '--'
 let g:gitgutter_sign_removed = 'xx'
