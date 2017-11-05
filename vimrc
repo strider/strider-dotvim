@@ -12,6 +12,7 @@ Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'dagwieers/asciidoc-vim'
 Plug 'davidhalter/jedi-vim' , {'for': 'python'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'dbakker/vim-lint'
 Plug 'duff/vim-scratch'
 Plug 'rodjek/vim-puppet'
@@ -70,7 +71,9 @@ Plug 'vim-scripts/vimwiki'
 Plug 'wellle/targets.vim'
 Plug 'wikitopian/hardmode'
 Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
 Plug 'Yggdroot/indentLine'
+Plug 'mhinz/vim-startify'
 call plug#end()
 " }}}
 " => Settings {{{
@@ -472,6 +475,11 @@ nnoremap <leader>rp <Esc>:call ToggleHardMode()<CR>
 let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
 
+let g:session_directory = "~/.vim/sessions"
+let g:session_autoload = "no"
+let g:session_autosave = "no"
+let g:startify_session_dir = "~/.vim/sessions"
+
 " }}}
 " => Mappings {{{
 " Removes highlight of your last search
@@ -534,6 +542,10 @@ xnoremap <Leader>s :!sort<CR>
 vnoremap < <gv  " better indentation
 xnoremap > >gv  " better indentation
 
+" Move visual block
+vnoremap R :m '>+1<CR>gv=gv
+vnoremap T :m '<-2<CR>gv=gv
+
 " underline the current line with : <F4><u>
 " useful for asciidoc sections
 "nn <F4>u yypVr-
@@ -578,6 +590,18 @@ iab br Best Regards, Gaël.<c-r>
 iab rh Red Hat
 iab linux Linux
 iab rdo RDO
+
+cnoreabbrev W! w!
+cnoreabbrev Q! q!
+cnoreabbrev Qall! qall!
+cnoreabbrev Wq wq
+cnoreabbrev Wa wa
+cnoreabbrev Wqa wqa
+cnoreabbrev wQ wq
+cnoreabbrev WQ wq
+cnoreabbrev W w
+cnoreabbrev Q q
+cnoreabbrev Qall qall
 
 function! Today()
   let today = strftime("%A %m\/%d\/%Y")
