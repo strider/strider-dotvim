@@ -3,9 +3,9 @@
 " => Vim-plug {{{
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
-Plug 'thaerkh/vim-workspace'
 Plug 'airblade/vim-rooter'
 Plug 'beloglazov/vim-online-thesaurus'
+Plug 'thaerkh/vim-workspace'
 Plug 'benmills/vimux'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ConradIrwin/vim-bracketed-paste'
@@ -14,11 +14,9 @@ Plug 'davidhalter/jedi-vim' , {'for': 'python'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'dbakker/vim-lint'
-Plug 'duff/vim-scratch'
 Plug 'rodjek/vim-puppet'
 Plug 'ervandew/supertab'
 Plug 'FooSoft/vim-argwrap'
-Plug 'garbas/vim-snipmate'
 Plug 'gcmt/wildfire.vim'
 Plug 'Glench/Vim-jinja2-Syntax'
 Plug 'godlygeek/csapprox'
@@ -26,10 +24,9 @@ Plug 'godlygeek/tabular'
 Plug 'honza/vim-snippets'
 Plug 'junegunn/gv.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'kien/ctrlp.vim'
 Plug 'ktonga/vim-follow-my-lead'
 Plug 'Lokaltog/vim-easymotion'
-Plug 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
@@ -47,7 +44,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'Shougo/neocomplete.vim'
 Plug 'Shougo/denite.nvim'
-Plug 'sjl/splice.vim'
 Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tomtom/tlib_vim'
@@ -72,8 +68,12 @@ Plug 'wellle/targets.vim'
 Plug 'wikitopian/hardmode'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
-Plug 'Yggdroot/indentLine'
+
+Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
+autocmd! User indentLine doautocmd indentLine Syntax
+
 Plug 'mhinz/vim-startify'
+Plug 'chrisbra/vim-diff-enhanced'
 call plug#end()
 " }}}
 " => Settings {{{
@@ -309,15 +309,15 @@ let g:ansible_extra_keywords_highlight = 1
 nmap <F5> :TagbarToggle<CR>
 
 " ctrlp config
-let g:ctrlp_map = '<leader>p'
-let g:ctrlp_max_height = 30
-let g:ctrlp_working_path_mode = 0
+"let g:ctrlp_map = '<leader>p'
+"let g:ctrlp_max_height = 30
+"let g:ctrlp_working_path_mode = 0
 "let g:ctrlp_show_hidden = 1
 "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|tox|lib)$'
-let g:ctrlp_match_window_reversed = 0
-let g:ctrlp_max_history = 50
-nmap ; :CtrlPMRU<CR>
-nmap ;; :CtrlPBuffer<CR>
+"let g:ctrlp_match_window_reversed = 0
+"let g:ctrlp_max_history = 50
+"nmap ; :CtrlPMRU<CR>
+"nmap ' :CtrlPBuffer<CR>
 
 set wildignore+=*.pyc,*.o,*.obj
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
@@ -371,12 +371,9 @@ let g:github_user = 'strider'
 
 let g:github_dashboard = { 'username': 'strider' }
 
-let g:splice_prefix = "<leader>t"
-
 " Git gutter
 let g:gitgutter_enabled = 1
 let g:gitgutter_eager = 0
-set signcolumn=yes
 let g:gitgutter_sign_added = '++'
 let g:gitgutter_sign_modified = '--'
 let g:gitgutter_sign_removed = 'xx'
@@ -390,10 +387,10 @@ let Tlist_Show_One_File = 1
 
 " IdentLine
 let g:indentLine_char = '┆'
-let g:indentLine_setColors = 0
+"let g:indentLine_setColors = 0
 let g:indentLine_concealcursor = 'inc'
 let g:indentLine_conceallevel = 2
-let g:indentLine_color_term = 184
+"let g:indentLine_color_term = 184
 let g:indentLine_enabled = 1
 let g:indentLine_fileTypeExclude = ['help', 'nerdtree']
 
@@ -480,6 +477,10 @@ let g:session_autoload = "no"
 let g:session_autosave = "no"
 let g:startify_session_dir = "~/.vim/sessions"
 
+" started In Diff-Mode set diffexpr (plugin not loaded yet)
+if &diff
+    let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=patience")'
+endif
 " }}}
 " => Mappings {{{
 " Removes highlight of your last search
@@ -496,16 +497,16 @@ nnoremap <leader>ev <C-w>s<C-w>j:e $MYVIMRC<cr>
 " vv to generate new vertical split
 nnoremap <silent> vv <C-w>v
 
-" window
-nmap <leader>sw<left>  :topleft  vnew<CR>
-nmap <leader>sw<right> :botright vnew<CR>
-nmap <leader>sw<up>    :topleft  new<CR>
-nmap <leader>sw<down>  :botright new<CR>
 " buffer
+nmap <leader>s<down>   :rightbelow new<CR>
 nmap <leader>s<left>   :leftabove  vnew<CR>
 nmap <leader>s<right>  :rightbelow vnew<CR>
 nmap <leader>s<up>     :leftabove  new<CR>
-nmap <leader>s<down>   :rightbelow new<CR>
+nmap <leader>sw<down>  :botright new<CR>
+nmap <leader>sw<left>  :topleft  vnew<CR>
+nmap <leader>sw<right> :botright vnew<CR>
+nmap <leader>sw<up>    :topleft  new<CR>
+" window
 
 "" Quicksave command
 noremap <C-Z> :update<CR>
@@ -553,11 +554,6 @@ nn <F4>u yyp<C-V>$r-
 
 " Yank from current cursor position to end of line
 map Y y$
-
-" Yank content in OS's clipboard. `o` stands for "OS's Clipoard".
-xnoremap <leader>yo "*y
-" Paste content from OS's clipboard
-nnoremap <leader>po "*p
 
 " easier formatting of paragraphs
 xmap Q gq
@@ -737,6 +733,72 @@ nnoremap ]e  :<c-u>execute 'move +'. v:count1<cr>
 " Quickly add empty lines
 nnoremap [<space>  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[
 nnoremap ]<space>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
+
+" Find lines >80 chars long
+nmap <Leader><F8> /^.\{-}\zs.\%>81v<CR>
+" Find multiple newlines together
+nmap <Leader>fi /^\(^}\n\)\@<!\n\n<CR>
+" Fix commas without a following space unless they're in strings
+nmap <silent> <Leader>x, :silent! %s/\(\(^\([^"']*\(["'][^"']*["']\)\)*[^"']*\)\@<=\)\+,\ze\S/& /g<CR>
+" Fix , with leading spaces
+nmap <silent> <Leader>xx, :silent! %s/\s\+,/,/g<CR>
+
+nmap ; :Buffers<CR>
+nmap ' :Files<CR>
+
+let g:fzf_prefer_tmux = 1
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
+
+"" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" An action can be a reference to a function that processes selected lines
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
+let g:fzf_action = {
+  \ 'ctrl-q': function('s:build_quickfix_list'),
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Default fzf layout
+" - down / up / left / right
+let g:fzf_layout = { 'down': '~20%:' }
+
+" You can set up fzf window using a Vim command (Neovim or latest Vim 8 required)
+"let g:fzf_layout = { 'window': 'enew' }
+"let g:fzf_layout = { 'window': '-tabnew' }
+"let g:fzf_layout = { 'window': '30split enew' }
+
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+" Enable per-command history.
+" CTRL-N and CTRL-P will be automatically bound to next-history and
+" previous-history instead of down and up. If you don't like the change,
+" explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
+let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 nnoremap <silent> <Leader>C :call fzf#run({
 \   'source':
