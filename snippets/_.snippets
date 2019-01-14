@@ -1,4 +1,4 @@
-# Global snippets
+#lobal snippets
 snippet gpl
 	# Copyright (C) `strftime("%Y")` `system("git config user.name")` (<`system("git config user.email")`>)
 	#
@@ -15,35 +15,64 @@ snippet gpl
 	# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 	${1}
-snippet #head head #1
-	# Author:: `system("git config user.name")` (<`system("git config user.email")`>)
-	# Date:: `system("ruby -e 'puts Time.now'")`
-	#
-	${1}
-snippet -- line -- #1
-	-----------------------------------------------------------------------------
-	${1}
-snippet __ underscore __ #1
-	_____________________________________________________________________________
-	${1}
-snippet asr
-	[source, ruby]
-	----
-	${1:source code}
-	----
-snippet asp
-	[source, python]
-	----
-	${1:source code}
-	----
-snippet ass
-	[source, sh]
-	----
-	${1:source code}
-	----
 snippet mysign
 	Best regards,
 	Gaël.
 
 # custom ansible
 
+snippet -- line -- #1
+	---
+	${1}
+snippet hosts
+	---
+	- hosts: ${1}
+	  vars:
+	    metadata:
+		  name: ${2}
+		  description: >
+		    ${3}
+		groups:
+		  - ${4}
+snippet tasks
+	tasks:
+snippet name
+	- name: ${1}
+snippet bc
+	become: True
+snippet ini
+	- name: ${1}
+	  ini:
+	    path: ${2}
+	    section: ${3}
+	    key: ${4}
+	    ignore_missing_file: True
+	  register: ${5}
+snippet reg
+	register: ${1}
+snippet ign
+	ignore_errors: ${1}
+snippet cw
+	changed_when: ${1}
+snippet when
+	when: ${1}
+snippet whenl
+	when:
+	  - ${1}
+	  - ${2}
+snippet fail
+	fail: msg="${1}"
+snippet faill
+	fail:
+	  msg: >-
+	    ${1}
+snippet var
+	${1}: ${2}
+snippet cmd
+	command: ${1}
+snippet sh
+	shell: ${1}
+snippet sf
+	- name: ${1}
+	  set_facts:
+	    ${2}: ${3}

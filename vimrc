@@ -4,7 +4,6 @@
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
-Plug 'beloglazov/vim-online-thesaurus'
 Plug 'thaerkh/vim-workspace'
 Plug 'benmills/vimux'
 Plug 'christoomey/vim-tmux-navigator'
@@ -14,7 +13,6 @@ Plug 'davidhalter/jedi-vim' , {'for': 'python'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'dbakker/vim-lint'
-Plug 'rodjek/vim-puppet'
 Plug 'ervandew/supertab'
 Plug 'FooSoft/vim-argwrap'
 Plug 'gcmt/wildfire.vim'
@@ -22,6 +20,7 @@ Plug 'Glench/Vim-jinja2-Syntax'
 Plug 'godlygeek/csapprox'
 Plug 'godlygeek/tabular'
 Plug 'honza/vim-snippets'
+Plug 'garbas/vim-snipmate'
 Plug 'junegunn/gv.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'ktonga/vim-follow-my-lead'
@@ -42,8 +41,13 @@ Plug 'Raimondi/delimitMate'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
-Plug 'Shougo/neocomplete.vim'
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/denite.nvim'
+Plug 'zchee/deoplete-jedi'
 Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tomtom/tlib_vim'
@@ -308,17 +312,6 @@ let g:ansible_extra_keywords_highlight = 1
 
 nmap <F5> :TagbarToggle<CR>
 
-" ctrlp config
-"let g:ctrlp_map = '<leader>p'
-"let g:ctrlp_max_height = 30
-"let g:ctrlp_working_path_mode = 0
-"let g:ctrlp_show_hidden = 1
-"let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|tox|lib)$'
-"let g:ctrlp_match_window_reversed = 0
-"let g:ctrlp_max_history = 50
-"nmap ; :CtrlPMRU<CR>
-"nmap ' :CtrlPBuffer<CR>
-
 set wildignore+=*.pyc,*.o,*.obj
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
 set wildignore+=*.pdf,*.psd
@@ -366,10 +359,8 @@ let g:snips_author = 'Gaël Chamoulaud'
 let g:snips_email = 'gchamoul@redhat.com'
 let g:snips_github = 'https://github.com/strider'
 
-" Github Comments
-let g:github_user = 'strider'
-
-let g:github_dashboard = { 'username': 'strider' }
+"" Github Comments
+"let g:github_user = 'strider'
 
 " Git gutter
 let g:gitgutter_enabled = 1
@@ -410,53 +401,32 @@ map <Leader>rl :VimuxRunLastCommand<CR>
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-" Set minimum syntax keyword length.
-let g:neocomplcache_min_syntax_length = 3
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+let g:deoplete#enable_at_startup = 1
 
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-      \ 'default' : '',
-      \ 'vimshell' : $HOME.'/.vimshell_hist',
-      \ 'scheme' : $HOME.'/.gosh_completions'
-      \ }
+" Enable snipMate compatibility feature.
+let g:neosnippet#enable_snipmate_compatibility = 1
 
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-  let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory='~/.vim/plugged/vim-snippets/snippets'
 
 " Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
 
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? "\<C-y>" : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <expr><TAB>
+ \ pumvisible() ? "\<C-n>" :
+ \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
-"" Enable heavy omni completion.
-"if !exists('g:neocomplete#sources#omni#input_patterns')
-"let g:neocomplete#sources#omni#input_patterns = {}
-"endif
-
-if !exists('g:neocomplete#force_omni_input_patterns')
-  let g:neocomplete#force_omni_input_patterns = {}
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
 endif
 
 autocmd FileType python setlocal omnifunc=jedi#completions
@@ -465,7 +435,6 @@ let g:jedi#popup_on_dot = 0
 let g:jedi#use_tabs_not_buffers = 1
 let g:jedi#popup_select_first = 0
 let g:jedi#show_call_signatures = "1"
-let g:neocomplete#force_omni_input_patterns.python = '[^. \t]\.\w*'
 
 nnoremap <leader>rp <Esc>:call ToggleHardMode()<CR>
 
@@ -481,6 +450,7 @@ let g:startify_session_dir = "~/.vim/sessions"
 if &diff
     let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=patience")'
 endif
+
 " }}}
 " => Mappings {{{
 " Removes highlight of your last search
@@ -497,11 +467,16 @@ nnoremap <leader>ev <C-w>s<C-w>j:e $MYVIMRC<cr>
 " vv to generate new vertical split
 nnoremap <silent> vv <C-w>v
 
+" window
+nmap <leader>sw<left>  :topleft  vnew<CR>
+nmap <leader>sw<right> :botright vnew<CR>
+nmap <leader>sw<up>    :topleft  new<CR>
+nmap <leader>sw<down>  :botright new<CR>
 " buffer
-nmap <leader>s<down>   :rightbelow new<CR>
 nmap <leader>s<left>   :leftabove  vnew<CR>
 nmap <leader>s<right>  :rightbelow vnew<CR>
 nmap <leader>s<up>     :leftabove  new<CR>
+nmap <leader>s<down>   :rightbelow new<CR>
 nmap <leader>sw<down>  :botright new<CR>
 nmap <leader>sw<left>  :topleft  vnew<CR>
 nmap <leader>sw<right> :botright vnew<CR>
@@ -554,6 +529,11 @@ nn <F4>u yyp<C-V>$r-
 
 " Yank from current cursor position to end of line
 map Y y$
+
+" Yank content in OS's clipboard. `o` stands for "OS's Clipoard".
+xnoremap <leader>yo "*y
+" Paste content from OS's clipboard
+nnoremap <leader>po "*p
 
 " easier formatting of paragraphs
 xmap Q gq
@@ -690,9 +670,9 @@ onoremap <right> <nop>
 
 " Less god like mode - change the escape key to C-k in
 " command and insert mode and to v in visual mode
-ino <C-k> <esc>
-cno <C-k> <c-c>
-xno v <esc>
+"ino <C-k> <esc>
+"cno <C-k> <c-c>
+"xno v <esc>
 
 " Always move through visual lines:
 nnoremap j gj
@@ -851,6 +831,9 @@ autocmd FileType ruby,eruby,yaml set tw=80 ai sw=2 sts=2 et
 autocmd FileType ruby,eruby,yaml setlocal foldmethod=manual
 autocmd User Rails set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 
+" add yaml stuffs
+au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Fileformats
