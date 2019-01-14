@@ -51,6 +51,9 @@ Plug 'zchee/deoplete-jedi'
 Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tomtom/tlib_vim'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'wellle/tmux-complete.vim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
@@ -369,6 +372,7 @@ let g:gitgutter_sign_added = '++'
 let g:gitgutter_sign_modified = '--'
 let g:gitgutter_sign_removed = 'xx'
 let g:gitgutter_sign_modified_removed = 'ww'
+let g:gitgutter_highlight_lines = 1
 highlight clear SignColumn
 
 let Tlist_Show_Menu = 1
@@ -429,7 +433,6 @@ if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
 
-autocmd FileType python setlocal omnifunc=jedi#completions
 let g:jedi#auto_vim_configuration = 0
 let g:jedi#popup_on_dot = 0
 let g:jedi#use_tabs_not_buffers = 1
@@ -544,9 +547,6 @@ map <leader>l :!clear && git log -p %<cr>
 
 map <Leader>vb Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 map <leader>da :echo 'Current Time is ' . strftime( '%c' )<CR>
-
-"inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
-"inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
 
 "open tag in new tab
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>"
