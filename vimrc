@@ -23,7 +23,6 @@ Plug 'honza/vim-snippets'
 Plug 'garbas/vim-snipmate'
 Plug 'junegunn/gv.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'ktonga/vim-follow-my-lead'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -32,7 +31,6 @@ Plug 'mattn/webapi-vim'
 Plug 'mileszs/ack.vim'
 Plug 'miyakogi/conoline.vim'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'nvie/vim-flake8'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'pearofducks/ansible-vim'
 Plug 'PotatoesMaster/i3-vim-syntax'
@@ -50,7 +48,7 @@ Plug 'Shougo/denite.nvim'
 Plug 'zchee/deoplete-jedi'
 Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'tomtom/tlib_vim'
+"Plug 'tomtom/tlib_vim'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'wellle/tmux-complete.vim'
@@ -314,6 +312,7 @@ let g:ansible_name_highlight = 'd'
 let g:ansible_extra_keywords_highlight = 1
 
 nmap <F5> :TagbarToggle<CR>
+nmap <F9> :GitGutterLineHighlightsToggle<CR>
 
 set wildignore+=*.pyc,*.o,*.obj
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
@@ -372,7 +371,7 @@ let g:gitgutter_sign_added = '++'
 let g:gitgutter_sign_modified = '--'
 let g:gitgutter_sign_removed = 'xx'
 let g:gitgutter_sign_modified_removed = 'ww'
-let g:gitgutter_highlight_lines = 1
+"let g:gitgutter_highlight_lines = 1
 highlight clear SignColumn
 
 let Tlist_Show_Menu = 1
@@ -832,7 +831,7 @@ autocmd FileType ruby,eruby,yaml setlocal foldmethod=manual
 autocmd User Rails set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 
 " add yaml stuffs
-au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml
+au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml.ansible
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -901,7 +900,7 @@ autocmd BufRead,BufNewFile *.txt,*.adoc,*.asciidoc,README,TODO,CHANGELOG,ABOUT
       \ formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\\|^\\s*<\\d\\+>\\s\\+\\\\|^\\s*[a-zA-Z.]\\.\\s\\+\\\\|^\\s*[ivxIVX]\\+\\.\\s\\+
       \ comments=s1:/*,ex:*/,://,b:#,:%,:XCOMM,fb:-,fb:*,fb:+,fb:.,fb:>
 
-map <silent> <F7> <Esc> :w! <cr> :!python % <cr>
+map <silent> <F7> <Esc> :w! <cr> :!python3 % <cr>
 command! W w !sudo tee "%" > /dev/null
 
 "delete all lines in the current buffer
