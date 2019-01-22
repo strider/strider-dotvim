@@ -4,6 +4,7 @@
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
+Plug 'lifepillar/vim-solarized8'
 Plug 'thaerkh/vim-workspace'
 Plug 'benmills/vimux'
 Plug 'christoomey/vim-tmux-navigator'
@@ -17,7 +18,6 @@ Plug 'ervandew/supertab'
 Plug 'FooSoft/vim-argwrap'
 Plug 'gcmt/wildfire.vim'
 Plug 'Glench/Vim-jinja2-Syntax'
-Plug 'godlygeek/csapprox'
 Plug 'godlygeek/tabular'
 Plug 'honza/vim-snippets'
 Plug 'garbas/vim-snipmate'
@@ -33,6 +33,8 @@ Plug 'miyakogi/conoline.vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'pearofducks/ansible-vim'
+Plug 'vim-python/python-syntax'
+Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'Raimondi/delimitMate'
@@ -45,13 +47,12 @@ Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/denite.nvim'
-Plug 'zchee/deoplete-jedi'
+Plug 'zchee/deoplete-jedi', {'for': 'python'}
 Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
-"Plug 'tomtom/tlib_vim'
+Plug 'tomtom/tlib_vim'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'wellle/tmux-complete.vim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
@@ -83,50 +84,57 @@ call plug#end()
 " }}}
 " => Settings {{{
 syntax on
-
-" UTF encoding
 set fenc=utf-8
 scriptencoding utf-8
 set encoding=utf-8
 set termencoding=utf-8
-
-" Use vim, not vi api
 set nocompatible
-
-" No backup files
 set nobackup
-
 set path+=**
-
-" No write backup
 set nowritebackup
-
-" No swap file
 set noswapfile
-
-" Turn word wrap off
 set nowrap
-
 set updatetime=250
-
-" Allow backspace to delete end of line, indent and start of line characters
 set backspace=indent,eol,start
-
-" Convert tabs to spaces
 set expandtab
-
-" Set tab size in spaces (this is for manual indenting)
 set tabstop=4
-
-" The number of spaces inserted for a tab (used for auto indenting)
 set shiftwidth=4
-
-" Turn on line numbers
 set number
-
-" Maintain undo history between sessions
+set laststatus=2
 set undofile
 set undodir=~/.vim_undodir
+set synmaxcol=1200
+set nojoinspaces
+set nostartofline
+set pastetoggle=<F2>
+set mouse=a
+set splitbelow
+set splitright
+set history=700
+set undolevels=700
+set showcmd
+set incsearch
+set hlsearch
+set smartcase
+set ignorecase
+set hidden
+set cursorline
+set visualbell
+set wildmenu
+set lazyredraw
+set showmatch
+set colorcolumn=80
+set shiftround
+set laststatus=2
+set statusline=%f\ %=L:%l/%L\ %c\ (%p%%)
+set noshowmode
+set scrolloff=8
+set sidescrolloff=15
+set scrolljump=5
+set sidescroll=1
+set so=7
+set formatprg=par\ -w80q
+set formatoptions+=t
 
 let g:workspace_undodir='~/.vim_undodir'
 
@@ -134,65 +142,11 @@ let g:workspace_undodir='~/.vim_undodir'
 " http://stackoverflow.com/questions/2158516/vim-delay-before-o-opens-a-new-line
 set timeout timeoutlen=1000 ttimeoutlen=100
 
-" Always show status bar
-set laststatus=2
-
-set pastetoggle=<F2>
-
 " Invisible characters
 map \ :set invlist<CR>
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:␣
 set showbreak=↪
-
-" Syntax coloring lines that are too long just slows down the world
-set synmaxcol=1200
-
-" Use only 1 space after "." when joining lines instead of 2
-set nojoinspaces
-
-" Don't reset cursor to start of line when moving around
-set nostartofline
-
-" Use system clipboard
-" http://stackoverflow.com/questions/8134647/copy-and-paste-in-vim-via-keyboard-between-different-mac-terminals
 set clipboard+=unnamed
-
-" Enable the mouse in all four modes
-set mouse=a
-
-" Better splits (new windows appear below and to the right)
-set splitbelow
-set splitright
-
-" Command history
-set history=700
-
-" Maximum number of changes that can be undone.
-set undolevels=700
-
-" Show incomplete commands
-set showcmd
-
-" Incremental searching (search as you type)
-set incsearch
-
-" Highlight search matches
-set hlsearch
-
-" Ignore case in search
-set smartcase
-
-" Make sure any searches /searchPhrase doesn't need the \c escape character
-set ignorecase
-
-" A buffer is marked as ‘hidden’ if it has unsaved changes, and it is not
-" currently loaded in a window if you try and quit Vim while there are hidden
-" buffers, you will raise an error: E162: No write since last change for buffer
-" “a.txt”
-set hidden
-
-" Highlight the current line
-set cursorline
 
 " Only show cursorline in the current window and in normal mode.
 augroup cline
@@ -203,36 +157,8 @@ augroup cline
   au InsertLeave * set cursorline
 augroup END
 
-" Ensure Vim doesn't beep at you every time you make a mistype
-set visualbell
-
-" Visual autocomplete for command menu (e.g. :e ~/path/to/file)
-set wildmenu
-
-" redraw only when we need to (i.e. don't redraw when executing a macro)
-set lazyredraw
-
-" highlight a matching [{()}] when cursor is placed on start/end character
-set showmatch
-
 " Set built-in file system explorer to use layout similar to the NERDTree plugin
 let g:netrw_style=3
-
-" Always highlight column 80 so it's easier to see where
-" cutoff appears on longer screens
-set colorcolumn=80
-
-" Round indent to multiple of 'shiftwidth'
-set shiftround
-
-" Always show status bar
-set laststatus=2
-
-" Set the status line to something useful
-set statusline=%f\ %=L:%l/%L\ %c\ (%p%%)
-
-" If in Insert, Replace or Visual mode, don't put a message on the last line.
-set noshowmode
 
 if v:version >= 700
   set viminfo=!,'20,<50,s10,h
@@ -248,23 +174,6 @@ if has('cmd_info')
   set showcmd
 endif
 
-" Start scrolling when we are 8 lines away from margins
-set scrolloff=8
-
-" Minimum lines to keep above and below
-set sidescrolloff=15
-
-" Lines to scroll when cursor leaves screen
-set scrolljump=5
-set sidescroll=1
-
-" Set 7 lines to the cursor - when moving vertically using j/k
-set so=7
-
-" Using par program for formatting paragraph
-set formatprg=par\ -w80q
-set formatoptions+=t
-
 " Automatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
 " }}}
@@ -274,7 +183,6 @@ filetype off
 filetype plugin indent on
 
 " Theme
-set t_Co=256
 set bg=dark
 colorscheme PaperColor
 "hi Normal ctermbg=none
@@ -298,18 +206,20 @@ let mapleader = "\<Space>"
 
 " Airline (status line)
 let g:airline_powerline_fonts = 1
-let g:airline_theme='tender'
+let g:airline_theme= 'deus'
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#hunks#enabled = 1
 let g:airline#extensions#virtualenv#enabled = 1
 
-let g:ansible_attribute_highlight = "ob"
+let g:ansible_attribute_highlight = "a"
 let g:ansible_name_highlight = 'd'
 let g:ansible_extra_keywords_highlight = 1
+let g:ansible_normal_keywords_highlight = 'Constant'
+let g:ansible_with_keywords_highlight = 'Constant'
 
 nmap <F5> :TagbarToggle<CR>
 nmap <F9> :GitGutterLineHighlightsToggle<CR>
@@ -346,6 +256,8 @@ let g:syntastic_sh_checkers = ['bashate', 'shellcheck']
 if (has("python3"))
   let g:jedi#force_py_version = 3
 endif
+
+let g:python_highlight_all = 1
 
 let g:conoline_auto_enable = 1
 let g:conoline_use_colorscheme_default_normal=1
@@ -405,6 +317,22 @@ map <Leader>rl :VimuxRunLastCommand<CR>
 let g:acp_enableAtStartup = 0
 
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#auto_complete_start_length = 1
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
 
 " Enable snipMate compatibility feature.
 let g:neosnippet#enable_snipmate_compatibility = 1
@@ -423,9 +351,9 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 imap <expr><TAB>
  \ pumvisible() ? "\<C-n>" :
  \ neosnippet#expandable_or_jumpable() ?
-" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+ \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+ \ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+ \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 " For conceal markers.
 if has('conceal')
@@ -446,6 +374,7 @@ let delimitMate_expand_space = 1
 let g:session_directory = "~/.vim/sessions"
 let g:session_autoload = "no"
 let g:session_autosave = "no"
+
 let g:startify_session_dir = "~/.vim/sessions"
 
 " started In Diff-Mode set diffexpr (plugin not loaded yet)
@@ -460,6 +389,10 @@ nmap <silent> <leader>; :silent :nohlsearch<CR>
 
 " Bind tabnew
 nmap T :tabnew<CR>
+
+"delete all lines in the current buffer
+nmap <leader>daa ggdG
+nmap <leader>caa ggVG
 
 nmap <leader>q :split ~/.buffer<cr>
 nmap <leader>v :tabedit $HOME/.vim/vimrc<CR>
@@ -521,8 +454,8 @@ vnoremap < <gv  " better indentation
 xnoremap > >gv  " better indentation
 
 " Move visual block
-vnoremap R :m '>+1<CR>gv=gv
-vnoremap T :m '<-2<CR>gv=gv
+xnoremap R :m '>+1<CR>gv=gv
+xnoremap T :m '<-2<CR>gv=gv
 
 " underline the current line with : <F4><u>
 " useful for asciidoc sections
@@ -547,24 +480,38 @@ map <leader>l :!clear && git log -p %<cr>
 map <Leader>vb Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 map <leader>da :echo 'Current Time is ' . strftime( '%c' )<CR>
 
-"open tag in new tab
-map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>"
-
 " pull word under cursor into Ack for a global search
 map <leader>za :Ack "<C-r>=expand("<cword>")<CR>"
 
 " =========================================
 "        Abreviation
 " =========================================
-iab gc -- Gaël
-iab Me Gaël Chamoulaud
-iab gcha Gaël Chamoulaud <gchamoul@redhat.com>
-iab g@ gael@redhat.com
-iab xdate <c-r>=strftime("%m/%d/%Y")
-iab br Best Regards, Gaël.<c-r>
-iab rh Red Hat
-iab linux Linux
-iab rdo RDO
+function! EatChar(pat)
+    let c = nr2char(getchar(0))
+    return (c =~ a:pat) ? '' : c
+endfunction
+
+function! MakeSpacelessIabbrev(from, to)
+    execute "iabbrev <silent> ".a:from." ".a:to."<C-R>=EatChar('\\s')<CR>"
+endfunction
+function! MakeSpacelessBufferIabbrev(from, to)
+    execute "iabbrev <silent> <buffer> ".a:from." ".a:to."<C-R>=EatChar('\\s')<CR>"
+endfunction
+
+call MakeSpacelessIabbrev('gh/',  'http://github.com/')
+call MakeSpacelessIabbrev('ghs/', 'http://github.com/strider/')
+
+iabbrev todo TODO
+iabbrev gc -- Gaël
+iabbrev Me Gaël Chamoulaud
+iabbrev gcha Gaël Chamoulaud <gchamoul@redhat.com>
+iabbrev g@ gael@redhat.com
+iabbrev xdate <c-r>=strftime("%m/%d/%Y")
+iabbrev br Best Regards, Gaël.<c-r>
+iabbrev rh Red Hat
+iabbrev linux Linux
+iabbrev rdo RDO
+iabbrev tv tripleo-validations
 
 cnoreabbrev W! w!
 cnoreabbrev Q! q!
@@ -618,10 +565,6 @@ map <Leader>5 :tabn 5<CR>
 " split horizontally with <leader> s
 nmap <Leader>vs :vsplit<CR> <C-w><C-w>
 nmap <Leader>sp :split<CR> <C-w><C-w>
-
-"Print current path
-"   'test'
-cmap <C-e> <C-r>=expand('%:p:h')<CR>/
 
 " Jump to the start or end of line without leaving the home row
 noremap H ^
@@ -690,10 +633,10 @@ nnoremap <silent> <leader>a :ArgWrap<CR>
 
 nnoremap g= gg=Gg``
 
-" Use tab and shift-tab to cycle through windows.
-nnoremap <Tab> <C-W>w
-nnoremap <C-i> <C-W>w
-nnoremap <S-Tab> <C-W>W
+"" Use tab and shift-tab to cycle through windows.
+"nnoremap <Tab> <C-W>w
+"nnoremap <C-i> <C-W>w
+"nnoremap <S-Tab> <C-W>W
 
 nmap / <Plug>(easymotion-sn)
 xmap / <Esc><Plug>(easymotion-sn)\v%V
@@ -723,7 +666,7 @@ nmap <silent> <Leader>x, :silent! %s/\(\(^\([^"']*\(["'][^"']*["']\)\)*[^"']*\)\
 nmap <silent> <Leader>xx, :silent! %s/\s\+,/,/g<CR>
 
 nmap ; :Buffers<CR>
-nmap ' :Files<CR>
+nmap ,, :Files<CR>
 
 let g:fzf_prefer_tmux = 1
 " [Buffers] Jump to the existing window if possible
@@ -902,12 +845,6 @@ autocmd BufRead,BufNewFile *.txt,*.adoc,*.asciidoc,README,TODO,CHANGELOG,ABOUT
 
 map <silent> <F7> <Esc> :w! <cr> :!python3 % <cr>
 command! W w !sudo tee "%" > /dev/null
-
-"delete all lines in the current buffer
-"nmap <C-S-F2> ggdG
-"nmap <C-S-F3> ggVG
-"vmap <C-c> "*y<CR>
-"vmap <C-v> "*gP<CR>
 
 autocmd VimEnter * redraw!
 

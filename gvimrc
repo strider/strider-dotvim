@@ -4,7 +4,7 @@ if has("gui_running")
   set background=dark
   colorscheme PaperColor
   " Airline (status line)
-  let g:airline_theme='cool'
+  let g:airline_theme='archery'
   let g:airline_powerline_fonts = 1
 endif
 
