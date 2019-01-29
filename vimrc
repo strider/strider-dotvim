@@ -4,20 +4,16 @@
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
-Plug 'lifepillar/vim-solarized8'
 Plug 'thaerkh/vim-workspace'
 Plug 'benmills/vimux'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ConradIrwin/vim-bracketed-paste'
-Plug 'dagwieers/asciidoc-vim'
 Plug 'davidhalter/jedi-vim' , {'for': 'python'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'dbakker/vim-lint'
-Plug 'ervandew/supertab'
 Plug 'FooSoft/vim-argwrap'
 Plug 'gcmt/wildfire.vim'
-Plug 'Glench/Vim-jinja2-Syntax'
 Plug 'godlygeek/tabular'
 Plug 'honza/vim-snippets'
 Plug 'garbas/vim-snipmate'
@@ -26,7 +22,6 @@ Plug 'junegunn/vim-easy-align'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
 Plug 'mileszs/ack.vim'
 Plug 'miyakogi/conoline.vim'
@@ -37,7 +32,7 @@ Plug 'vim-python/python-syntax'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'rafi/awesome-vim-colorschemes'
-Plug 'Raimondi/delimitMate'
+Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
@@ -48,30 +43,24 @@ Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/denite.nvim'
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
-Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tomtom/tlib_vim'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'dagwieers/asciidoc-vim'
 Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-tbone'
+Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/autocorrect.vim'
-Plug 'vim-scripts/bash-support.vim'
-Plug 'vim-scripts/BufOnly.vim'
+Plug 'WolfgangMehner/bash-support'
 Plug 'vim-scripts/Tabmerge'
-Plug 'vim-scripts/taglist.vim'
 Plug 'vim-scripts/TextFormat'
-Plug 'vim-scripts/unimpaired.vim'
-Plug 'vim-scripts/vimwiki'
+Plug 'vimwiki/vimwiki'
 Plug 'wellle/targets.vim'
-Plug 'wikitopian/hardmode'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 
@@ -189,24 +178,12 @@ colorscheme PaperColor
 "hi NonText ctermbg=none
 hi ColorColumn cterm=none ctermfg=none ctermbg=236
 
-" Allow to trigger background
-function! ToggleBG()
-  let s:tbg = &background
-  " Inversion
-  if s:tbg == "dark"
-    set background=light
-  else
-    set background=dark
-  endif
-endfunction
-noremap <leader>bg :call ToggleBG()<CR>
-
 " My Map Leader
 let mapleader = "\<Space>"
 
 " Airline (status line)
 let g:airline_powerline_fonts = 1
-let g:airline_theme= 'deus'
+let g:airline_theme= 'tender'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#branch#enabled = 1
@@ -264,9 +241,6 @@ let g:conoline_use_colorscheme_default_normal=1
 let g:conoline_use_colorscheme_default_insert=1
 
 let g:vimwiki_ = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
-
-" Private Gist by default
-let g:gist_post_private = 1
 
 " SnipMate Options
 let g:snips_author = 'Gaël Chamoulaud'
@@ -328,32 +302,40 @@ function! s:my_cr_function()
   " For no inserting <CR> key.
   "return pumvisible() ? "\<C-y>" : "\<CR>"
 endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
+
+"imap <expr><TAB>
+ "\ pumvisible() ? "\<C-n>" :
+ "\ neosnippet#expandable_or_jumpable() ?
+ "\    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+ "\ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+ "\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+imap <expr><TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ (neosnippet#expandable_or_jumpable() ?
+  \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>")
+
+imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+
+imap <expr><CR>
+  \ pumvisible() ? deoplete#mappings#close_popup() :
+  \ "\<CR>\<Plug>AutoPairsReturn"
 
 " Enable snipMate compatibility feature.
 let g:neosnippet#enable_snipmate_compatibility = 1
 
 " Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.vim/plugged/vim-snippets/snippets'
+let g:neosnippet#snippets_directory='~/.vim/plugged/vim-snippets/snippets/'
 
 " Plugin key-mappings.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <expr><TAB>
- \ pumvisible() ? "\<C-n>" :
- \ neosnippet#expandable_or_jumpable() ?
- \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
- \ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
- \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 " For conceal markers.
 if has('conceal')
@@ -366,10 +348,8 @@ let g:jedi#use_tabs_not_buffers = 1
 let g:jedi#popup_select_first = 0
 let g:jedi#show_call_signatures = "1"
 
-nnoremap <leader>rp <Esc>:call ToggleHardMode()<CR>
-
-let delimitMate_expand_cr = 1
-let delimitMate_expand_space = 1
+let g:AutoPairsFlymode = 1
+let g:AutoPairsMapCR=0
 
 let g:session_directory = "~/.vim/sessions"
 let g:session_autoload = "no"
@@ -498,12 +478,13 @@ function! MakeSpacelessBufferIabbrev(from, to)
     execute "iabbrev <silent> <buffer> ".a:from." ".a:to."<C-R>=EatChar('\\s')<CR>"
 endfunction
 
-call MakeSpacelessIabbrev('gh/',  'http://github.com/')
-call MakeSpacelessIabbrev('ghs/', 'http://github.com/strider/')
+call MakeSpacelessIabbrev('gh/',  'https://github.com/')
+call MakeSpacelessIabbrev('ghs/', 'https://github.com/strider/')
+call MakeSpacelessIabbrev('rhc/', 'https://redhat.com')
 
 iabbrev todo TODO
 iabbrev gc -- Gaël
-iabbrev Me Gaël Chamoulaud
+iabbrev myname Gaël Chamoulaud
 iabbrev gcha Gaël Chamoulaud <gchamoul@redhat.com>
 iabbrev g@ gael@redhat.com
 iabbrev xdate <c-r>=strftime("%m/%d/%Y")
@@ -512,6 +493,8 @@ iabbrev rh Red Hat
 iabbrev linux Linux
 iabbrev rdo RDO
 iabbrev tv tripleo-validations
+iabbrev openstack OpenStack
+iabbrev tripleo TripleO
 
 cnoreabbrev W! w!
 cnoreabbrev Q! q!
